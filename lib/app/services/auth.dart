@@ -42,7 +42,7 @@ class AuthService extends GetxService {
         status = true;
       } else {
         showMySnackbar(msg: "Google Sign In has been cancelled");
-        debugPrint(value.errorMessage.toString());
+        debugPrint(value.errorMessage.toString());  
       }
     });
     DialogHelper.hideDialog();
@@ -86,16 +86,26 @@ class AuthService extends GetxService {
 //phone number with country code
 
   mobileOtp({required String phoneno}) async {
+    debugPrint("phoneno=>${phoneno}");
+    try {
     await auth.requestVerificationCode(
       phoneNumber: phoneno,
+
       onVerificationFailed: (exception) {
+        debugPrint('exception=>$exception');
+
         if (exception.code == 'invalid-phone-number') {
           debugPrint('The provided phone number is not valid.');
         } else {
           debugPrint(exception.message);
+          debugPrint("exception.message456=>${exception.message}");
+
         }
+        debugPrint("exception.message=>${exception.message}");
+
       },
       onVerificationCompleted: (authenticationResult) {
+        debugPrint("authenticationResult=>${authenticationResult}");
         if (authenticationResult.user != null) {
           debugPrint('User is signed in');
         } else {
@@ -104,7 +114,12 @@ class AuthService extends GetxService {
       },
       timeout: const Duration(seconds: 120),
       onCodeSent: (verificationID) => print('verificationId: $verificationID'),
-    );
+    );} catch (error) {
+      showMySnackbar(
+          msg:
+          "Verification Error: Unable to verify your mobile number. Please try again");
+      // showMySnackbar(msg: error.toString());
+    }
   }
 
   Future<bool> verifyMobileOtp({required String otp}) async {

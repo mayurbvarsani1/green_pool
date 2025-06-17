@@ -26,6 +26,12 @@ import '../modules/file_dispute/bindings/file_dispute_binding.dart';
 import '../modules/file_dispute/views/file_dispute_view.dart';
 import '../modules/find_ride/bindings/find_ride_binding.dart';
 import '../modules/find_ride/views/find_ride_view.dart';
+import '../modules/grop_carpool/create_new_event/bindings/create_new_event_binding.dart';
+import '../modules/grop_carpool/create_new_event/views/create_new_event_view.dart';
+import '../modules/grop_carpool/event_details/bindings/event_details_binding.dart';
+import '../modules/grop_carpool/event_details/views/event_details_view.dart';
+import '../modules/grop_carpool/organize_carpool/bindings/organize_carpool_binding.dart';
+import '../modules/grop_carpool/organize_carpool/views/organize_carpool_view.dart';
 import '../modules/help_support/bindings/help_support_binding.dart';
 import '../modules/help_support/views/help_support_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -309,6 +315,29 @@ class AppPages {
       page: () => const FindRideView(),
       binding: FindRideBinding(),
     ),
+
+
+    GetPage(
+      name: _Paths.CREATE_NEW_EVENT,
+      page: () => const CreateNewEventView(),
+      binding: EventDetailsBinding(),
+    ),
+
+
+
+    GetPage(
+      name: _Paths.EVENT_DETAILS,
+      page: () => const EventDetailsView(),
+      binding: CreateNewEventBinding(),
+    ),
+
+    GetPage(
+      name: _Paths.ORGANIZE_CARPOOL,
+      page: () => const OrganizeCarpoolView(),
+      binding: OrganizeCarpoolBinding(),
+    ),
+
+
     GetPage(
       name: _Paths.MATCHING_RIDES,
       page: () => const MatchingRidesView(),

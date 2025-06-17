@@ -61,6 +61,27 @@ class LocaleKeys {
   static const app_noRideHistory = 'app_noRideHistory';
   static const app_fileDispute = 'app_fileDispute';
   static const app_findRide = 'app_findRide';
+
+  static const app_groupCarpool = 'app_groupCarpool';
+  static const app_organizeCarpool = 'app_organizeCarpool';
+  static const app_searchForGroups = 'app_searchForGroups';
+  static const app_requestARide  = 'app_requestARide';
+  static const app_offerARide = 'app_offerARide';
+  static const app_upcomingEvents = 'app_upcomingEvents';
+  static const app_createNewEvent = 'app_createNewEvent';
+  static const app_title = 'app_title';
+  static const app_destinations = 'app_destinations';
+  static const app_dateTime = 'app_dateTime';
+  static const app_expectedAttendees = 'app_expectedAttendees';
+  static const app_publicPrivate = 'app_publicPrivate';
+  static const app_publishEvent = 'app_publishEvent';
+  static const app_eventDetails = 'app_eventDetails';
+  static const app_eventLocation = 'app_eventLocation';
+  static const app_attendees = 'app_attendees';
+  static const app_going = 'app_going';
+  static const app_joinEvent = 'app_joinEvent';
+
+
   static const app_pickup = 'app_pickup';
   static const app_enterOrigin = 'app_enterOrigin';
   static const app_destination = 'app_destination';
@@ -607,6 +628,28 @@ class Locales {
     'app_noRideHistory': 'No ride history from past 7 days',
     'app_fileDispute': 'File Dispute',
     'app_findRide': 'Find a Ride',
+
+
+    'app_groupCarpool': 'Group Carpool',
+    'app_organizeCarpool': 'Organize Carpool',
+    'app_searchForGroups': 'Search  for Groups',
+    'app_requestARide': 'Request a ride',
+    'app_offerARide': 'Offer a ride',
+    'app_upcomingEvents': 'Upcoming Events',
+    'app_createNewEvent': 'Create New Event',
+    'app_title': 'Title',
+    'app_destinations': 'Destination',
+    'app_dateTime': 'Date & Time',
+    'app_expectedAttendees': 'Expected attendees',
+    'app_publicPrivate': 'Public/Private',
+    'app_publishEvent': 'Publish Event',
+    'app_eventDetails': 'Event Details',
+    'app_eventLocation': 'Event Location',
+    'app_attendees': 'Attendees',
+    'app_going': 'Going',
+    'app_joinEvent': 'Join Event',
+
+
     'app_pickup': 'Pickup',
     'app_enterOrigin': 'Enter pickup address',
     'app_destination': 'Dropoff',

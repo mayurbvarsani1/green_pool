@@ -97,9 +97,11 @@ class ChatPageView extends GetView<ChatPageController> {
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
+                        debugPrint("controller.messages=>${controller.messages}");
                         final message = controller.messages[index];
-                        final isSender = message.senderId ==
-                            Get.find<GetStorageService>().getUserAppId;
+                        debugPrint("message=>${message}");
+                        final isSender = message.senderId == Get.find<GetStorageService>().getUserAppId;
+                        debugPrint("isSender=>${isSender}");
 
                         return Container(
                           padding: EdgeInsets.only(

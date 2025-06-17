@@ -95,9 +95,9 @@ class LoginController extends GetxController {
   otpAuth() async {
     try {
       log("phone number: ${phoneNumberController.text}");
-      await Get.find<AuthService>()
-          .mobileOtp(phoneno: countryCode + phoneNumberController.text);
-
+      await Get.find<AuthService>().mobileOtp(phoneno: countryCode + phoneNumberController.text);
+      debugPrint("Get.find<HomeController>().findingRide.value=>${Get.find<HomeController>().findingRide.value}");
+      log("Get.find<HomeController>().findingRide.value12=>${Get.find<HomeController>().findingRide.value}");
       if (Get.find<HomeController>().findingRide.value) {
         await Get.offNamed(
           Routes.VERIFY,

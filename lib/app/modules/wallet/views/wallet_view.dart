@@ -92,6 +92,7 @@ class WalletView extends GetView<WalletController> {
                               ],
                             ),
                           ),*/
+
                         ],
                       ),
                     ).paddingOnly(top: 32.kh, bottom: 24.kh),

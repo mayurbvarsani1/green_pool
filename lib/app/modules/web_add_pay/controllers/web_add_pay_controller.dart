@@ -9,7 +9,7 @@ class WebAddPayController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    addAmountModel.value =Get.arguments;
+    addAmountModel.value = Get.arguments;
     isLoad.value = false;
   }
 }

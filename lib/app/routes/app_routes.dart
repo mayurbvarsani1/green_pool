@@ -39,6 +39,12 @@ abstract class Routes {
   static const PRICING_VIEW = _Paths.PRICING_VIEW;
   static const BOTTOM_NAVIGATION = _Paths.BOTTOM_NAVIGATION;
   static const FIND_RIDE = _Paths.FIND_RIDE;
+
+  static const CREATE_NEW_EVENT = _Paths.CREATE_NEW_EVENT;
+  static const EVENT_DETAILS = _Paths.EVENT_DETAILS;
+  static const ORGANIZE_CARPOOL = _Paths.ORGANIZE_CARPOOL;
+
+
   static const MATCHING_RIDES = _Paths.MATCHING_RIDES;
   static const DRIVER_DETAILS = _Paths.DRIVER_DETAILS;
   static const RIDER_PROFILE_SETUP = _Paths.RIDER_PROFILE_SETUP;
@@ -136,6 +142,13 @@ abstract class _Paths {
   static const HELP_SUPPORT = '/help-support';
   static const CHANGE_PASSWORD = '/change-password';
   static const FIND_RIDE = '/find-ride';
+
+  static const CREATE_NEW_EVENT = '/create-new-event';
+  static const EVENT_DETAILS = '/event-details';
+  static const ORGANIZE_CARPOOL = '/organize-carpool';
+
+
+
   static const MATCHING_RIDES = '/matching-rides';
   static const DRIVER_DETAILS = '/driver-details';
   static const RIDER_PROFILE_SETUP = '/rider-profile-setup';

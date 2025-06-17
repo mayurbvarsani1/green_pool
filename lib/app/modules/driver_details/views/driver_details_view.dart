@@ -167,12 +167,9 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                 const GreenPoolDivider(),
                 RouteWidget(
                     needPickUp: true,
-                    origin:
-                        "${controller.matchingRidesModelData.value.origin?.name}",
-                    stop1:
-                        "${controller.matchingRidesModelData.value.stops?[0]?.name}",
-                    stop2:
-                        "${controller.matchingRidesModelData.value.stops?[1]?.name}",
+                    origin: "${controller.matchingRidesModelData.value.origin?.name}",
+                    stop1: "${controller.matchingRidesModelData.value.stops?[0]?.name}",
+                    stop2: "${controller.matchingRidesModelData.value.stops?[1]?.name}",
                     destination:
                         "${controller.matchingRidesModelData.value.destination?.name}"),
                 //bottom line

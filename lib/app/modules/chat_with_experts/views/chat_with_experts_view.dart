@@ -53,10 +53,12 @@ class ChatWithExpertsView extends GetView<ChatWithExpertsController> {
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
                         final message = controller.messages[index];
-                        final isSender = message.senderId ==
-                            Get.find<GetStorageService>().getUserAppId;
-                        final isPinkModeOn =
-                            Get.find<HomeController>().isPinkModeOn.value;
+                        debugPrint("messages=>${controller.messages.length}");
+                        final isSender = message.senderId == Get.find<GetStorageService>().getUserAppId;
+                        debugPrint("senderId=>${message.senderId}");
+                        final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
+                        debugPrint("isPinkModeOn=>$isPinkModeOn");
+                        debugPrint("message123=>$message");
 
                         return Container(
                           padding: EdgeInsets.only(

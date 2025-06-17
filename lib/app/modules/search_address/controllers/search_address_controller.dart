@@ -113,6 +113,7 @@ class SearchAddressController extends GetxController {
       var response = await _cancelableOperation?.value;
 
       if (response != null && response.statusCode == 200) {
+        debugPrint("responseBody=>${response.body}");
         final predictions = jsonDecode(response.body.toString())['predictions'];
         addressSugestionList.value = predictions;
         if (predictions.isEmpty) {
@@ -148,8 +149,8 @@ class SearchAddressController extends GetxController {
       String request =
           '$baseurl/details/json?place_id=$placeId&key=$placeApiKey';
       var response = await http.get(Uri.parse(request));
-      final geometry =
-          GoogleLocationModel.fromJson(jsonDecode(response.body)).result;
+      final geometry = GoogleLocationModel.fromJson(jsonDecode(response.body)).result;
+      debugPrint("geometry=>${geometry}");
       double lat = geometry?.geometry?.location?.lat ?? 0.0;
       double long = geometry?.geometry?.location?.lng ?? 0.0;
       String nameOfLocation = geometry?.formattedAddress ?? "";
@@ -180,8 +181,7 @@ class SearchAddressController extends GetxController {
   Future<void> setLocationFromCache(String type, int index) async {
     try {
       // fetch the serialized JSON string from storage
-      String? storedLocation =
-          Get.find<GetStorageService>().getLocationByType(type);
+      String? storedLocation = Get.find<GetStorageService>().getLocationByType(type);
 
       // decode the JSON string
       List<dynamic> decodedList = jsonDecode(storedLocation ?? "");

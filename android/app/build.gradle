@@ -74,6 +74,9 @@ android {
             shrinkResources false
             signingConfig signingConfigs.release
         }
+            debug {
+                signingConfig signingConfigs.debug
+            }
     }
 
     flavorDimensions "app"

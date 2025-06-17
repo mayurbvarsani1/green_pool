@@ -1,13 +1,10 @@
 import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:get/get.dart';
 import 'package:green_pool/app/res/strings.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
-
 import '../../../../generated/locales.g.dart';
 import '../../../constants/image_constant.dart';
 import '../../../routes/app_pages.dart';

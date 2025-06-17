@@ -38,8 +38,7 @@ class ChatPageController extends GetxController {
     scrollController = ScrollController();
     try {
       chatArg.value = Get.arguments["chatArg"];
-      ridePostId = Get.arguments[
-          "ridePostId"]; //ride post id from rider-confirm-req-section
+      ridePostId = Get.arguments["ridePostId"];
       if (chatArg.value.chatRoomId != null) {
         getChat();
       }

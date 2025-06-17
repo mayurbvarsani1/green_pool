@@ -36,20 +36,11 @@ class SearchAddressView extends GetView<SearchAddressController> {
           children: [
             Obx(
               () => GreenPoolTextField(
-                hintText: controller.locationValues.name ==
-                            LocationValues.origin.name ||
-                        controller.locationValues.name ==
-                            LocationValues.findRideOrigin.name
-                    ? LocaleKeys.app_enterOrigin.tr
-                    : controller.locationValues.name ==
-                                LocationValues.destination.name ||
-                            controller.locationValues.name ==
-                                LocationValues.findRideDestination.name
-                        ? LocaleKeys.app_enterDestinationAddress.tr
-                        : controller.locationValues.name ==
-                                LocationValues.addStop1.name
-                            ? LocaleKeys.app_addStop1.tr
-                            : LocaleKeys.app_addStop2.tr,
+                hintText: controller.locationValues.name == LocationValues.origin.name || controller.locationValues.name ==
+                    LocationValues.findRideOrigin.name ? LocaleKeys.app_enterOrigin.tr
+                    : controller.locationValues.name == LocationValues.destination.name || controller.locationValues.name ==
+                    LocationValues.findRideDestination.name ? LocaleKeys.app_enterDestinationAddress.tr : controller.locationValues.name ==
+                    LocationValues.addStop1.name ? LocaleKeys.app_addStop1.tr : LocaleKeys.app_addStop2.tr,
                 controller: controller.originController,
                 onchanged: (value) {
                   controller.setSessionToken();
@@ -127,12 +118,11 @@ class SearchAddressView extends GetView<SearchAddressController> {
                                         color: ColorUtil.kNeutral7)),
                                 borderRadius: BorderRadius.circular(8.kh)),
                             child: ListTile(
-                              title: Text(controller.addressSugestionList[index]
-                                  ['description']),
+                              title: Text(controller.addressSugestionList[index]['description']),
                               onTap: () async {
+                                debugPrint("45dg5f45");
                                 await controller.setLocationData(
-                                  controller.addressSugestionList[index]
-                                      ['place_id'],
+                                  controller.addressSugestionList[index]['place_id'],
                                 );
                                 controller.resetSessionToken();
                                 // Get.back(

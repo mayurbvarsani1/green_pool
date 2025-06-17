@@ -115,6 +115,7 @@ class ImageConstant {
   static String svgNoRidesPink = 'assets/images/home/no_rides_pink.svg';
   static String svgEnableNotification =
       'assets/images/home/enable_notification.svg';
+
   static String gifLocation = 'assets/images/home/location_gif.gif';
   static String pngCarPointer = 'assets/images/home/car_pointer.png';
 
@@ -170,4 +171,12 @@ class ImageConstant {
   static String linkedin = 'assets/images/icons/linkedin.png';
   static String tiktok = 'assets/images/icons/tiktok.png';
   static String twitter = 'assets/images/icons/x.png';
+
+  /// new Added
+  static String eventUserLogo =
+      'assets/images/home/event_user_logo.png';
+  static String location ='assets/images/icons/location.svg';
+  static String locationRing ='assets/images/icons/location_ring.svg';
+  static String userRing ='assets/images/icons/user_ring.svg';
+
 }
