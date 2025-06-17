@@ -193,6 +193,7 @@ class TextStyleUtil {
     Color color = ColorUtil.kBlack01,
     FontWeight fontWeight = FontWeight.w600,
     TextDecoration textDecoration = TextDecoration.none,
+    double? fontSize,
   }) {
     return GoogleFonts.inter(
       fontWeight: fontWeight,

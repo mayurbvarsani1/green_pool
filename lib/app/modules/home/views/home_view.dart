@@ -11,6 +11,7 @@ import 'package:green_pool/app/services/responsive_size.dart';
 import 'package:green_pool/app/services/text_style_util.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../components/common_image_view.dart';
 import '../../../services/storage.dart';
 import '../../profile/controllers/profile_controller.dart';
 import '../controllers/home_controller.dart';
@@ -178,7 +179,7 @@ class HomeView extends GetView<HomeController> {
                     Get.toNamed(Routes.HELP_SUPPORT);
                   });
                 }
-                    : () {
+                  : () {
                   Get.toNamed(Routes.ORGANIZE_CARPOOL, arguments: false);
                   controller.findingRide.value = true;
                 },
@@ -200,20 +201,40 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   child: Stack(
+                    // clipBehavior: Clip.none,
                     children: [
                       Positioned(
-                          right: 0.kw,
-                          left: storageService.isPinkMode ? 0 : null,
-                          top: storageService.isPinkMode ? 0 : null,
-                          bottom: 0.kh,
-                          child: storageService.isPinkMode
-                              ? SvgPicture.asset(
-                            ImageConstant.svgPinkFindRide,
-                            fit: BoxFit.fill,
+                          // right: storageService.isPinkMode ? 0 :-25.w,
+                          right: -25.w,
+                          top: -10.w,
+                          bottom: -5.w,
+                          child:
+                          // storageService.isPinkMode
+                          //     ?
+                          // CommonImageView(
+                          //   // fit: BoxFit.fitWidth,
+                          //   width: 100.w,
+                          //   height: 149.kh,
+                          //   imagePath: ImageConstant.groupCarpoolPinkLogo,
+                          // )
+                          // SvgPicture.asset(
+                          //   ImageConstant.svgPinkFindRide,
+                          //   fit: BoxFit.fill,
+                          // )
+                          //     :
+                          // SvgPicture.asset(
+                          //   ImageConstant.svgFindRide,
+                          // )
+                          // SvgPicture.asset(
+                          //   ImageConstant.groupCarpoolLogo,
+                          // )
+                          CommonImageView(
+                            // fit: BoxFit.fitWidth,
+                            width: 100.w,
+                            height: 149.kh,
+                            imagePath: ImageConstant.groupCarpoolLogo,
                           )
-                              : SvgPicture.asset(
-                            ImageConstant.svgFindRide,
-                          )),
+                      ),
                       Positioned(
                         left: 16.kw,
                         top: 48.kh,

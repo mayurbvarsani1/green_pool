@@ -43,6 +43,7 @@ abstract class Routes {
   static const CREATE_NEW_EVENT = _Paths.CREATE_NEW_EVENT;
   static const EVENT_DETAILS = _Paths.EVENT_DETAILS;
   static const ORGANIZE_CARPOOL = _Paths.ORGANIZE_CARPOOL;
+  static const GROUP_DESTINATION = _Paths.GROUP_DESTINATION;
 
 
   static const MATCHING_RIDES = _Paths.MATCHING_RIDES;
@@ -146,6 +147,7 @@ abstract class _Paths {
   static const CREATE_NEW_EVENT = '/create-new-event';
   static const EVENT_DETAILS = '/event-details';
   static const ORGANIZE_CARPOOL = '/organize-carpool';
+  static const GROUP_DESTINATION = '/group-destination';
 
 
 

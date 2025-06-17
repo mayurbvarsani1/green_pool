@@ -1,0 +1,2 @@
+D:/part time/carpool/android/app/.cxx/Debug/v4k5e95w/x86/CMakeFiles/edit_cache.dir
+D:/part time/carpool/android/app/.cxx/Debug/v4k5e95w/x86/CMakeFiles/rebuild_cache.dir

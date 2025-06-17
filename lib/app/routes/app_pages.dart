@@ -30,6 +30,8 @@ import '../modules/grop_carpool/create_new_event/bindings/create_new_event_bindi
 import '../modules/grop_carpool/create_new_event/views/create_new_event_view.dart';
 import '../modules/grop_carpool/event_details/bindings/event_details_binding.dart';
 import '../modules/grop_carpool/event_details/views/event_details_view.dart';
+import '../modules/grop_carpool/group_destination/bindings/group_destination_binding.dart';
+import '../modules/grop_carpool/group_destination/views/group_destination_view.dart';
 import '../modules/grop_carpool/organize_carpool/bindings/organize_carpool_binding.dart';
 import '../modules/grop_carpool/organize_carpool/views/organize_carpool_view.dart';
 import '../modules/help_support/bindings/help_support_binding.dart';
@@ -335,6 +337,12 @@ class AppPages {
       name: _Paths.ORGANIZE_CARPOOL,
       page: () => const OrganizeCarpoolView(),
       binding: OrganizeCarpoolBinding(),
+    ),
+
+    GetPage(
+      name: _Paths.GROUP_DESTINATION,
+      page: () => const GroupDestinationView(),
+      binding: GroupDestinationBinding(),
     ),
 
 

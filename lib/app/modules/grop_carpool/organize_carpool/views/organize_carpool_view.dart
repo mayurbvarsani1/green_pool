@@ -11,6 +11,7 @@ import 'package:green_pool/app/services/responsive_size.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../components/greenpool_textfield.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
 import '../../../../services/text_style_util.dart';
@@ -134,38 +135,47 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 5,
                   itemBuilder: (context, itemsIndex) {
-                    return ListTile(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
-                      minVerticalPadding: 12.kh,
-                      title: Text(
-                        "Toronto Tech Fest",
-                        style: TextStyleUtil.k14Bold(),
+                    return InkWell(
+                      onTap: () {
+
+                        // Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
+
+                      },
+                      child: Container(
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
+                          minVerticalPadding: 12.kh,
+                          title: Text(
+                            "Toronto Tech Fest",
+                            style: TextStyleUtil.k14Bold(),
+                          ),
+                          subtitle: Text(
+                            "8:00 AM - 9:00 AM",
+                            style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
+                          ),
+                          leading: Container(
+                            padding: EdgeInsets.all(16.kh),
+                            height: 212.kh,
+                            width: 15.w,
+                            decoration: BoxDecoration(
+                              color: ColorUtil.kBlack08,
+                              borderRadius: BorderRadius.circular(8.kh),
+                            ),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              ImageConstant.svgProfileCar,
+                              // width: 30,
+                              // height: 30,
+                              colorFilter: ColorFilter.mode(
+                                  isPinkModeOn
+                                      ? ColorUtil.kPrimary3PinkMode
+                                      : ColorUtil.kSecondary01,
+                                  BlendMode.srcIn),
+                            ),
+                          ),
+                        ).paddingOnly(bottom: 4.kh),
                       ),
-                      subtitle: Text(
-                        "8:00 AM - 9:00 AM",
-                        style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
-                      ),
-                      leading: Container(
-                        padding: EdgeInsets.all(16.kh),
-                        height: 212.kh,
-                        width: 15.w,
-                        decoration: BoxDecoration(
-                          color: ColorUtil.kBlack08,
-                          borderRadius: BorderRadius.circular(8.kh),
-                        ),
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          ImageConstant.svgProfileCar,
-                          // width: 30,
-                          // height: 30,
-                          colorFilter: ColorFilter.mode(
-                              isPinkModeOn
-                                  ? ColorUtil.kPrimary3PinkMode
-                                  : ColorUtil.kSecondary01,
-                              BlendMode.srcIn),
-                        ),
-                      ),
-                    ).paddingOnly(bottom: 4.kh);
+                    );
                   },
                 ),
 

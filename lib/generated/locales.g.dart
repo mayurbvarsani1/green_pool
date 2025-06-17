@@ -70,6 +70,7 @@ class LocaleKeys {
   static const app_upcomingEvents = 'app_upcomingEvents';
   static const app_createNewEvent = 'app_createNewEvent';
   static const app_title = 'app_title';
+  static const app_titleHintText = 'app_titleHintText';
   static const app_destinations = 'app_destinations';
   static const app_dateTime = 'app_dateTime';
   static const app_expectedAttendees = 'app_expectedAttendees';
@@ -638,6 +639,7 @@ class Locales {
     'app_upcomingEvents': 'Upcoming Events',
     'app_createNewEvent': 'Create New Event',
     'app_title': 'Title',
+    'app_titleHintText': 'Enter event title',
     'app_destinations': 'Destination',
     'app_dateTime': 'Date & Time',
     'app_expectedAttendees': 'Expected attendees',

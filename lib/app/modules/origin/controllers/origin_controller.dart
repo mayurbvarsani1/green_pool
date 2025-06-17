@@ -191,8 +191,7 @@ class OriginController extends GetxController {
   Future<void> setLocationFromCache(String type, int index) async {
     try {
       // fetch the serialized JSON string from storage
-      String? storedLocation =
-          Get.find<GetStorageService>().getFindLocationByType(type);
+      String? storedLocation = Get.find<GetStorageService>().getFindLocationByType(type);
 
       // decode the JSON string
       List<dynamic> decodedList = jsonDecode(storedLocation ?? "");

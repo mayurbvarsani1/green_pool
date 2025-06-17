@@ -63,6 +63,8 @@ extension ColorUtil on BuildContext {
   static const Color kSecondary01 = Color(0xff163300);
 
   //black
+  static const Color kBlack011 = Color(0xFF121417);
+  static const Color kBlack010 = Color(0xFF61758A);
   static const Color kBlack09 = Color(0xFF373737);
   static const Color kBlack08 = Color(0xffF2F2F5);
   static const Color kBlack07 = Color(0xfff6f6f6);

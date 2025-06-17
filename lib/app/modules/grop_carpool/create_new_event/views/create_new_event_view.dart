@@ -45,26 +45,28 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 RichTextHeading(text: LocaleKeys.app_title.tr),
                 GreenPoolTextField(
                   textStyle: TextStyleUtil.k14Medium(color: ColorUtil.kBlack01),
-                  hintText: LocaleKeys.app_enterOrigin.tr,
+                  hintText: LocaleKeys.app_titleHintText.tr,
                   keyboardType: TextInputType.streetAddress,
                   onchanged: (v) {
 
-
                   },
                   onTap: () {
-                    
+
+
                   },
-                  controller: controller.riderOriginTextController,
-                  readOnly: true,
+                  controller: controller.riderDestinationTextController,
+                  // readOnly: true,
                 ).paddingOnly(top: 8.kh, bottom: 14.kh),
+
                 // Text(
                 //   LocaleKeys.app_destinations.tr,
                 //   style: TextStyleUtil.k14Semibold(),
                 // ),
+
                 RichTextHeading(text: LocaleKeys.app_destinations.tr),
                 GreenPoolTextField(
                   textStyle: TextStyleUtil.k14Medium(color: ColorUtil.kBlack01),
-                  hintText: LocaleKeys.app_enterAdestination.tr,
+                  hintText: "Enter a destination",
                   keyboardType: TextInputType.streetAddress,
                   onchanged: (v) {
                     controller.setActiveState();
@@ -72,7 +74,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                   onTap: () {
                     controller.moveToSetDestination();
                   },
-                  controller: controller.riderDestinationTextController,
+                  controller: controller.riderOriginTextController,
                   // prefix: Icon(
                   //   Icons.location_on,
                   //   size: 24.kh,
@@ -81,12 +83,12 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                   //       : ColorUtil.kSecondary01,
                   // ),
                   prefix: SvgPicture.asset(
-                    ImageConstant.locationRing,
-                    colorFilter: ColorFilter.mode(
-                        isPinkModeOn
-                            ? ColorUtil.kPrimary3PinkMode
-                            : ColorUtil.kBlack09,
-                        BlendMode.srcIn),
+                    ImageConstant.location,
+                    // colorFilter: ColorFilter.mode(
+                    //     isPinkModeOn
+                    //         ? ColorUtil.kPrimary3PinkMode
+                    //         : ColorUtil.kBlack09,
+                    //     BlendMode.srcIn),
                   ),
                   readOnly: true,
                   suffix: controller.isDestinationAdded.value
@@ -194,23 +196,26 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                   Row(
                     children: [
                       Text(LocaleKeys.app_publicPrivate.tr,) ,
-                        InkWell(onTap: () => Get.dialog(
-                          useSafeArea: true,
-                          Center(
-                            child: Container(
-                                padding: EdgeInsets.all(16.kh),
-                                width: 80.w,
-                                decoration: BoxDecoration(
-                                  color: ColorUtil.kWhiteColor,
-                                  borderRadius: BorderRadius.circular(8.kh),
-                                ),
-                                child: Text(
-                                  "LocaleKeys",
-                                  style: TextStyleUtil.k14Regular(
-                                      color: ColorUtil.kBlack03),
-                                )),
-                          ),
-                        ),child: SvgPicture.asset(ImageConstant.svgIconInfo,color: ColorUtil.kPrimary01,)),
+                        InkWell(
+                        //     onTap: () => Get.dialog(
+                        //   useSafeArea: true,
+                        //   Center(
+                        //     child: Container(
+                        //         padding: EdgeInsets.all(16.kh),
+                        //         width: 80.w,
+                        //         decoration: BoxDecoration(
+                        //           color: ColorUtil.kWhiteColor,
+                        //           borderRadius: BorderRadius.circular(8.kh),
+                        //         ),
+                        //         child: Text(
+                        //           "LocaleKeys",
+                        //           style: TextStyleUtil.k14Regular(
+                        //               color: ColorUtil.kBlack03),
+                        //         )),
+                        //   ),
+                        // )
+
+                            child: SvgPicture.asset(ImageConstant.svgIconInfo,color: ColorUtil.kPrimary01,)),
                     ],
                   ),
                     Obx(
@@ -281,7 +286,9 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 GreenPoolButton(
                   color:ColorUtil.kPrimary01,
                   padding: const EdgeInsets.all(0),
-                  onPressed: () => controller.moveToMatchingRides(),
+                  onPressed: () {
+                    Get.back();
+                  },
                   // isActive: controller.isActive.value,
                   labelColor: Get.find<HomeController>().isPinkModeOn.value
                       ? ColorUtil.kPrimary3PinkMode

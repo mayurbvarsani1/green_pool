@@ -83,7 +83,7 @@ class CreateNewEventController extends GetxController {
   }
 
   moveToSetDestination() {
-    Get.toNamed(Routes.ORIGIN, arguments: LocationValues.findRideDestination)
+    Get.toNamed(Routes.GROUP_DESTINATION, arguments: LocationValues.findRideDestination)
         ?.then(
       (value) {
         if (riderDestinationTextController.value.text.isNotEmpty) {
@@ -289,8 +289,7 @@ class CreateNewEventController extends GetxController {
   void setActiveState() {
     final seatText = seatAvailable.value.text;
 
-    isActive.value = (riderOriginTextController.text.isNotEmpty ||
-            riderDestinationTextController.text.isNotEmpty) &&
+    isActive.value = (riderDestinationTextController.text.isNotEmpty) &&
         (seatText.isNotEmpty &&
             int.tryParse(seatText) != null &&
             int.parse(seatText) >= 1 &&
