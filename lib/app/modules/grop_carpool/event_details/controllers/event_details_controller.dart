@@ -19,5 +19,13 @@ import '../../../origin/controllers/origin_controller.dart';
 
 class EventDetailsController extends GetxController {
   RxBool isActive = false.obs;
+  final List<String> imageUrls = [
+    'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png',
+    'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg',
+    'https://images.pexels.com/photos/5378700/pexels-photo-5378700.jpeg',
+    'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg',
+    'https://cdn.pixabay.com/photo/2024/10/20/08/29/portrait-9134409_1280.png',
+
+  ];
 
 }

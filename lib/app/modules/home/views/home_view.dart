@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final storageService = Get.find<GetStorageService>();
     final isUserSuspended = Get.find<GetStorageService>().accSuspended;
+
     Get.lazyPut(() => ProfileController());
     return Scaffold(
       body: SafeArea(
@@ -179,9 +180,12 @@ class HomeView extends GetView<HomeController> {
                     Get.toNamed(Routes.HELP_SUPPORT);
                   });
                 }
-                  : () {
+                  : storageService.isLoggedIn ? () {
                   Get.toNamed(Routes.ORGANIZE_CARPOOL, arguments: false);
                   controller.findingRide.value = true;
+                }:(){
+                  Get.toNamed(Routes.LOGIN,
+                      arguments: {'isDriver': false, 'fromNavBar': true});
                 },
                 child: Container(
                   width: 100.w,
@@ -209,8 +213,15 @@ class HomeView extends GetView<HomeController> {
                           top: -10.w,
                           bottom: -5.w,
                           child:
-                          // storageService.isPinkMode
-                          //     ?
+                          storageService.isPinkMode
+                              ?
+                          CommonImageView(
+                            // fit: BoxFit.fitWidth,
+                            // imagePathColor: ColorUtil.kPrimary02.withOpacity(0.9),
+                            width: 100.w,
+                            height: 149.kh,
+                            imagePath: ImageConstant.groupCarpoolPinkLogo,
+                          )
                           // CommonImageView(
                           //   // fit: BoxFit.fitWidth,
                           //   width: 100.w,
@@ -221,7 +232,7 @@ class HomeView extends GetView<HomeController> {
                           //   ImageConstant.svgPinkFindRide,
                           //   fit: BoxFit.fill,
                           // )
-                          //     :
+                              :
                           // SvgPicture.asset(
                           //   ImageConstant.svgFindRide,
                           // )
@@ -230,6 +241,7 @@ class HomeView extends GetView<HomeController> {
                           // )
                           CommonImageView(
                             // fit: BoxFit.fitWidth,
+                            // imagePathColor: ColorUtil.kPrimary02.withOpacity(0.9),
                             width: 100.w,
                             height: 149.kh,
                             imagePath: ImageConstant.groupCarpoolLogo,
@@ -245,13 +257,13 @@ class HomeView extends GetView<HomeController> {
                               LocaleKeys.app_groupCarpool.tr,
                               style: TextStyleUtil.k20Heading700(),
                             ).paddingOnly(bottom: 4.kh),
-                            // SizedBox(
-                            //   width: 170.kw,
-                            //   child: Text(
-                            //     LocaleKeys.app_takeRidesNearby.tr,
-                            //     style: TextStyleUtil.k14Regular(),
-                            //   ),
-                            // ),
+                            SizedBox(
+                              width: 170.kw,
+                              child: Text(
+                                LocaleKeys.app_rideTogetherSave.tr,
+                                style: TextStyleUtil.k14Regular(),
+                              ),
+                            ),
                           ],
                         ),
                       ),

@@ -36,7 +36,7 @@ class CreateNewEventController extends GetxController {
   TextEditingController selectedTime = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController riderOriginTextController = TextEditingController();
-  TextEditingController riderDestinationTextController = TextEditingController();
+  TextEditingController titleTextController = TextEditingController();
 
   double riderOriginLat = 0.0;
   double riderOriginLong = 0.0;
@@ -86,7 +86,7 @@ class CreateNewEventController extends GetxController {
     Get.toNamed(Routes.GROUP_DESTINATION, arguments: LocationValues.findRideDestination)
         ?.then(
       (value) {
-        if (riderDestinationTextController.value.text.isNotEmpty) {
+        if (riderOriginTextController.value.text.isNotEmpty) {
           isDestinationAdded.value = true;
         } else {
           isDestinationAdded.value = false;
@@ -96,79 +96,23 @@ class CreateNewEventController extends GetxController {
     );
   }
 
-  void swapTextFields() {
-    // Swap origin and destination values
-    final tempName = riderOriginTextController.text;
-    final tempLat = riderOriginLat;
-    final tempLong = riderOriginLong;
-
-    riderOriginTextController.text = riderDestinationTextController.text;
-    riderOriginLat = riderDestinationLat;
-    riderOriginLong = riderDestinationLong;
-
-    riderDestinationTextController.text = tempName;
-    riderDestinationLat = tempLat;
-    riderDestinationLong = tempLong;
-
-    // Update flags
-    isOriginAdded.value = riderOriginTextController.text.isNotEmpty;
-    isDestinationAdded.value = riderDestinationTextController.text.isNotEmpty;
-  }
-
-  FindRideModel _getRideDetails() {
-    String rideDate = "";
-    String rideTime = "";
-
-    if (date.text.isNotEmpty && selectedTime.text.isNotEmpty) {
-      final combinedDateTime =
-          "${date.text.split("T").first}T${selectedTime.text}";
-      String combinedDateTimeUTC =
-          DateTimeUtils.convertCombinedToGmt(combinedDateTime);
-      rideDate = combinedDateTimeUTC.split("T").first;
-      rideTime = combinedDateTimeUTC;
-    } else {
-      rideDate = date.text;
-    }
-
-    return FindRideModel(
-      ridesDetails: FindRideModelRidesDetails(
-        date: rideDate,
-        seatAvailable: int.parse(seatAvailable.value.text),
-        time: rideTime,
-        description: descriptionTextController.value.text,
-        pinkMode: Get.find<GetStorageService>().isPinkMode,
-        origin: FindRideModelRidesDetailsOrigin(
-          latitude: riderOriginLat,
-          longitude: riderOriginLong,
-          name: riderOriginTextController.value.text,
-        ),
-        destination: FindRideModelRidesDetailsDestination(
-          latitude: riderDestinationLat,
-          longitude: riderDestinationLong,
-          name: riderDestinationTextController.value.text,
-        ),
-      ),
-    );
-  }
 
   void moveToMatchingRides() {
-    // final rideDetails = _getRideDetails();
-    // _storePreviousLocations();
+    _storePreviousLocations();
     // Get.toNamed(Routes.MATCHING_RIDES, arguments: rideDetails.toJson());
     debugPrint("***********************");
-    Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
+    // Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
   }
 
   void _storePreviousLocations() {
-    if (riderOriginTextController.text.isNotEmpty &&
-        riderDestinationTextController.text.isNotEmpty) {
+    if (riderOriginTextController.text.isNotEmpty && titleTextController.text.isNotEmpty) {
       addLocationModel(
         riderOriginLat: riderOriginLat,
         riderOriginLong: riderOriginLong,
         riderOriginTextController: riderOriginTextController,
         riderDestinationLat: riderDestinationLat,
         riderDestinationLong: riderDestinationLong,
-        riderDestinationTextController: riderDestinationTextController,
+        riderDestinationTextController: titleTextController,
       );
     }
   }
@@ -227,12 +171,12 @@ class CreateNewEventController extends GetxController {
 
     riderDestinationLat = location.destinationLocation!.lat ?? 0.0;
     riderDestinationLong = location.destinationLocation!.long ?? 0.0;
-    riderDestinationTextController.text =
+    titleTextController.text =
         location.destinationLocation!.nameOfLocation ?? "";
 
     // Update flags
     isOriginAdded.value = riderOriginTextController.text.isNotEmpty;
-    isDestinationAdded.value = riderDestinationTextController.text.isNotEmpty;
+    isDestinationAdded.value = titleTextController.text.isNotEmpty;
 
     setActiveState();
   }
@@ -251,18 +195,23 @@ class CreateNewEventController extends GetxController {
 
     if (pickedDate != null) {
       date.text = pickedDate.toIso8601String();
-      departureDate.text =
-          "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+      departureDate.text = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+      selectedTime.clear();
+      setActiveState();
     }
   }
 
   Future<void> setTime(BuildContext context) async {
+    final now = TimeOfDay.now();
     TimeOfDay? pickedTime = Platform.isIOS
         ? await DialogHelper.cupertinoTimePicker(context)
         : await showTimePicker(
             context: context,
             builder: _pickerTheme,
-            initialTime: TimeOfDay.now(),
+            initialTime: TimeOfDay(
+              hour: (now.hour + 1) % 24,
+              minute: now.minute,
+            ),
             initialEntryMode: TimePickerEntryMode.dial,
           );
     if (pickedTime != null) {
@@ -271,7 +220,7 @@ class CreateNewEventController extends GetxController {
           alwaysUse24HourFormat: false);
       if (date.text.isNotEmpty) {
         if (DateTimeUtils.isToday(DateTime.parse(date.text))) {
-          if (DateTimeUtils.isAfterCurrentTime(formattedTime)) {
+          if (DateTimeUtils.isAfterOneHourTime(formattedTime)) {
             selectedTime.text = formattedTime;
           } else {
             showMySnackbar(msg: LocaleKeys.app_select_valid_time.tr);
@@ -284,16 +233,16 @@ class CreateNewEventController extends GetxController {
         showMySnackbar(msg: LocaleKeys.app_select_valid_date.tr);
       }
     }
+    setActiveState();
   }
 
   void setActiveState() {
     final seatText = seatAvailable.value.text;
 
-    isActive.value = (riderDestinationTextController.text.isNotEmpty) &&
-        (seatText.isNotEmpty &&
+    isActive.value = titleTextController.text.isNotEmpty && riderOriginTextController.text.isNotEmpty && selectedTime.text.isNotEmpty && (seatText.isNotEmpty &&
             int.tryParse(seatText) != null &&
             int.parse(seatText) >= 1 &&
-            int.parse(seatText) < 11);
+            int.parse(seatText) < 101);
   }
 
   String? seatsValidator(String? value) {
@@ -302,8 +251,8 @@ class CreateNewEventController extends GetxController {
     }
 
     final parsedValue = int.tryParse(value);
-    if (parsedValue == null || parsedValue < 1 || parsedValue > 10) {
-      return LocaleKeys.app_only_book_up_to_10_seats.tr;
+    if (parsedValue == null || parsedValue < 1 || parsedValue > 100) {
+      return LocaleKeys.app_only_book_up_to_100_seats.tr;
     }
     return null;
   }
@@ -338,27 +287,77 @@ class CreateNewEventController extends GetxController {
   }
 
   removeDestination() {
-    riderDestinationTextController.clear();
+    riderOriginTextController.clear();
     isDestinationAdded.value = false;
     riderDestinationLat = 0.0;
     riderDestinationLong = 0.0;
   }
-}
 
-/*Future<void> riderPostRideAPI() async {
-    final findRideData = _getRideDetails();
 
-    try {
-      final response =
-          await APIManager.postRiderFindRide(body: findRideData.toJson());
-      if (response.data['status']) {
-        rideresponse.value =
-            FindRideResponseModel.fromJson(jsonDecode(response.toString()));
-        log("this is rider's ride id: ${rideresponse.value.data![0]?.Id}");
-      } else {
-        showMySnackbar(msg: rideresponse.value?.message ?? "");
+
+  apiPublishEvent(){
+
+
+
+    Map<String,dynamic>   eventBody  = {
+
+        "ridesDetails": {
+          "origin": {
+            "name": titleTextController.text,
+            "longitude": -114.0718831,
+            "latitude": 51.04473309999999,
+            "originDestinationFair": 324
+          },
+          "destination": {
+            "name": titleTextController.text,
+            "longitude": -79.3831843,
+            "latitude": 43.653226
+          },
+          "stops": [
+            {
+              "name": "",
+              "longitude": 0,
+              "latitude": 0,
+              "originToStopFair": "0",
+              "stopToStopFair": "0",
+              "stopTodestinationFair": "0"
+            },
+            {
+              "name": "",
+              "longitude": 0,
+              "latitude": 0,
+              "originToStopFair": "0",
+              "stopToStopFair": "0",
+              "stopTodestinationFair": "0"
+            }
+          ],
+          "recurringTrip": {
+            "recurringTripDays": []
+          },
+          "tripType": "oneTime",
+          "date": "2025-06-17",
+          "time": "2025-06-17T07:10:00.000Z",
+          "description": "",
+          "returnTrip": {
+            "isReturnTrip": false,
+            "returnDate": "",
+            "returnTime": ""
+          },
+          "seatAvailable": 1,
+          "preferences": {
+            "luggageType": "NO",
+            "other": {
+              "AppreciatesConversation": false,
+              "EnjoysMusic": false,
+              "CoolingOrHeating": false,
+              "SmokeFree": false,
+              "PetFriendly": false,
+              "WinterTires": false,
+              "BabySeat": false,
+              "HeatedSeats": false
+            }
+          }
       }
-    } catch (e) {
-      throw Exception(e);
-    }
-  }*/
+    };
+  }
+}

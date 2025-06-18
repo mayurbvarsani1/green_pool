@@ -12,6 +12,7 @@ class CommonImageView extends StatelessWidget {
   String? svgPath;
   File? file;
   double? height;
+  Alignment alignment;
   double? width;
   final BoxFit fit;
   final String placeHolder;
@@ -25,6 +26,7 @@ class CommonImageView extends StatelessWidget {
     this.imagePath,
     this.svgPath,
     this.svgColor,
+    this.alignment  = Alignment.center,
     this.file,
     this.height,
     this.width,
@@ -68,6 +70,7 @@ class CommonImageView extends StatelessWidget {
       return CachedNetworkImage(
         height: height,
         width: width,
+       alignment: alignment,
         fit: fit,
         imageUrl: url!,
         placeholder: (context, url) => SizedBox(

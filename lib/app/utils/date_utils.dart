@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {
@@ -188,6 +189,26 @@ class DateTimeUtils {
 
     // Get the current local time
     DateTime now = DateTime.now();
+
+    // Compare only the hour and minute
+    if (inputDateTime.hour > now.hour) {
+      return true;
+    } else if (inputDateTime.hour == now.hour &&
+        inputDateTime.minute >= now.minute) {
+      return true;
+    }
+    return false;
+  }
+
+
+
+  static bool isAfterOneHourTime(String inputTime) {
+    // Parse the input time
+    DateFormat inputFormat = DateFormat('h:mm a');
+    DateTime inputDateTime = inputFormat.parse(inputTime);
+
+    // Get the current local time
+    DateTime now = DateTime.now().add(1.hours);
 
     // Compare only the hour and minute
     if (inputDateTime.hour > now.hour) {

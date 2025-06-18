@@ -62,6 +62,7 @@ class LocaleKeys {
   static const app_fileDispute = 'app_fileDispute';
   static const app_findRide = 'app_findRide';
 
+  static const app_rideTogetherSave = 'app_rideTogetherSave';
   static const app_groupCarpool = 'app_groupCarpool';
   static const app_organizeCarpool = 'app_organizeCarpool';
   static const app_searchForGroups = 'app_searchForGroups';
@@ -72,6 +73,7 @@ class LocaleKeys {
   static const app_title = 'app_title';
   static const app_titleHintText = 'app_titleHintText';
   static const app_destinations = 'app_destinations';
+  static const app_enterADestination = 'app_enterADestination';
   static const app_dateTime = 'app_dateTime';
   static const app_expectedAttendees = 'app_expectedAttendees';
   static const app_publicPrivate = 'app_publicPrivate';
@@ -538,6 +540,7 @@ class LocaleKeys {
   static const app_no_img_selected = 'app_no_img_selected';
   static const app_pls_enter_value = 'app_pls_enter_value';
   static const app_only_book_up_to_10_seats = 'app_only_book_up_to_10_seats';
+  static const app_only_book_up_to_100_seats = 'app_only_book_up_to_100_seats';
   static const app_select_valid_time = 'app_select_valid_time';
   static const app_select_valid_date = 'app_select_valid_date';
   static const app_copy = 'app_copy';
@@ -631,6 +634,7 @@ class Locales {
     'app_findRide': 'Find a Ride',
 
 
+    'app_rideTogetherSave': 'Together, Every Mile',
     'app_groupCarpool': 'Group Carpool',
     'app_organizeCarpool': 'Organize Carpool',
     'app_searchForGroups': 'Search  for Groups',
@@ -641,6 +645,7 @@ class Locales {
     'app_title': 'Title',
     'app_titleHintText': 'Enter event title',
     'app_destinations': 'Destination',
+    'app_enterADestination': 'Enter a destination',
     'app_dateTime': 'Date & Time',
     'app_expectedAttendees': 'Expected attendees',
     'app_publicPrivate': 'Public/Private',
@@ -1129,6 +1134,7 @@ class Locales {
     'app_no_img_selected': 'No image selected',
     'app_pls_enter_value': 'Please enter a value',
     'app_only_book_up_to_10_seats': 'You can only book up to 10 seats.',
+    'app_only_book_up_to_100_seats': 'You can only book up to 100 seats.',
     'app_select_valid_time': 'Please select a valid time',
     'app_select_valid_date': 'Please select a date',
     'app_copy': 'Copy',
@@ -1221,6 +1227,32 @@ class Locales {
     'app_noRideHistory': 'No hay historial de viajes en los últimos 7 días',
     'app_fileDispute': 'Presentar una disputa',
     'app_findRide': 'Encontrar un viaje',
+
+
+    'app_rideTogetherSave': 'Juntos, cada kilómetro',
+    'app_groupCarpool': 'Viaje compartido en grupo',
+    'app_organizeCarpool': 'Organizar viaje compartido',
+    'app_searchForGroups': 'Buscar grupos',
+    'app_requestARide': 'Solicitar un viaje',
+    'app_offerARide': 'Ofrecer un viaje',
+    'app_upcomingEvents': 'Próximos eventos',
+    'app_createNewEvent': 'Crear nuevo evento',
+    'app_title': 'Título',
+    'app_titleHintText': 'Ingrese el título del evento',
+    'app_destinations': 'Destino',
+    'app_enterADestination': 'Ingrese un destino',
+    'app_dateTime': 'Fecha y hora',
+    'app_expectedAttendees': 'Asistentes esperados',
+    'app_publicPrivate': 'Público/Privado',
+    'app_publishEvent': 'Publicar evento',
+    'app_eventDetails': 'Detalles del evento',
+    'app_eventLocation': 'Ubicación del evento',
+    'app_attendees': 'Asistentes',
+    'app_going': 'Asistiendo',
+    'app_joinEvent': 'Unirse al evento',
+
+
+
     'app_pickup': 'Recogida',
     'app_enterOrigin': 'Ingrese la dirección de recogida',
     'app_destination': 'Destino',
@@ -1706,6 +1738,7 @@ class Locales {
     'app_no_img_selected': 'Ninguna imagen seleccionada',
     'app_pls_enter_value': 'Por favor, ingrese un valor',
     'app_only_book_up_to_10_seats': 'Solo puedes reservar hasta 10 asientos.',
+    'app_only_book_up_to_100_seats': 'Solo puedes reservar hasta 100 asientos.',
     'app_select_valid_time': 'Por favor, seleccione una hora válida',
     'app_select_valid_date': 'Por favor, seleccione una fecha',
     'app_copy': 'Copiar',
@@ -1800,6 +1833,31 @@ class Locales {
         'Aucun historique de trajets au cours des 7 derniers jours',
     'app_fileDispute': 'Déposer un litige',
     'app_findRide': 'Trouver un trajet',
+
+
+    'app_rideTogetherSave': 'Ensemble, chaque kilomètre',
+    'app_groupCarpool': 'Covoiturage en groupe',
+    'app_organizeCarpool': 'Organiser un covoiturage',
+    'app_searchForGroups': 'Rechercher des groupes',
+    'app_requestARide': 'Demander un trajet',
+    'app_offerARide': 'Proposer un trajet',
+    'app_upcomingEvents': 'Événements à venir',
+    'app_createNewEvent': 'Créer un nouvel événement',
+    'app_title': 'Titre',
+    'app_titleHintText': 'Entrez le titre de l’événement',
+    'app_destinations': 'Destination',
+    'app_enterADestination': 'Entrez une destination',
+    'app_dateTime': 'Date et heure',
+    'app_expectedAttendees': 'Participants attendus',
+    'app_publicPrivate': 'Public/Privé',
+    'app_publishEvent': 'Publier l’événement',
+    'app_eventDetails': 'Détails de l’événement',
+    'app_eventLocation': 'Lieu de l’événement',
+    'app_attendees': 'Participants',
+    'app_going': 'Participe',
+    'app_joinEvent': 'Rejoindre l’événement',
+
+
     'app_pickup': 'Point de départ',
     'app_enterOrigin': 'Entrez l\'adresse de départ',
     'app_destination': 'Destination',
@@ -2284,8 +2342,8 @@ class Locales {
         'Pour créer une alerte de trajet, veuillez saisir tous les détails',
     'app_no_img_selected': 'Aucune image sélectionnée',
     'app_pls_enter_value': 'Veuillez entrer une valeur',
-    'app_only_book_up_to_10_seats':
-        'Vous ne pouvez réserver que jusqu\'à 10 sièges.',
+    'app_only_book_up_to_10_seats': 'Vous ne pouvez réserver que jusqu\'à 10 sièges.',
+    'app_only_book_up_to_100_seats': 'Vous ne pouvez réserver que jusqu\'à 100 sièges.',
     'app_select_valid_time': 'Veuillez sélectionner une heure valide',
     'app_select_valid_date': 'Veuillez sélectionner une date',
     'app_copy': 'Copier',

@@ -25,7 +25,7 @@ class GroupDestinationView extends GetView<GroupDestinationController> {
           children: [
             Obx(
               () => GreenPoolTextField(
-                hintText: "Enter a destination",
+                hintText: LocaleKeys.app_enterADestination.tr,
                 controller: controller.originController,
                 onchanged: (value) {
                   controller.setSessionToken();

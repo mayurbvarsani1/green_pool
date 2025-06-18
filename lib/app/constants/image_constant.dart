@@ -173,10 +173,10 @@ class ImageConstant {
   static String twitter = 'assets/images/icons/x.png';
 
   /// new Added
-  static String groupCarpoolLogo = 'assets/images/home/group_carpool.png';
-  static String groupCarpoolPinkLogo = 'assets/images/home/group_carpool_pink.png';
-  static String eventUserLogo =
-      'assets/images/home/event_user_logo.png';
+  static String groupCarpoolLogo = 'assets/images/home/carpool_green.png';
+  static String groupCarpoolPinkLogo = 'assets/images/home/carpool_pink.png';
+  static String eventGroup = 'assets/images/home/event_group_img.png';
+  static String eventUserLogo = 'assets/images/home/event_user_logo.png';
   static String location ='assets/images/icons/location.svg';
   static String locationRing ='assets/images/icons/location_ring.svg';
   static String userRing ='assets/images/icons/user_ring.svg';

@@ -14,6 +14,7 @@ import '../../../../components/greenpool_textfield.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
+import '../../../../services/storage.dart';
 import '../../../../services/text_style_util.dart';
 import '../../../home/controllers/home_controller.dart';
 import '../controllers/organize_carpool_controller.dart';
@@ -26,6 +27,8 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
   @override
   Widget build(BuildContext context) {
     final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
+    final storageService = Get.find<GetStorageService>();
+
     // final pickedDate = DateTime.now();
     // controller.date.text = pickedDate.toIso8601String();
     // controller.departureDate.text =
@@ -69,11 +72,7 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                       Expanded(
                         child: GreenPoolButton(
                           onPressed: () {
-
                             controller.selectedButton.value = 'request';
-
-
-
                           },
                           label: LocaleKeys.app_requestARide.tr,
                           fontSize: 14.kh,
@@ -86,16 +85,16 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                           //     .isPinkModeOn.value
                           //     ? ColorUtil.kPrimary3PinkMode
                           //     : ColorUtil.kSecondary01,
-                          color:controller.selectedButton.value == 'request' ?ColorUtil.kPrimary01  : ColorUtil.kBlack08,
-                          borderColor: controller.selectedButton.value == 'request'
-                              ? (Get.find<HomeController>().isPinkModeOn.value
-                              ? ColorUtil.kPrimary3PinkMode
-                              : ColorUtil.kSecondary01)
-                              : Colors.grey,
-                          labelColor: Get.find<HomeController>()
-                              .isPinkModeOn.value
-                              ? ColorUtil.kPrimary3PinkMode
-                              : ColorUtil.kSecondary01,
+                          color:controller.selectedButton.value == 'request' ? null  : ColorUtil.kBlack08,
+                          // borderColor: controller.selectedButton.value == 'request'
+                          //     ? (Get.find<HomeController>().isPinkModeOn.value
+                          //     ? ColorUtil.kPrimary3PinkMode
+                          //     : ColorUtil.kSecondary01)
+                          //     : Colors.grey,
+                          // labelColor: Get.find<HomeController>()
+                          //     .isPinkModeOn.value
+                          //     ? ColorUtil.kPrimary3PinkMode
+                          //     : ColorUtil.kSecondary01,
                           padding: EdgeInsets.all(0.kh),
                         ),
                       ),
@@ -110,16 +109,16 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                             controller.selectedButton.value = 'offer';
 
                           },
-                          color:controller.selectedButton.value == 'offer' ?ColorUtil.kPrimary01  : ColorUtil.kBlack08,
-                          borderColor: controller.selectedButton.value == 'offer'
-                              ? ( Get.find<HomeController>().isPinkModeOn.value
-                              ? ColorUtil.kPrimary3PinkMode
-                              : ColorUtil.kSecondary01)
-                              : Colors.grey,
-                          labelColor: Get.find<HomeController>()
-                              .isPinkModeOn.value
-                              ? ColorUtil.kPrimary3PinkMode
-                              : ColorUtil.kSecondary01,
+                          color:controller.selectedButton.value == 'offer' ? null  : ColorUtil.kBlack08,
+                          // borderColor: controller.selectedButton.value == 'offer'
+                          //     ? ( Get.find<HomeController>().isPinkModeOn.value
+                          //     ? ColorUtil.kPrimary3PinkMode
+                          //     : ColorUtil.kSecondary01)
+                          //     : Colors.grey,
+                          // labelColor: Get.find<HomeController>()
+                          //     .isPinkModeOn.value
+                          //     ? ColorUtil.kPrimary3PinkMode
+                          //     : ColorUtil.kSecondary01,
                         ),
                       ),
                     ],
@@ -130,53 +129,69 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                   style: TextStyleUtil.k20Heading700(),
                 ).paddingOnly(bottom: 4.kh),
 
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (context, itemsIndex) {
-                    return InkWell(
-                      onTap: () {
-
-                        // Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
-
-                      },
-                      child: Container(
-                        child: ListTile(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
-                          minVerticalPadding: 12.kh,
-                          title: Text(
-                            "Toronto Tech Fest",
-                            style: TextStyleUtil.k14Bold(),
-                          ),
-                          subtitle: Text(
-                            "8:00 AM - 9:00 AM",
-                            style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
-                          ),
-                          leading: Container(
-                            padding: EdgeInsets.all(16.kh),
-                            height: 212.kh,
-                            width: 15.w,
-                            decoration: BoxDecoration(
-                              color: ColorUtil.kBlack08,
-                              borderRadius: BorderRadius.circular(8.kh),
+                SizedBox(
+                  height: 435.kh,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, itemsIndex) {
+                      return InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
+                        },
+                        child: Container(
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
+                            minVerticalPadding: 12.kh,
+                            title: Text(
+                              "Toronto Tech Fest",
+                              style: TextStyleUtil.k14Bold(),
                             ),
-                            alignment: Alignment.center,
-                            child: SvgPicture.asset(
-                              ImageConstant.svgProfileCar,
-                              // width: 30,
-                              // height: 30,
-                              colorFilter: ColorFilter.mode(
-                                  isPinkModeOn
-                                      ? ColorUtil.kPrimary3PinkMode
-                                      : ColorUtil.kSecondary01,
-                                  BlendMode.srcIn),
+                            subtitle: Text(
+                              "8:00 AM - 9:00 AM",
+                              style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
                             ),
-                          ),
-                        ).paddingOnly(bottom: 4.kh),
-                      ),
-                    );
-                  },
+
+                            leading: Container(
+                              padding: EdgeInsets.all(16.kh),
+                              height: 212.kh,
+                              width: 15.w,
+                              decoration: BoxDecoration(
+                                color: ColorUtil.kBlack08,
+                                borderRadius: BorderRadius.circular(8.kh),
+                              ),
+                              alignment: Alignment.center,
+                              child: SvgPicture.asset(
+                                ImageConstant.svgProfileCar,
+                                // width: 30,
+                                // height: 30,
+                                colorFilter: ColorFilter.mode(
+                                    isPinkModeOn
+                                        ? ColorUtil.kPrimary3PinkMode
+                                        : ColorUtil.kSecondary01,
+                                    BlendMode.srcIn),
+                              ),
+                            ),
+                            trailing:
+                            InkWell(onTap: () {
+
+                            },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
+
+                            // trailing:   SvgPicture.asset(
+                            //   ImageConstant.svgNavMessagesFilled,
+                            //   colorFilter: ColorFilter.mode(
+                            //     Get.find<GetStorageService>().isPinkMode
+                            //         ? ColorUtil.kPrimary3PinkMode
+                            //         : ColorUtil.kSecondary01,
+                            //     BlendMode.srcIn,
+                            //   ),
+                            // ),
+                          ).paddingOnly(bottom: 4.kh),
+                        ),
+                      );
+                    },
+                  ),
                 ),
 
 
@@ -187,11 +202,7 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                 const Expanded(child: SizedBox()),
                 GreenPoolButton(
                   padding: const EdgeInsets.all(0),
-                  labelColor: Get.find<HomeController>().isPinkModeOn.value
-                      ? ColorUtil.kPrimary3PinkMode
-                      : ColorUtil.kSecondary01,
                   fontSize: 18.kh,
-                  color:ColorUtil.kPrimary01,
                   onPressed: () => controller.moveToMatchingRides(),
                   label: LocaleKeys.app_createNewEvent.tr,
                 ).paddingOnly(bottom: 30.kh),

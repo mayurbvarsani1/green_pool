@@ -14,6 +14,7 @@ import '../../../../../generated/locales.g.dart';
 import '../../../../components/greenpool_textfield.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
+import '../../../../services/storage.dart';
 import '../../../../services/text_style_util.dart';
 import '../../../home/controllers/home_controller.dart';
 
@@ -24,6 +25,8 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
 
   @override
   Widget build(BuildContext context) {
+    final storageService = Get.find<GetStorageService>();
+
     final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
     // final pickedDate = DateTime.now();
     // controller.date.text = pickedDate.toIso8601String();
@@ -41,7 +44,8 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // RichTextHeading(text: LocaleKeys.app_pickup.tr).paddingOnly(top: 12.kh),
-                
+              SizedBox(
+              height: 30.kh),
                 RichTextHeading(text: LocaleKeys.app_title.tr),
                 GreenPoolTextField(
                   textStyle: TextStyleUtil.k14Medium(color: ColorUtil.kBlack01),
@@ -54,7 +58,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
 
 
                   },
-                  controller: controller.riderDestinationTextController,
+                  controller: controller.titleTextController,
                   // readOnly: true,
                 ).paddingOnly(top: 8.kh, bottom: 14.kh),
 
@@ -66,7 +70,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 RichTextHeading(text: LocaleKeys.app_destinations.tr),
                 GreenPoolTextField(
                   textStyle: TextStyleUtil.k14Medium(color: ColorUtil.kBlack01),
-                  hintText: "Enter a destination",
+                  hintText: LocaleKeys.app_enterADestination.tr,
                   keyboardType: TextInputType.streetAddress,
                   onchanged: (v) {
                     controller.setActiveState();
@@ -84,11 +88,11 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                   // ),
                   prefix: SvgPicture.asset(
                     ImageConstant.location,
-                    // colorFilter: ColorFilter.mode(
-                    //     isPinkModeOn
-                    //         ? ColorUtil.kPrimary3PinkMode
-                    //         : ColorUtil.kBlack09,
-                    //     BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                        isPinkModeOn
+                            ? ColorUtil.kPrimary3PinkMode
+                            : ColorUtil.kBlack09,
+                        BlendMode.srcIn),
                   ),
                   readOnly: true,
                   suffix: controller.isDestinationAdded.value
@@ -114,10 +118,9 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 //   ],
                 // ),
 
-                Text(
-                  LocaleKeys.app_dateTime.tr,
-                  style: TextStyleUtil.k14Semibold(),
-                ),
+
+                RichTextHeading(text: LocaleKeys.app_dateTime.tr),
+
                 Row(
                   children: [
                     SizedBox(
@@ -174,7 +177,9 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                     FilteringTextInputFormatter.allow(
                         RegExp(r'[0-9]')), // Only allow digits (0-9)
                     FilteringTextInputFormatter.deny(
-                        RegExp(r'[^\w\s]')), // Deny all special characters
+                        RegExp(r'[^\w\s]')),
+                    LengthLimitingTextInputFormatter(3),
+                    // Deny all special characters
                   ],
                   keyboardType: TextInputType.number,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -215,7 +220,8 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                         //   ),
                         // )
 
-                            child: SvgPicture.asset(ImageConstant.svgIconInfo,color: ColorUtil.kPrimary01,)),
+                            child: SvgPicture.asset(ImageConstant.svgIconInfo,color: storageService.isPinkMode
+                                ?   ColorUtil.kSecondaryPinkMode  : ColorUtil.kPrimary01,)),
                     ],
                   ),
                     Obx(
@@ -226,13 +232,14 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                           controller.toggleSwitch();
                         },
                         inactiveThumbColor: ColorUtil.kNeutral1,
-                        inactiveTrackColor: ColorUtil.kPrimary04,
-                        activeTrackColor: ColorUtil.kPrimary01,
+                        inactiveTrackColor:  storageService.isPinkMode
+                            ?   ColorUtil.kSecondaryPinkMode  :ColorUtil.kPrimary04,
+                        activeTrackColor: storageService.isPinkMode
+                            ?  ColorUtil.kPrimary2PinkMode  :   ColorUtil.kPrimary01,
                         trackOutlineWidth: const MaterialStatePropertyAll(0),
                         thumbColor: const MaterialStatePropertyAll(
                             ColorUtil.kWhiteColor),
-                        trackOutlineColor:
-                        const MaterialStatePropertyAll(ColorUtil.kNeutral1),
+                        trackOutlineColor: const MaterialStatePropertyAll(ColorUtil.kNeutral1),
                       ),
                     ),
                   ],
@@ -284,15 +291,9 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 // ),
                const Expanded(child: SizedBox()),
                 GreenPoolButton(
-                  color:ColorUtil.kPrimary01,
                   padding: const EdgeInsets.all(0),
-                  onPressed: () {
-                    Get.back();
-                  },
-                  // isActive: controller.isActive.value,
-                  labelColor: Get.find<HomeController>().isPinkModeOn.value
-                      ? ColorUtil.kPrimary3PinkMode
-                      : ColorUtil.kSecondary01,
+                  onPressed: () => controller.moveToMatchingRides(),
+                  isActive: controller.isActive.value,
                   label: LocaleKeys.app_publishEvent.tr,
                 ).paddingOnly(bottom: 30.kh),
               ],

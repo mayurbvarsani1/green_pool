@@ -217,8 +217,7 @@ class GroupDestinationController extends GetxController {
   void setLocationToFindRideController(List<dynamic> fetchLatLong) {
       Get.find<CreateNewEventController>().riderOriginLat = fetchLatLong[0];
       Get.find<CreateNewEventController>().riderOriginLong = fetchLatLong[1];
-      Get.find<CreateNewEventController>().riderOriginTextController.text =
-          fetchLatLong[2];
+      Get.find<CreateNewEventController>().riderOriginTextController.text = fetchLatLong[2];
       _saveLocation(fetchLatLong, "findRideOrigin");
   }
 

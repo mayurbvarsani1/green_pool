@@ -202,6 +202,7 @@ class HomeController extends GetxController with Versionk {
     final storageService = Get.find<GetStorageService>();
 
     if (storageService.isLoggedIn) {
+      debugPrint("storageService.isLoggedIn=>${storageService.isLoggedIn}");
       if (storageService.profileStatus) {
         final isUserSuspended = Get.find<GetStorageService>().accSuspended;
         if (isUserSuspended && (index == 1 || index == 2)) {
