@@ -180,5 +180,6 @@ class ImageConstant {
   static String location ='assets/images/icons/location.svg';
   static String locationRing ='assets/images/icons/location_ring.svg';
   static String userRing ='assets/images/icons/user_ring.svg';
+  static String eventNotFound ='assets/images/icons/event_not_found.png';
 
 }

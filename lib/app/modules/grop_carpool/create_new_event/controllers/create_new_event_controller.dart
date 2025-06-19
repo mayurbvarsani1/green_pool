@@ -12,9 +12,11 @@ import 'package:green_pool/generated/locales.g.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../services/dialog_helper.dart';
+import '../../../../services/dio/api_service.dart';
 import '../../../../services/storage.dart';
 import '../../../../utils/date_utils.dart';
 import '../../../origin/controllers/origin_controller.dart';
+import '../../organize_carpool/controllers/organize_carpool_controller.dart';
 
 
 class CreateNewEventController extends GetxController {
@@ -40,8 +42,7 @@ class CreateNewEventController extends GetxController {
 
   double riderOriginLat = 0.0;
   double riderOriginLong = 0.0;
-  double riderDestinationLat = 0.0;
-  double riderDestinationLong = 0.0;
+
 
   RxList<LocationModel> locationModelNames = <LocationModel>[].obs;
 
@@ -98,24 +99,13 @@ class CreateNewEventController extends GetxController {
 
 
   void moveToMatchingRides() {
-    _storePreviousLocations();
+    apiPublishEvent();
     // Get.toNamed(Routes.MATCHING_RIDES, arguments: rideDetails.toJson());
     debugPrint("***********************");
     // Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
   }
 
-  void _storePreviousLocations() {
-    if (riderOriginTextController.text.isNotEmpty && titleTextController.text.isNotEmpty) {
-      addLocationModel(
-        riderOriginLat: riderOriginLat,
-        riderOriginLong: riderOriginLong,
-        riderOriginTextController: riderOriginTextController,
-        riderDestinationLat: riderDestinationLat,
-        riderDestinationLong: riderDestinationLong,
-        riderDestinationTextController: titleTextController,
-      );
-    }
-  }
+
 
   bool isDuplicate(LocationModel newLocationModel) {
     return locationModelNames.any((location) =>
@@ -168,9 +158,6 @@ class CreateNewEventController extends GetxController {
     riderOriginLong = location.originLocation!.long ?? 0.0;
     riderOriginTextController.text =
         location.originLocation!.nameOfLocation ?? "";
-
-    riderDestinationLat = location.destinationLocation!.lat ?? 0.0;
-    riderDestinationLong = location.destinationLocation!.long ?? 0.0;
     titleTextController.text =
         location.destinationLocation!.nameOfLocation ?? "";
 
@@ -195,7 +182,7 @@ class CreateNewEventController extends GetxController {
 
     if (pickedDate != null) {
       date.text = pickedDate.toIso8601String();
-      departureDate.text = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+      departureDate.text = "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
       selectedTime.clear();
       setActiveState();
     }
@@ -289,75 +276,61 @@ class CreateNewEventController extends GetxController {
   removeDestination() {
     riderOriginTextController.clear();
     isDestinationAdded.value = false;
-    riderDestinationLat = 0.0;
-    riderDestinationLong = 0.0;
+    riderOriginLat = 0.0;
+    riderOriginLong = 0.0;
   }
 
 
 
-  apiPublishEvent(){
+    final RxBool isLoad = true.obs;
+  apiPublishEvent() async {
 
 
+    final combinedDateTime = "${departureDate.text.toString().split("T").first}T${selectedTime.text}";
 
+    final combinedDateTimeUTC =
+    DateTimeUtils.convertCombinedToGmt(combinedDateTime);
+
+    final date = combinedDateTimeUTC.split("T").first;
+    final time = combinedDateTimeUTC;
     Map<String,dynamic>   eventBody  = {
 
-        "ridesDetails": {
-          "origin": {
-            "name": titleTextController.text,
-            "longitude": -114.0718831,
-            "latitude": 51.04473309999999,
-            "originDestinationFair": 324
-          },
-          "destination": {
-            "name": titleTextController.text,
-            "longitude": -79.3831843,
-            "latitude": 43.653226
-          },
-          "stops": [
-            {
-              "name": "",
-              "longitude": 0,
-              "latitude": 0,
-              "originToStopFair": "0",
-              "stopToStopFair": "0",
-              "stopTodestinationFair": "0"
-            },
-            {
-              "name": "",
-              "longitude": 0,
-              "latitude": 0,
-              "originToStopFair": "0",
-              "stopToStopFair": "0",
-              "stopTodestinationFair": "0"
-            }
-          ],
-          "recurringTrip": {
-            "recurringTripDays": []
-          },
-          "tripType": "oneTime",
-          "date": "2025-06-17",
-          "time": "2025-06-17T07:10:00.000Z",
-          "description": "",
-          "returnTrip": {
-            "isReturnTrip": false,
-            "returnDate": "",
-            "returnTime": ""
-          },
-          "seatAvailable": 1,
-          "preferences": {
-            "luggageType": "NO",
-            "other": {
-              "AppreciatesConversation": false,
-              "EnjoysMusic": false,
-              "CoolingOrHeating": false,
-              "SmokeFree": false,
-              "PetFriendly": false,
-              "WinterTires": false,
-              "BabySeat": false,
-              "HeatedSeats": false
-            }
-          }
-      }
+      "title": titleTextController.text,
+      "destination": {
+        "name": riderOriginTextController.text,
+        "latitude":   riderOriginLat,
+        "longitude":riderOriginLong
+      },
+      "expectedAttendees": int.parse(seatAvailable.text),
+      "description": "description",
+      "date": date,   //  "2025-06-17",
+      "time": time // "2025-06-17T07:10:00.000Z"
+
     };
+    print("eventBody=>$eventBody");
+    print("selectedTime=>${selectedTime.text}");
+
+
+    try {
+      isLoad.value = true;
+
+      final res = await APIManager.postEventSend(body: eventBody);
+      debugPrint("res=>${res.data}");
+      if(res.data['status'] = true){
+          Get.back();
+          if(Get.find<OrganizeCarpoolController>().selectedButton.value != 'request'){
+          Get.find<OrganizeCarpoolController>().getEventAPI(isOfferRide:true);
+          }
+          // await APIManager.eventList();
+          }
+
+
+      isLoad.value = false;
+    }
+    catch(e){
+
+      debugPrint(e.toString());
+
+    }
   }
 }

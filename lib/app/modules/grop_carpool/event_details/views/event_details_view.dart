@@ -9,6 +9,7 @@ import 'package:green_pool/app/constants/image_constant.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import '../../../../../generated/locales.g.dart';
 import '../../../../components/common_image_view.dart';
+import '../../../../components/gp_progress.dart';
 import '../../../../components/greenpool_textfield.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
@@ -58,161 +59,173 @@ class EventDetailsView extends GetView<EventDetailsController> {
               ).paddingOnly(bottom: 25.kh),
 
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Toronto Tech Fest",
-                      style: TextStyleUtil.k18Bold(),
-                    ).paddingOnly(bottom: 8.kh),
-                    Text(
-                      'Saturday, July 15, 2023 · 12:00 PM',
-                      style:
-                          TextStyleUtil.k14Regular(color: ColorUtil.kBlack010),
-                    ).paddingOnly(bottom: 15.kh),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.kh)),
-                      minVerticalPadding: 12.kh,
-                      title: Text(
-                        LocaleKeys.app_eventLocation.tr,
-                        style: TextStyleUtil.k14Medium(fontSize: 16),
-                      ),
-                      subtitle: Text(
-                        "Central Park, New York",
-                        style: TextStyleUtil.k14Regular(
-                            color: ColorUtil.kBlack010),
-                      ),
-                      leading: Container(
-                        padding: EdgeInsets.all(16.kh),
-                        height: 212.kh,
-                        width: 15.w,
-                        decoration: BoxDecoration(
-                          color: ColorUtil.kBlack08,
-                          borderRadius: BorderRadius.circular(8.kh),
-                        ),
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          ImageConstant.locationRing,
-                          // width: 30,
-                          // height: 30,
-                          colorFilter: ColorFilter.mode(
-                              isPinkModeOn
-                                  ? ColorUtil.kPrimary3PinkMode
-                                  : ColorUtil.kSecondary01,
-                              BlendMode.srcIn),
-                        ),
-                      ),
-                    ).paddingOnly(bottom: 4.kh),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.kh)),
-                      minVerticalPadding: 12.kh,
-                      title: Text(
-                        LocaleKeys.app_attendees.tr,
-                        style: TextStyleUtil.k14Bold(),
-                      ),
-                      subtitle: Text(
-                        "150+ attendees",
-                        style: TextStyleUtil.k14Regular(
-                            color: ColorUtil.kBlack010),
-                      ),
-                      leading: Container(
-                        padding: EdgeInsets.all(16.kh),
-                        height: 212.kh,
-                        width: 15.w,
-                        decoration: BoxDecoration(
-                          color: ColorUtil.kBlack08,
-                          borderRadius: BorderRadius.circular(8.kh),
-                        ),
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          ImageConstant.userRing,
-                          // width: 30,
-                          // height: 30,
-                          colorFilter: ColorFilter.mode(
-                              isPinkModeOn
-                                  ? ColorUtil.kPrimary3PinkMode
-                                  : ColorUtil.kSecondary01,
-                              BlendMode.srcIn),
-                        ),
-                      ),
-                    ).paddingOnly(bottom: 4.kh),
-                    Text(
-                      LocaleKeys.app_going.tr,
-                      style: TextStyleUtil.k18Bold(),
-                    ).paddingOnly(bottom: 15.kh),
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.imageUrls.length,
-                        itemBuilder: (context, index) {
-                          final isLast =
-                              index == controller.imageUrls.length - 1;
-                          return Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                  width: 50,
-                                  height: 50,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: ColorUtil.kBackgroundColor,
-                                      borderRadius:
-                                          BorderRadius.circular(100))),
-                              // Positioned(
-                              //   left: 7,
-                              //   child: CircleAvatar(
-                              //     radius: 25,
-                              //     backgroundImage: NetworkImage( controller.imageUrls[index]),
-                              //   ),
-                              // )
+                child: Obx(
+                  ()=>  controller.isLoad.value
+                      ? const GpProgress()
+                      :
+                      Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        controller.eventDetailsData.value?.data?.event?.title?.capitalizeFirst ?? "",
+                        // "Toronto Tech Fest",
+                        style: TextStyleUtil.k18Bold(),
+                      ).paddingOnly(bottom: 8.kh),
+                      Text(
 
-                              Positioned(
-                                left: 7,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: CommonImageView(
-                                      height: 52,
-                                      width: 52,
-                                      fit: BoxFit.cover,
-                                      alignment: Alignment.topCenter,
-                                      url: controller.imageUrls[index]),
-                                ),
-                              )
 
-                              // Container(
-                              //   alignment: Alignment.center,
-                              //     decoration: BoxDecoration(
-                              //       color: Colors.black,
-                              //       border: Border.all(width: 5),
-                              //     ),
-                              //     child: Image.network(
-                              //       controller.imageUrls[index],
-                              //       height: 75,
-                              //       width: 75,
-                              //       fit: BoxFit.cover,
-                              //     )),
-                            ],
-                          );
-                        },
+                        controller.formatDateTime(controller.eventDetailsData.value?.data?.event?.time ?? DateTime.now()),
+                        // 'Saturday, July 15, 2023 · 12:00 PM',
+                        style:
+                            TextStyleUtil.k14Regular(color: ColorUtil.kBlack010),
+                      ).paddingOnly(bottom: 15.kh),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.kh)),
+                        minVerticalPadding: 12.kh,
+                        title: Text(
+                          LocaleKeys.app_eventLocation.tr,
+                          style: TextStyleUtil.k14Medium(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          controller.eventDetailsData.value?.data?.event?.destination?.name ?? "",
+                          // "Central Park, New York",
+                          style: TextStyleUtil.k14Regular(
+                              color: ColorUtil.kBlack010),
+                        ),
+                        leading: Container(
+                          padding: EdgeInsets.all(16.kh),
+                          height: 212.kh,
+                          width: 15.w,
+                          decoration: BoxDecoration(
+                            color: ColorUtil.kBlack08,
+                            borderRadius: BorderRadius.circular(8.kh),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset(
+                            ImageConstant.locationRing,
+                            // width: 30,
+                            // height: 30,
+                            colorFilter: ColorFilter.mode(
+                                isPinkModeOn? ColorUtil.kPrimary3PinkMode: ColorUtil.kSecondary01,BlendMode.srcIn),
+                          ),
+                        ),
+                      ).paddingOnly(bottom: 4.kh),
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.kh)),
+                        minVerticalPadding: 12.kh,
+                        title: Text(
+                          LocaleKeys.app_attendees.tr,
+                          style: TextStyleUtil.k14Bold(),
+                        ),
+                        subtitle: Text(
+                          "${controller.eventDetailsData.value?.data?.totalUsers.toString() ?? ""} attendees",
+                          style: TextStyleUtil.k14Regular(
+                              color: ColorUtil.kBlack010),
+                        ),
+                        leading: Container(
+                          padding: EdgeInsets.all(16.kh),
+                          height: 212.kh,
+                          width: 15.w,
+                          decoration: BoxDecoration(
+                            color: ColorUtil.kBlack08,
+                            borderRadius: BorderRadius.circular(8.kh),
+                          ),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset(
+                            ImageConstant.userRing,
+                            // width: 30,
+                            // height: 30,
+                            colorFilter: ColorFilter.mode(
+                                isPinkModeOn
+                                    ? ColorUtil.kPrimary3PinkMode
+                                    : ColorUtil.kSecondary01,
+                                BlendMode.srcIn),
+                          ),
+                        ),
+                      ).paddingOnly(bottom: 4.kh),
+                      Text(
+                        LocaleKeys.app_going.tr,
+                        style: TextStyleUtil.k18Bold(),
+                      ).paddingOnly(bottom: 15.kh),
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.eventDetailsData.value?.data?.users?.length,
+                          itemBuilder: (context, index) {
+                               var userProfile =   controller.eventDetailsData.value?.data?.users?[index];
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                    width: 50,
+                                    height: 50,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: ColorUtil.kBackgroundColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100))),
+                                // Positioned(
+                                //   left: 7,
+                                //   child: CircleAvatar(
+                                //     radius: 25,
+                                //     backgroundImage: NetworkImage( controller.imageUrls[index]),
+                                //   ),
+                                // )
+
+                                Positioned(
+                                  left: 7,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: CommonImageView(
+                                        height: 52,
+                                        width: 52,
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.topCenter,
+                                        url: userProfile?.profilePic?.url ?? ""),
+                                  ),
+                                )
+
+                                // Container(
+                                //   alignment: Alignment.center,
+                                //     decoration: BoxDecoration(
+                                //       color: Colors.black,
+                                //       border: Border.all(width: 5),
+                                //     ),
+                                //     child: Image.network(
+                                //       controller.imageUrls[index],
+                                //       height: 75,
+                                //       width: 75,
+                                //       fit: BoxFit.cover,
+                                //     )),
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    GreenPoolButton(
-                      width: 124.kw,
-                      height: 40.kh,
-                      padding: const EdgeInsets.all(0),
-                      onPressed: () {},
-                      // isActive: controller.isActive.value,
-                      label: LocaleKeys.app_joinEvent.tr,
-                    ).paddingOnly(bottom: 30.kh),
-                  ],
-                ).paddingSymmetric(horizontal: 16.kw),
+
+                      const Expanded(child: SizedBox()),
+
+                      Visibility(
+                        // visible: true,
+                        visible: controller.eventDetailsData.value?.data?.isAvailable ?? false,
+                        child: GreenPoolButton(
+                          width: 124.kw,
+                          height: 40.kh,
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {},
+                          // isActive: controller.isActive.value,
+                          label: LocaleKeys.app_joinEvent.tr,
+                        ).paddingOnly(bottom: 30.kh),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16.kw),
+                ),
               ),
             ],
           )

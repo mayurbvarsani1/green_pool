@@ -59,12 +59,12 @@ class LoginView extends GetView<LoginController> {
                   autofocus: false,
                   prefix: CountryCodePicker(
                     onChanged: (countryCode) {
-                      controller.countryCode = countryCode.dialCode ?? "+1";
+                      controller.countryCode = countryCode.dialCode ?? "+91";
                     },
                     padding: const EdgeInsets.all(0),
                     dialogSize: Size(60.kw, 25.h),
-                    initialSelection: 'CA',
-                    countryFilter: const ['CA'],
+                    initialSelection: 'IN',
+                    countryFilter: const ['IN'],
                     showFlag: true,
                     hideSearch: true,
                     searchDecoration: InputDecoration(

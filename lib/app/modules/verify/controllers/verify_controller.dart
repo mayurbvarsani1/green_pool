@@ -80,6 +80,7 @@ class VerifyController extends GetxController {
       await Future.delayed(const Duration(seconds: 2));
       bool isStatus = await Get.find<AuthService>()
           .verifyMobileOtp(otp: otpController.text);
+      print("isStatus=>$isStatus");
       if (isStatus) {
         await loginAPI();
       } else {
@@ -133,6 +134,9 @@ class VerifyController extends GetxController {
       try {
         final response =
             await APIManager.postRegisterAcc(body: {"fullName": fullName});
+        // print("response=>${response}");
+        // print("response=>${response.data['status']}");
+        // print("response=>${response.statusCode}");
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);
           _handleNewUser(userInfo, authService, homeController, storageService);
@@ -155,6 +159,10 @@ class VerifyController extends GetxController {
       //USER LOGIN
       try {
         final response = await APIManager.postLogin();
+        // print("response=>${response}");
+        // print("response=>${response.data['status']}");
+        // print("response=>${response.statusCode}");
+
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);
           _handleUserLogin(

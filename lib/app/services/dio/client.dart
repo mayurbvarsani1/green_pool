@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'app_interceptors.dart';
 import 'endpoints.dart';
@@ -12,6 +13,7 @@ class DioClient {
   String? baseUrl;
 
   DioClient(this._dio, {this.isOverlayLoader = false, this.showSnakbar = false,this.baseUrl}) {
+    debugPrint("baseUrl=>$baseUrl");
     _dio
       ..options.baseUrl = baseUrl ?? Endpoints.baseUrl
       ..options.connectTimeout = const Duration(milliseconds: Endpoints.connectionTimeout)
@@ -51,6 +53,7 @@ class DioClient {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
+    debugPrint("url=>$url");
     final Response response = await _dio.post(
       url,
       data: data,
@@ -60,6 +63,8 @@ class DioClient {
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
     );
+    debugPrint("response=>${response.statusCode}");
+    debugPrint("response=>${response.data}");
     return response;
   }
 

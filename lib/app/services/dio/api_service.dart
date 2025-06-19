@@ -408,7 +408,7 @@ class APIManager {
     required String chatRoomId,
   }) async =>
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
-          .post(Endpoints.deleteChat, data: {"chatRoomId": chatRoomId});
+            .post(Endpoints.deleteChat, data: {"chatRoomId": chatRoomId});
 
   static Future<dynamic> deleteAccount() async =>
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
@@ -449,4 +449,32 @@ class APIManager {
           {required String driverRideId, required dynamic body}) async =>
       await DioClient(Dio(), showSnakbar: false, isOverlayLoader: true)
           .put(Endpoints.editRide + driverRideId, data: body);
+
+
+
+
+/// TODO: group carpooll api
+  static Future<Response> eventList(
+      {Map<String, dynamic>? queryParameters}) async =>
+      await DioClient(
+        Dio(),
+        showSnakbar: true,
+      ).get(Endpoints.getEventListApi, queryParameters: queryParameters);
+
+  static Future<Response> postEventSend({required dynamic body}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+          .post(Endpoints.getEventListApi, data: jsonEncode(body));
+
+
+  static Future<Response> getEventDetailId(
+      {required String eventId}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+        Endpoints.getEventListApi + eventId,
+      );
+  // static Future<Response> getRideDetailById(
+  //     {required String driverRideId}) async =>
+  //     await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+  //       Endpoints.getRideDetail + driverRideId,
+  //       queryParameters: {"type": "chat"},
+  //     );
 }

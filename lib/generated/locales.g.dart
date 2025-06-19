@@ -69,6 +69,7 @@ class LocaleKeys {
   static const app_requestARide  = 'app_requestARide';
   static const app_offerARide = 'app_offerARide';
   static const app_upcomingEvents = 'app_upcomingEvents';
+  static const app_myEvent = 'app_myEvent';
   static const app_createNewEvent = 'app_createNewEvent';
   static const app_title = 'app_title';
   static const app_titleHintText = 'app_titleHintText';
@@ -637,10 +638,11 @@ class Locales {
     'app_rideTogetherSave': 'Together, Every Mile',
     'app_groupCarpool': 'Group Carpool',
     'app_organizeCarpool': 'Organize Carpool',
-    'app_searchForGroups': 'Search  for Groups',
+    'app_searchForGroups': 'Search for Groups',
     'app_requestARide': 'Request a ride',
     'app_offerARide': 'Offer a ride',
     'app_upcomingEvents': 'Upcoming Events',
+    'app_myEvent': 'My Event',
     'app_createNewEvent': 'Create New Event',
     'app_title': 'Title',
     'app_titleHintText': 'Enter event title',
@@ -1236,6 +1238,7 @@ class Locales {
     'app_requestARide': 'Solicitar un viaje',
     'app_offerARide': 'Ofrecer un viaje',
     'app_upcomingEvents': 'Próximos eventos',
+    'app_app_myEvent': 'Mis eventos',
     'app_createNewEvent': 'Crear nuevo evento',
     'app_title': 'Título',
     'app_titleHintText': 'Ingrese el título del evento',
@@ -1842,6 +1845,7 @@ class Locales {
     'app_requestARide': 'Demander un trajet',
     'app_offerARide': 'Proposer un trajet',
     'app_upcomingEvents': 'Événements à venir',
+    'app_myEvent': 'Mes événements',
     'app_createNewEvent': 'Créer un nouvel événement',
     'app_title': 'Titre',
     'app_titleHintText': 'Entrez le titre de l’événement',

@@ -167,7 +167,9 @@ class GroupDestinationController extends GetxController {
       double lat = geometry?.geometry?.location?.lat ?? 0.0;
       double long = geometry?.geometry?.location?.lng ?? 0.0;
       String nameOfLocation = geometry?.formattedAddress ?? "";
-
+      debugPrint("lat=>$lat");
+      debugPrint("long=>$long");
+      debugPrint("nameOfLocation=>$nameOfLocation");
       // Add the fetched data to the cache
       storageService
           .addToFindLocationCache(placeId, [lat, long, nameOfLocation]);
@@ -182,7 +184,8 @@ class GroupDestinationController extends GetxController {
   Future<void> setLocationData(String placeId) async {
     try {
       List<dynamic> fetchLatLong = await getLatLong(placeId);
-
+          debugPrint("fetchLatLong=>${fetchLatLong}");
+          debugPrint("fetchLatLong=>${fetchLatLong}");
       setLocationToFindRideController(fetchLatLong);
     } catch (e) {
       log("setLocationData error: $e");

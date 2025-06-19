@@ -134,4 +134,10 @@ class Endpoints {
 
   //put url
   static const String editRide = "driver/rides/";
+
+
+  /// TODO: group carpooll api
+
+  static const String getEventListApi = "event/";     //get post get
+
 }

@@ -10,13 +10,17 @@ import 'package:green_pool/app/constants/image_constant.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 
 import '../../../../../generated/locales.g.dart';
+import '../../../../components/common_image_view.dart';
+import '../../../../components/gp_progress.dart';
 import '../../../../components/greenpool_textfield.dart';
+import '../../../../data/event_list_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
 import '../../../../services/storage.dart';
 import '../../../../services/text_style_util.dart';
 import '../../../home/controllers/home_controller.dart';
+import '../../event_details/controllers/event_details_controller.dart';
 import '../controllers/organize_carpool_controller.dart';
 
 
@@ -50,8 +54,8 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                 GreenPoolTextField(
                     hintText: LocaleKeys.app_searchForGroups.tr,
                     controller: controller.searchTextController,
-                    onchanged: (v) {
-
+                    onchanged: (value) {
+                        controller.onSearchTextChanged(value);
                     },
                     prefix: Icon(
                       Icons.search,
@@ -59,6 +63,7 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                           ? ColorUtil.kPrimary3PinkMode
                           : ColorUtil.kBlack03,
                     ),
+
                     onPressedSuffix: () {
 
                     },
@@ -72,7 +77,11 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                       Expanded(
                         child: GreenPoolButton(
                           onPressed: () {
+                            controller.searchTextController.clear();
                             controller.selectedButton.value = 'request';
+                            controller.getEventAPI();
+                            FocusManager.instance.primaryFocus?.unfocus();
+
                           },
                           label: LocaleKeys.app_requestARide.tr,
                           fontSize: 14.kh,
@@ -106,7 +115,11 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                           fontSize: 14.kh,
                           label: LocaleKeys.app_offerARide.tr,
                           onPressed: () async {
+                            controller.searchTextController.clear();
                             controller.selectedButton.value = 'offer';
+                            controller.getEventAPI(isOfferRide: true);
+                            FocusManager.instance.primaryFocus?.unfocus();
+
 
                           },
                           color:controller.selectedButton.value == 'offer' ? null  : ColorUtil.kBlack08,
@@ -125,70 +138,93 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                   ).paddingOnly(bottom: 25.kh),
                 ),
                 Text(
-                  LocaleKeys.app_upcomingEvents.tr,
+                  controller.selectedButton.value == 'request'  ? LocaleKeys.app_upcomingEvents.tr  : LocaleKeys.app_myEvent.tr ,
                   style: TextStyleUtil.k20Heading700(),
                 ).paddingOnly(bottom: 4.kh),
-
+                controller.isLoad.value
+                    ? Padding(
+                      padding: EdgeInsets.only(top: 200.0.kh),
+                      child: const Column(
+                        children: [
+                          GpProgress(),
+                        ],
+                      ),
+                    )
+                    : controller.eventData.isEmpty
+                    ? Padding(
+                    padding: EdgeInsets.only(top: 25.0.kh),
+                    child: Center(
+                      child: CommonImageView(
+                        fit: BoxFit.fitWidth,
+                        width: Get.width,
+                        imagePath: ImageConstant.eventNotFound,
+                      )
+                    ))
+                    :
                 SizedBox(
                   height: 435.kh,
                   child: ListView.builder(
                     shrinkWrap: true,
                     // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
+                    itemCount: controller.eventData.length,
+                    padding: EdgeInsets.zero,
                     itemBuilder: (context, itemsIndex) {
+                      Doc?  eventData  = controller.eventData[itemsIndex];
                       return InkWell(
                         onTap: () {
+                          debugPrint("eventData.id=>${eventData.id}");
+                          // Get.lazyPut(()=>EventDetailsController().eventDetailAPI(eventData.id ?? ""));
+                          EventDetailsController  eventIdController  = Get.put(EventDetailsController());
+                          eventIdController.eventDetailAPI(eventData.id ?? "");
                           Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
                         },
-                        child: Container(
-                          child: ListTile(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
-                            minVerticalPadding: 12.kh,
-                            title: Text(
-                              "Toronto Tech Fest",
-                              style: TextStyleUtil.k14Bold(),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),
+                          minVerticalPadding: 12.kh,
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            eventData.title?.capitalizeFirst ?? "",
+                            style: TextStyleUtil.k14Bold(),
+                          ),
+                          subtitle: Text(
+                           controller.formatDateAndTime( eventData.date ?? DateTime.now(),  eventData.time ?? DateTime.now()),
+                          style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
+                          ),
+                          leading: Container(
+                            padding: EdgeInsets.all(16.kh),
+                            height: 212.kh,
+                            width: 15.w,
+                            decoration: BoxDecoration(
+                              color: ColorUtil.kBlack08,
+                              borderRadius: BorderRadius.circular(8.kh),
                             ),
-                            subtitle: Text(
-                              "8:00 AM - 9:00 AM",
-                              style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              ImageConstant.svgProfileCar,
+                              // width: 30,
+                              // height: 30,
+                              colorFilter: ColorFilter.mode(
+                                  isPinkModeOn
+                                      ? ColorUtil.kPrimary3PinkMode
+                                      : ColorUtil.kSecondary01,
+                                  BlendMode.srcIn),
                             ),
+                          ),
+                          trailing:
+                          InkWell(onTap: () {
 
-                            leading: Container(
-                              padding: EdgeInsets.all(16.kh),
-                              height: 212.kh,
-                              width: 15.w,
-                              decoration: BoxDecoration(
-                                color: ColorUtil.kBlack08,
-                                borderRadius: BorderRadius.circular(8.kh),
-                              ),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                ImageConstant.svgProfileCar,
-                                // width: 30,
-                                // height: 30,
-                                colorFilter: ColorFilter.mode(
-                                    isPinkModeOn
-                                        ? ColorUtil.kPrimary3PinkMode
-                                        : ColorUtil.kSecondary01,
-                                    BlendMode.srcIn),
-                              ),
-                            ),
-                            trailing:
-                            InkWell(onTap: () {
+                          },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
 
-                            },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
-
-                            // trailing:   SvgPicture.asset(
-                            //   ImageConstant.svgNavMessagesFilled,
-                            //   colorFilter: ColorFilter.mode(
-                            //     Get.find<GetStorageService>().isPinkMode
-                            //         ? ColorUtil.kPrimary3PinkMode
-                            //         : ColorUtil.kSecondary01,
-                            //     BlendMode.srcIn,
-                            //   ),
-                            // ),
-                          ).paddingOnly(bottom: 4.kh),
-                        ),
+                          // trailing:   SvgPicture.asset(
+                          //   ImageConstant.svgNavMessagesFilled,
+                          //   colorFilter: ColorFilter.mode(
+                          //     Get.find<GetStorageService>().isPinkMode
+                          //         ? ColorUtil.kPrimary3PinkMode
+                          //         : ColorUtil.kSecondary01,
+                          //     BlendMode.srcIn,
+                          //   ),
+                          // ),
+                        ).paddingOnly(bottom: 4.kh),
                       );
                     },
                   ),
