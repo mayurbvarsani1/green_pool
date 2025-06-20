@@ -139,5 +139,7 @@ class Endpoints {
   /// TODO: group carpooll api
 
   static const String getEventListApi = "event/";     //get post get
+  static const String jointEventApi = "event/join"; // post
+  static const String sendChatApi = "chat/jinesh"; // post
 
 }

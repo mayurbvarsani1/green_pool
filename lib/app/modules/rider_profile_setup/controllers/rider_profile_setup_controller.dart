@@ -37,12 +37,7 @@ class RiderProfileSetupController extends GetxController {
   TextEditingController email = TextEditingController(
       text: Get.find<AuthService>().auth.currentUser?.email);
   TextEditingController phoneNumber = TextEditingController(
-      text: Get.find<GetStorageService>()
-              .phoneNumber
-              .toString()
-              .split("+1")
-              .last ??
-          "");
+      text: Get.find<GetStorageService>().phoneNumber.toString().split("+1").last ??"");
   TextEditingController gender = TextEditingController();
   RxBool isGenderListExpanded = false.obs;
   RxList<String> genderList =
@@ -52,7 +47,7 @@ class RiderProfileSetupController extends GetxController {
   TextEditingController formattedDateOfBirth = TextEditingController();
   TextEditingController city = TextEditingController();
   RxBool isCityListExpanded = false.obs;
-
+String prefix = "+1";
   GlobalKey<FormState> userFormKey = GlobalKey<FormState>();
 
   final Rx<FindRideModel> findRideModel = FindRideModel().obs;
@@ -73,9 +68,27 @@ class RiderProfileSetupController extends GetxController {
       fromNavBar = Get.arguments['fromNavBar'];
       findRideModel.value = Get.arguments['findRideModel'];
       fullName.text = Get.arguments['fullName'];
+      debugPrint("fromNavBar=?$fromNavBar");
+      debugPrint("123=?${Get.find<GetStorageService>().phoneNumber}");
+      if(Get.find<GetStorageService>().phoneNumber.startsWith("+91")){
+        phoneNumber = TextEditingController(text: Get.find<GetStorageService>().phoneNumber.toString().split("+91").last);
+        prefix = "+91";
+      }else{
+        phoneNumber = TextEditingController(text: Get.find<GetStorageService>().phoneNumber.toString().split("+1").last);
+        prefix = "+1";
+      }
     } catch (e) {
       fromNavBar = Get.arguments['fromNavBar'];
       fullName.text = Get.arguments['fullName'];
+      if(Get.find<GetStorageService>().phoneNumber.startsWith("+91")){
+        phoneNumber = TextEditingController(text: Get.find<GetStorageService>().phoneNumber.toString().split("+91").last);
+        prefix = "+91";
+      }else{
+        phoneNumber = TextEditingController(text: Get.find<GetStorageService>().phoneNumber.toString().split("+1").last);
+        prefix = "+1";
+      }
+      debugPrint("fromNavBar1=?$fromNavBar");
+      debugPrint("phoneNumber1=?${Get.find<GetStorageService>().phoneNumber}");
     }
     if (Get.find<GetStorageService>().emailId != "") {
       readOnlyEmail = true;

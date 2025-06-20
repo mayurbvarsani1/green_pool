@@ -51,6 +51,8 @@ class LoginView extends GetView<LoginController> {
                         RegExp(r'[0-9]')), // Only allow digits (0-9)
                     FilteringTextInputFormatter.deny(
                         RegExp(r'[^\w\s]')), // Deny all special characters
+                    LengthLimitingTextInputFormatter(10),
+
                   ],
                   keyboardType: TextInputType.phone,
                   validator: (value) => controller.phoneNumberValidator(value),
@@ -59,12 +61,13 @@ class LoginView extends GetView<LoginController> {
                   autofocus: false,
                   prefix: CountryCodePicker(
                     onChanged: (countryCode) {
-                      controller.countryCode = countryCode.dialCode ?? "+91";
+                      controller.countryCode = countryCode.dialCode ?? "+1";
+                      debugPrint("controller.countryCode=>${controller.countryCode}");
                     },
                     padding: const EdgeInsets.all(0),
                     dialogSize: Size(60.kw, 25.h),
-                    initialSelection: 'IN',
-                    countryFilter: const ['IN'],
+                    initialSelection: 'CA',
+                    countryFilter: const ['CA','IN'],
                     showFlag: true,
                     hideSearch: true,
                     searchDecoration: InputDecoration(

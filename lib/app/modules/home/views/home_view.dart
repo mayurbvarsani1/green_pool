@@ -8,6 +8,7 @@ import 'package:green_pool/app/routes/app_pages.dart';
 import 'package:green_pool/app/services/colors.dart';
 import 'package:green_pool/app/services/dialog_helper.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
+import 'package:green_pool/app/services/snackbar.dart';
 import 'package:green_pool/app/services/text_style_util.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -172,21 +173,42 @@ class HomeView extends GetView<HomeController> {
 
               /// TODO group carpool
               GestureDetector(
-                onTap: isUserSuspended
-                    ? () {
-                  DialogHelper.accSuspendedDialog(() {
-                    Get.back();
-                    controller.changeTabIndex(3);
-                    Get.toNamed(Routes.HELP_SUPPORT);
-                  });
-                }
-                  : storageService.isLoggedIn ? () {
-                  Get.toNamed(Routes.ORGANIZE_CARPOOL, arguments: false);
-                  controller.findingRide.value = true;
-                }:(){
-                  Get.toNamed(Routes.LOGIN,
-                      arguments: {'isDriver': false, 'fromNavBar': true});
+                onTap: (){
+                  if(storageService.isLoggedIn){
+                    if (storageService.profileStatus) {
+                      if (isUserSuspended) {
+                        DialogHelper.accSuspendedDialog(() {
+                          Get.back();
+                          controller.changeTabIndex(3);
+                          Get.toNamed(Routes.HELP_SUPPORT);
+                        });
+                      } else {
+                        Get.toNamed(Routes.ORGANIZE_CARPOOL, arguments: false);
+                        controller.findingRide.value = true;
+                      }
+                    } else {
+                      Get.toNamed(Routes.RIDER_PROFILE_SETUP, arguments: {"fromNavBar": true, "fullName": ""});
+                        showMySnackbar(msg: LocaleKeys.app_pleaseCompleteProfileSetup.tr);
+                    }
+                  }else{
+                    Get.toNamed(Routes.LOGIN, arguments: {'isDriver': false, 'fromNavBar': true});
+                  }
                 },
+                // onTap: isUserSuspended
+                //     ? () {
+                //   DialogHelper.accSuspendedDialog(() {
+                //     Get.back();
+                //     controller.changeTabIndex(3);
+                //     Get.toNamed(Routes.HELP_SUPPORT);
+                //   });
+                // }
+                //   : storageService.isLoggedIn ? () {
+                //   Get.toNamed(Routes.ORGANIZE_CARPOOL, arguments: false);
+                //   controller.findingRide.value = true;
+                // }:(){
+                //   Get.toNamed(Routes.LOGIN,
+                //       arguments: {'isDriver': false, 'fromNavBar': true});
+                // },
                 child: Container(
                   width: 100.w,
                   height: 149.kh,
@@ -242,7 +264,7 @@ class HomeView extends GetView<HomeController> {
                           CommonImageView(
                             // fit: BoxFit.fitWidth,
                             // imagePathColor: ColorUtil.kPrimary02.withOpacity(0.9),
-                            width: 100.w,
+                            width: 90.w,
                             height: 149.kh,
                             imagePath: ImageConstant.groupCarpoolLogo,
                           )

@@ -165,6 +165,7 @@ class PostRideStepTwoController extends GetxController
         if (DateTimeUtils.isToday(DateTime.parse(selectedDate.text))) {
           if (DateTimeUtils.isAfterCurrentTime(formattedTime)) {
             selectedTime.text = formattedTime;
+
             setActiveStateCarpoolSchedule();
           } else {
             showMySnackbar(msg: "Please select a valid time");
@@ -174,6 +175,7 @@ class PostRideStepTwoController extends GetxController
           selectedTime.text = formattedTime;
           setActiveStateCarpoolSchedule();
         }
+        debugPrint("selectedTime.text=${selectedTime.text}");
       } else {
         showMySnackbar(msg: "Please select a date");
       }
@@ -300,15 +302,15 @@ class PostRideStepTwoController extends GetxController
   }
 
   moveToPricingView() {
-    final combinedDateTime =
-        "${selectedDate.text.toString().split("T").first}T${selectedTime.text}";
+    final combinedDateTime = "${selectedDate.text.toString().split("T").first}T${selectedTime.text}";
 
     final combinedDateTimeUTC =
         DateTimeUtils.convertCombinedToGmt(combinedDateTime);
 
     final date = combinedDateTimeUTC.split("T").first;
     final time = combinedDateTimeUTC;
-
+    debugPrint("date=>${date}");
+    debugPrint("time=>${time}");
     final combinedReturnDateTime =
         "${selectedReturnDate.text.toString().split("T").first}T${selectedReturnTime.text}";
 

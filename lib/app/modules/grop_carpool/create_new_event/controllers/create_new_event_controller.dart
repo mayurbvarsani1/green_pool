@@ -278,6 +278,7 @@ class CreateNewEventController extends GetxController {
     isDestinationAdded.value = false;
     riderOriginLat = 0.0;
     riderOriginLong = 0.0;
+    setActiveState();
   }
 
 
@@ -294,15 +295,15 @@ class CreateNewEventController extends GetxController {
     final date = combinedDateTimeUTC.split("T").first;
     final time = combinedDateTimeUTC;
     Map<String,dynamic>   eventBody  = {
-
+      // isPublicPrivate.value
       "title": titleTextController.text,
+      'isPublic' :  !isPublicPrivate.value,
       "destination": {
         "name": riderOriginTextController.text,
         "latitude":   riderOriginLat,
         "longitude":riderOriginLong
       },
       "expectedAttendees": int.parse(seatAvailable.text),
-      "description": "description",
       "date": date,   //  "2025-06-17",
       "time": time // "2025-06-17T07:10:00.000Z"
 

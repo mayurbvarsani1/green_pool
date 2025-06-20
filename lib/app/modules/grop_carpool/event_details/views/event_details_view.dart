@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/components/richtext_heading.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
+import 'package:green_pool/app/data/rider_send_request_model.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import '../../../../../generated/locales.g.dart';
 import '../../../../components/common_image_view.dart';
@@ -13,6 +14,7 @@ import '../../../../components/gp_progress.dart';
 import '../../../../components/greenpool_textfield.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
+import '../../../../services/storage.dart';
 import '../../../../services/text_style_util.dart';
 import '../../../home/controllers/home_controller.dart';
 import '../controllers/event_details_controller.dart';
@@ -51,7 +53,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // RichTextHeading(text: LocaleKeys.app_pickup.tr).paddingOnly(top: 12.kh),
-              SizedBox(height: 18.kh),
+              SizedBox(height: 12.kh),
               CommonImageView(
                 fit: BoxFit.fitWidth,
                 width: Get.width,
@@ -112,6 +114,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
                           ),
                         ),
                       ).paddingOnly(bottom: 4.kh),
+
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(
@@ -122,7 +125,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
                           style: TextStyleUtil.k14Bold(),
                         ),
                         subtitle: Text(
-                          "${controller.eventDetailsData.value?.data?.totalUsers.toString() ?? ""} attendees",
+                          "${controller.eventDetailsData.value?.data?.totalUsers ?? ""}/${controller.eventDetailsData.value?.data?.event?.expectedAttendees ?? ""} attendees",
                           style: TextStyleUtil.k14Regular(
                               color: ColorUtil.kBlack010),
                         ),
@@ -146,17 +149,38 @@ class EventDetailsView extends GetView<EventDetailsController> {
                                 BlendMode.srcIn),
                           ),
                         ),
+
+
+                        trailing:InkWell(onTap: () {
+                            controller.openMessage(controller.eventDetailsData.value?.data?.event?.id as RiderSendRequestModelData);
+                        },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
+                        // trailing:   InkWell(
+                        //   onTap: () {
+                        //
+                        //   },
+                        //   child: SvgPicture.asset(
+                        //     ImageConstant.svgNavMessagesFilled,
+                        //     colorFilter: ColorFilter.mode(
+                        //       Get.find<GetStorageService>().isPinkMode
+                        //           ? ColorUtil.kPrimary3PinkMode
+                        //           : ColorUtil.kSecondary01,
+                        //       BlendMode.srcIn,
+                        //     ),
+                        //   ),
+                        // ),
                       ).paddingOnly(bottom: 4.kh),
                       Text(
                         LocaleKeys.app_going.tr,
                         style: TextStyleUtil.k18Bold(),
                       ).paddingOnly(bottom: 15.kh),
-                      Expanded(
+                      SizedBox(
+                        height: 52,
                         child: ListView.builder(
                           shrinkWrap: true,
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.eventDetailsData.value?.data?.users?.length,
+                          // itemCount: 100,
                           itemBuilder: (context, index) {
                                var userProfile =   controller.eventDetailsData.value?.data?.users?[index];
                             return Stack(
@@ -188,6 +212,7 @@ class EventDetailsView extends GetView<EventDetailsController> {
                                         fit: BoxFit.cover,
                                         alignment: Alignment.topCenter,
                                         url: userProfile?.profilePic?.url ?? ""),
+                                        // url: "https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png"),
                                   ),
                                 )
 
@@ -209,19 +234,28 @@ class EventDetailsView extends GetView<EventDetailsController> {
                         ),
                       ),
 
+
                       const Expanded(child: SizedBox()),
 
-                      Visibility(
-                        // visible: true,
-                        visible: controller.eventDetailsData.value?.data?.isAvailable ?? false,
-                        child: GreenPoolButton(
-                          width: 124.kw,
-                          height: 40.kh,
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {},
-                          // isActive: controller.isActive.value,
-                          label: LocaleKeys.app_joinEvent.tr,
-                        ).paddingOnly(bottom: 30.kh),
+                      Obx(
+                        () {
+                          final isAvailable = controller.eventDetailsData.value?.data?.isAvailable ?? false;
+                          // controller.eventDetailsData.value?.data?.totalUsers;
+                          // controller.eventDetailsData.value?.data?.event?.expectedAttendees;
+
+                         debugPrint("isAvailable=>$isAvailable");
+                          return GreenPoolButton(
+                            width: 124.kw,
+                            height: 40.kh,
+                            padding: const EdgeInsets.all(0),
+                            isActive: isAvailable,
+                            onPressed: () {
+                              debugPrint("controller.eventDetailsData.value?.data?.event?.id=>${controller.eventDetailsData.value?.data?.event?.id}");
+                              controller.jointEventAPI(controller.eventDetailsData.value?.data?.event?.id ?? "");
+                            },
+                            label: LocaleKeys.app_joinEvent.tr,
+                          ).paddingOnly(bottom: 30.kh);
+                          }
                       ),
                     ],
                   ).paddingSymmetric(horizontal: 16.kw),

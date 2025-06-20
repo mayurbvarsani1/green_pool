@@ -80,7 +80,7 @@ class RiderProfileSetupView extends GetView<RiderProfileSetupController> {
                 hintText: LocaleKeys.app_enterPhoneNumber.tr,
                 controller: controller.phoneNumber,
                 prefix: Text(
-                  "+1",
+                  controller.prefix,
                   style: TextStyleUtil.k14Regular(
                     color: ColorUtil.kBlack03,
                   ),

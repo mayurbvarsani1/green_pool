@@ -471,10 +471,15 @@ class APIManager {
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
         Endpoints.getEventListApi + eventId,
       );
-  // static Future<Response> getRideDetailById(
-  //     {required String driverRideId}) async =>
-  //     await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
-  //       Endpoints.getRideDetail + driverRideId,
-  //       queryParameters: {"type": "chat"},
-  //     );
+
+
+  static Future<Response> jointEventApi({required dynamic body}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+          .post(Endpoints.jointEventApi, data: jsonEncode(body));
+
+  static Future<Response> sendChatApi({required dynamic body}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+          .post(Endpoints.sendChatApi, data: jsonEncode(body));
+
+
 }

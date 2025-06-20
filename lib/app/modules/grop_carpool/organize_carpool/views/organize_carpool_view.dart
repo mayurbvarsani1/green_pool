@@ -184,11 +184,13 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                           contentPadding: EdgeInsets.zero,
                           title: Text(
                             eventData.title?.capitalizeFirst ?? "",
-                            style: TextStyleUtil.k14Bold(),
+                            style: TextStyleUtil.k18Bold(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           subtitle: Text(
                            controller.formatDateAndTime( eventData.date ?? DateTime.now(),  eventData.time ?? DateTime.now()),
-                          style: TextStyleUtil.k14Regular(color: Color(0xFF6B7582)),
+                          style: TextStyleUtil.k16Regular(color: const Color(0xFF6B7582)),
                           ),
                           leading: Container(
                             padding: EdgeInsets.all(16.kh),
@@ -210,8 +212,7 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                                   BlendMode.srcIn),
                             ),
                           ),
-                          trailing:
-                          InkWell(onTap: () {
+                          trailing:InkWell(onTap: () {
 
                           },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
 

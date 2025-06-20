@@ -46,15 +46,12 @@ class OrganizeCarpoolController extends GetxController {
 
 
   String formatDateAndTime(dynamic date, dynamic time) {
-    final parsedDate = date is DateTime ? date : DateTime.parse(date.toString());
-    final parsedTime = time is DateTime ? time : DateTime.parse(time.toString()).toLocal();
+    // final parsedDate = date is DateTime ? date : DateTime.parse(date.toString());
+    final parsedTime = time is DateTime ? time.toLocal() : DateTime.parse(time.toString()).toLocal();
 
-    final dateFormatted = DateFormat('dd MMMM yyyy').format(parsedDate);
-    final start = parsedTime;
-    final end = start.add(Duration(hours: 1));
-    final timeFormatted = '${DateFormat.jm().format(start)} - ${DateFormat.jm().format(end)}';
+    final dateFormatted = DateFormat('dd MMMM yyyy, hh:mm:a').format(parsedTime);
 
-    return '$dateFormatted, $timeFormatted';
+    return '$dateFormatted';
   }
 
   final RxBool isLoad = true.obs;

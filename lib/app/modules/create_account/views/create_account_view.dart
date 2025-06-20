@@ -68,6 +68,8 @@ class CreateAccountView extends GetView<CreateAccountController> {
                         RegExp(r'[0-9]')), // Only allow digits (0-9)
                     FilteringTextInputFormatter.deny(
                         RegExp(r'[^\w\s]')), // Deny all special characters
+                    LengthLimitingTextInputFormatter(3),
+
                   ],
                   validator: (value) => controller.phoneNumberValidator(value),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -80,7 +82,7 @@ class CreateAccountView extends GetView<CreateAccountController> {
                     hideSearch: true,
                     dialogSize: Size(60.kw, 25.h),
                     initialSelection: 'CA',
-                    countryFilter: const ['CA'],
+                    countryFilter: const ['CA','IN'],
                     searchDecoration: InputDecoration(
                       focusColor: ColorUtil.kNeutral6,
                       focusedBorder: OutlineInputBorder(

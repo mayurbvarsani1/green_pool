@@ -41,6 +41,7 @@ class HomeController extends GetxController with Versionk {
   RxInt totUnreadMsgs = 0.obs;
 
   void changeTabIndex(int index) {
+    debugPrint("---------");
     pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 1),
@@ -203,6 +204,7 @@ class HomeController extends GetxController with Versionk {
 
     if (storageService.isLoggedIn) {
       debugPrint("storageService.isLoggedIn=>${storageService.isLoggedIn}");
+      debugPrint("storageService.profileStatus${storageService.profileStatus}");
       if (storageService.profileStatus) {
         final isUserSuspended = Get.find<GetStorageService>().accSuspended;
         if (isUserSuspended && (index == 1 || index == 2)) {

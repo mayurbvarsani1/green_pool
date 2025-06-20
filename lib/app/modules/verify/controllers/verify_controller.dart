@@ -134,9 +134,10 @@ class VerifyController extends GetxController {
       try {
         final response =
             await APIManager.postRegisterAcc(body: {"fullName": fullName});
-        // print("response=>${response}");
+        print("response=>${response}");
+        print("response.data=>${response.data}");
         // print("response=>${response.data['status']}");
-        // print("response=>${response.statusCode}");
+        print("response.StatusCode=>${response.statusCode}");
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);
           _handleNewUser(userInfo, authService, homeController, storageService);

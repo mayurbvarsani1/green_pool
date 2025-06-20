@@ -14,7 +14,7 @@ import '../../verify/controllers/verify_controller.dart';
 class LoginController extends GetxController {
   TextEditingController phoneNumberController = TextEditingController();
   RxBool isVisible = false.obs;
-  String countryCode = "+91";
+  String countryCode = "+1";
   bool isDriver = false;
   bool fromNavBar = false;
   RxBool isActive = false.obs;
