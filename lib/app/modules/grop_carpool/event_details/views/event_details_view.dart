@@ -7,15 +7,19 @@ import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/components/richtext_heading.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
 import 'package:green_pool/app/data/rider_send_request_model.dart';
+import 'package:green_pool/app/modules/grop_carpool/group_chat/controllers/group_chat_controller.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import '../../../../../generated/locales.g.dart';
 import '../../../../components/common_image_view.dart';
 import '../../../../components/gp_progress.dart';
 import '../../../../components/greenpool_textfield.dart';
+import '../../../../data/chat_arg.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../../services/colors.dart';
 import '../../../../services/custom_button.dart';
 import '../../../../services/storage.dart';
 import '../../../../services/text_style_util.dart';
+import '../../../../utils/date_utils.dart';
 import '../../../home/controllers/home_controller.dart';
 import '../controllers/event_details_controller.dart';
 
@@ -151,9 +155,26 @@ class EventDetailsView extends GetView<EventDetailsController> {
                         ),
 
 
-                        trailing:InkWell(onTap: () {
-                            controller.openMessage(controller.eventDetailsData.value?.data?.event?.id as RiderSendRequestModelData);
-                        },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
+                        trailing:Visibility(
+                          visible: !(controller.eventDetailsData.value?.data?.isAvailable ?? false),
+                          child: InkWell(onTap: () {
+                            // groupChatController.sendChatAPI(controller.eventDetailsData.value?.data?.event?.id ?? "", controller.eventDetailsData.value?.chatRoomId ?? "");
+                            Get.toNamed(Routes.GROUP_CHAT, arguments: {
+
+                                "chatArg": ChatArg(
+                                  chatRoomId: controller.eventDetailsData.value?.chatRoomId  ?? "",
+                                  id: Get.find<GetStorageService>().getUserAppId,
+                                  image: Get.find<GetStorageService>().profilePicUrl,
+                                  name: controller.eventDetailsData.value?.data?.event?.title ?? "",
+                                  eventId: controller.eventDetailsData.value?.data?.event?.id  ?? "",
+                                  deleteUpdateTime: "${controller.eventDetailsData.value?.deleteUpdateTime ?? ""}"  ,
+                                  // date: DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr)),
+                                ),
+                                // "ridePostId": message?.ridePostId ?? "",
+
+                            });
+                          },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
+                        ),
                         // trailing:   InkWell(
                         //   onTap: () {
                         //
@@ -242,7 +263,6 @@ class EventDetailsView extends GetView<EventDetailsController> {
                           final isAvailable = controller.eventDetailsData.value?.data?.isAvailable ?? false;
                           // controller.eventDetailsData.value?.data?.totalUsers;
                           // controller.eventDetailsData.value?.data?.event?.expectedAttendees;
-
                          debugPrint("isAvailable=>$isAvailable");
                           return GreenPoolButton(
                             width: 124.kw,

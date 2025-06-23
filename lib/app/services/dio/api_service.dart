@@ -478,8 +478,19 @@ class APIManager {
           .post(Endpoints.jointEventApi, data: jsonEncode(body));
 
   static Future<Response> sendChatApi({required dynamic body}) async =>
-      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false)
           .post(Endpoints.sendChatApi, data: jsonEncode(body));
 
 
+  static Future<Response> getChatDetails(
+      {required String chatRoomId}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+        Endpoints.getChatListApi + chatRoomId,
+      );
+
+  static Future<dynamic> deleteGroupChat({
+    required String eventId,
+  }) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+          .post(Endpoints.deleteGroupChatApi, data: {"eventId"  : eventId});
 }

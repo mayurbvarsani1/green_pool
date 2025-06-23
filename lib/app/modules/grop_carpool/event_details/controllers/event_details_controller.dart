@@ -134,37 +134,4 @@ class EventDetailsController extends GetxController {
   }
 
 
-
-
-    sendChatAPI(String eventId) async {
-
-
-    try {
-      final res = await APIManager.sendChatApi(body:
-
-
-      {
-        "message": "type a message",
-        "eventId":  eventId,
-      }
-      );
-      showMySnackbar(msg: res.data["message"]);
-      debugPrint("res=>${res.data}");
-      debugPrint("res=>${res.statusCode}");
-      if(res.data['status'] = true){
-        eventDetailAPI(eventId);
-        debugPrint("-----------");
-
-      }
-    }
-    catch(e){
-      debugPrint(e.toString());
-    }
-  }
-
-
-
-
-
-
 }

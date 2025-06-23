@@ -9,39 +9,38 @@ import 'package:green_pool/app/services/colors.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import 'package:green_pool/app/services/storage.dart';
 import 'package:green_pool/app/services/text_style_util.dart';
+import '../../../../../generated/locales.g.dart';
+import '../../../../components/gp_progress.dart';
+import '../../../../utils/date_utils.dart';
+import '../../../chat_page/controllers/chat_page_controller.dart';
+import '../../../home/controllers/home_controller.dart';
+import '../controllers/group_chat_controller.dart';
 
-import '../../../../generated/locales.g.dart';
-import '../../../components/gp_progress.dart';
-import '../../../utils/date_utils.dart';
-import '../../home/controllers/home_controller.dart';
-import '../controllers/chat_page_controller.dart';
-
-class ChatPageView extends GetView<ChatPageController> {
-  const ChatPageView({super.key});
+class GroupChatView extends GetView<GroupChatController> {
+  const GroupChatView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            isPinkModeOn ? ColorUtil.kPrimaryPinkMode : ColorUtil.kPrimary01,
-        surfaceTintColor:
-            isPinkModeOn ? ColorUtil.kPrimaryPinkMode : ColorUtil.kPrimary01,
+        backgroundColor: isPinkModeOn ? ColorUtil.kPrimaryPinkMode : ColorUtil.kPrimary01,
+        surfaceTintColor: isPinkModeOn ? ColorUtil.kPrimaryPinkMode : ColorUtil.kPrimary01,
         elevation: 1,
         toolbarHeight: 64.kh,
         title: Obx(
           () => Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.kh),
-                child: CommonImageView(
-                  url: controller.chatArg.value.image,
-                  height: 32.kh,
-                  width: 32.kh,
-                ),
-              ),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(8.kh),
+              //   child: CommonImageView(
+              //     imagePath: ImageConstant.eventNotFound,
+              //     height: 32.kh,
+              //     width: 32.kh,
+              //   ),
+              // ),
+              Icon(Icons.group ,color: ColorUtil.kNeutral5,size: 28.kh,),
               12.kwidthBox,
               Flexible(
                 child: Column(
@@ -49,16 +48,17 @@ class ChatPageView extends GetView<ChatPageController> {
                   children: [
                     Text(
                       controller.chatArg.value.name ?? "User",
+                      // controller.groupName ?? "User",
                       style: TextStyleUtil.k14Bold(),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    Text(
-                      "${controller.chatArg.value.origin} ${LocaleKeys.app_to.tr} ${controller.chatArg.value.destination}, ${controller.chatArg.value.date}",
-                      style: TextStyleUtil.k12Regular(),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
+                    // Text(
+                    //   "${controller.chatArg.value.origin} ${LocaleKeys.app_to.tr} ${controller.chatArg.value.destination}, ${controller.chatArg.value.date}",
+                    //   style: TextStyleUtil.k12Regular(),
+                    //   overflow: TextOverflow.ellipsis,
+                    //   maxLines: 1,
+                    // ),
                   ],
                 ),
               ),
@@ -86,11 +86,11 @@ class ChatPageView extends GetView<ChatPageController> {
             ? const GpProgress()
             : Column(
                 children: [
-                  Visibility(
-                    visible: controller.isPayBtnVisible.value,
-                    child: PayNowBtn(
-                        controller: controller, isPinkModeOn: isPinkModeOn),
-                  ),
+                  // Visibility(
+                  //   visible: controller.isPayBtnVisible.value,
+                  //   child: PayNowBtn(
+                  //       controller: controller, isPinkModeOn: isPinkModeOn),
+                  // ),
                   Expanded(
                     child: ListView.separated(
                       itemCount: controller.messages.length,
@@ -99,16 +99,12 @@ class ChatPageView extends GetView<ChatPageController> {
                       itemBuilder: (context, index) {
                         debugPrint("controller.messages=>${controller.messages}");
                         final message = controller.messages[index];
-                        debugPrint("message=>$message");
+                        debugPrint("message=>${message}");
                         final isSender = message.senderId == Get.find<GetStorageService>().getUserAppId;
-                        debugPrint("isSender=>$isSender");
+                        debugPrint("isSender=>${isSender}");
 
                         return Container(
-                          padding: EdgeInsets.only(
-                              left: 2.kw,
-                              right: 2.kw,
-                              top: 10.kh,
-                              bottom: 10.kh),
+                          padding: EdgeInsets.only(left: 2.kw, right: 2.kw, top: 10.kh, bottom: 10.kh),
                           child: Column(
                             children: [
                               Row(
@@ -116,13 +112,11 @@ class ChatPageView extends GetView<ChatPageController> {
                                 children: [
                                   if (!isSender)
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
+                                      padding: const EdgeInsets.only(right: 8.0),
                                       child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100.kh),
+                                        borderRadius: BorderRadius.circular(100.kh),
                                         child: CommonImageView(
-                                          url: controller.chatArg.value.image,
+                                          url: message.senderProfilePic,
                                           height: 32.kh,
                                           width: 32.kh,
                                         ),
@@ -130,87 +124,48 @@ class ChatPageView extends GetView<ChatPageController> {
                                     ),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: isSender
-                                          ? CrossAxisAlignment.end
-                                          : CrossAxisAlignment.start,
+                                      crossAxisAlignment: isSender ? CrossAxisAlignment.end  : CrossAxisAlignment.start,
                                       children: [
                                         Container(
                                           width: 60.w,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.only(
-                                              bottomLeft:
-                                                  Radius.circular(15.kh),
-                                              bottomRight:
-                                                  Radius.circular(15.kh),
-                                              topLeft: Radius.circular(
-                                                  isSender ? 15.kh : 0.kh),
-                                              topRight: Radius.circular(
-                                                  isSender ? 0.kh : 15.kh),
-                                            ),
+                                              bottomLeft: Radius.circular(15.kh),
+                                              bottomRight: Radius.circular(15.kh),topLeft: Radius.circular(isSender ? 15.kh : 0.kh),topRight: Radius.circular(isSender ? 0.kh : 15.kh),),
                                             color: isSender
-                                                ? isPinkModeOn
-                                                    ? ColorUtil
-                                                        .kPrimary5PinkMode
-                                                    : ColorUtil.kPrimary01
-                                                : isPinkModeOn
-                                                    ? ColorUtil
-                                                        .kPrimary4PinkMode
-                                                    : ColorUtil.kSecondary01,
-                                          ),
+                                                ? isPinkModeOn? ColorUtil.kPrimary5PinkMode: ColorUtil.kPrimary01: isPinkModeOn
+                                                    ? ColorUtil.kPrimary4PinkMode: ColorUtil.kSecondary01,),
                                           padding: EdgeInsets.symmetric(
                                               vertical: 8.kh,
                                               horizontal: 12.kw),
                                           child: Column(
-                                            crossAxisAlignment: isSender
-                                                ? CrossAxisAlignment.end
-                                                : CrossAxisAlignment.start,
+                                            crossAxisAlignment: isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                                             children: [
+                                              if(!isSender)
+                                              Text( message.senderName?.capitalizeFirst ?? "",style:TextStyleUtil
+                                                  .k12Bold(color: ColorUtil.kNeutral1)),
+
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      message.message ?? "",
-                                                      style: TextStyleUtil
-                                                          .k14Regular(
-                                                        color: isSender
-                                                            ? isPinkModeOn
-                                                                ? ColorUtil
-                                                                    .kBlack01
-                                                                : ColorUtil
-                                                                    .kSecondary01
-                                                            : isPinkModeOn
-                                                                ? ColorUtil
-                                                                    .kBlack01
-                                                                : ColorUtil
-                                                                    .kPrimary01,
-                                                      ),
+                                                  Expanded(child: Text(message.message ?? "",
+                                                    style: TextStyleUtil.k14Regular(color: isSender? isPinkModeOn? ColorUtil.kBlack01:
+                                                    ColorUtil.kSecondary01 : isPinkModeOn? ColorUtil.kBlack01: ColorUtil.kPrimary01,),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              4.kheightBox, // Add some space between message and time
+                                              4.kheightBox,
+                                              // Add some space between message and time
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
+                                                mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
                                                   Text(
-                                                    DateTimeUtils.formatTime(message
-                                                        .timestamp), // Replace with actual time
-                                                    style: TextStyleUtil
-                                                        .k10Regular(
-                                                      color: isSender
-                                                          ? isPinkModeOn
-                                                              ? ColorUtil
-                                                                  .kBlack03
-                                                              : ColorUtil
-                                                                  .kSecondary01
-                                                          : isPinkModeOn
-                                                              ? ColorUtil
-                                                                  .kBlack03
-                                                              : ColorUtil
-                                                                  .kWhiteColor,
+                                                    DateTimeUtils.formatTime(message.timestamp),
+                                                    // Replace with actual time
+                                                    style: TextStyleUtil.k10Regular(
+                                                      color: isSender ? isPinkModeOn ? ColorUtil.kBlack03 : ColorUtil.kSecondary01
+                                                          : isPinkModeOn ? ColorUtil.kBlack03 : ColorUtil.kWhiteColor,
                                                     ),
                                                   ),
                                                 ],
@@ -225,11 +180,9 @@ class ChatPageView extends GetView<ChatPageController> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100.kh),
+                                        borderRadius: BorderRadius.circular(100.kh),
                                         child: CommonImageView(
-                                          url: Get.find<GetStorageService>()
-                                              .profilePicUrl,
+                                          url: Get.find<GetStorageService>().profilePicUrl,
                                           height: 32.kh,
                                           width: 32.kh,
                                         ),
@@ -272,18 +225,12 @@ class ChatPageView extends GetView<ChatPageController> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      DateTimeUtils.isToday(
-                                              nextMessage.timestamp)
-                                          ? LocaleKeys.app_today.tr
-                                          : DateFormat.E()
-                                              .format(nextMessage.timestamp),
+                                      DateTimeUtils.isToday(nextMessage.timestamp) ? LocaleKeys.app_today.tr : DateFormat.E().format(nextMessage.timestamp),
                                       style: TextStyleUtil.k14Regular(),
                                     ),
                                     Text(
-                                      DateTimeUtils.formatDateddMMMyyyy(
-                                          nextMessage.timestamp.toString()),
-                                      style: TextStyleUtil.k12Regular(
-                                          color: ColorUtil.kBlack04),
+                                      DateTimeUtils.formatDateddMMMyyyy(nextMessage.timestamp.toString()),
+                                      style: TextStyleUtil.k12Regular(color: ColorUtil.kBlack04),
                                     ),
                                   ],
                                 ).paddingOnly(top: 8.kh),
@@ -293,11 +240,11 @@ class ChatPageView extends GetView<ChatPageController> {
                       },
                     ),
                   ),
-                  Visibility(
-                    visible: controller.isWarningVisible.value,
-                    child: WarningMsg(
-                        controller: controller, isPinkModeOn: isPinkModeOn),
-                  ),
+                  // Visibility(
+                  //   visible: controller.isWarningVisible.value,
+                  //   child: WarningMsg(
+                  //       controller: controller, isPinkModeOn: isPinkModeOn),
+                  // ),
                   GreenPoolTextField(
                     controller: controller.eMsg,
                     hintText: LocaleKeys.app_writeMsg.tr,
@@ -305,6 +252,7 @@ class ChatPageView extends GetView<ChatPageController> {
                     textCapitalization: TextCapitalization.sentences,
                     suffix: InkWell(
                         onTap: () => controller.sendMsg(),
+                        // onTap: () => controller.sendChatAPI(),
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         child: SvgPicture.asset(ImageConstant.svgIconSend)),

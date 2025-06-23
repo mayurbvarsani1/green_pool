@@ -141,5 +141,10 @@ class Endpoints {
   static const String getEventListApi = "event/";     //get post get
   static const String jointEventApi = "event/join"; // post
   static const String sendChatApi = "chat/jinesh"; // post
+  static const String getChatListApi = "chat?chatRoomId"; // get
+  static const String deleteGroupChatApi = "chat/delete-event-message"; // Post
+
+
+
 
 }

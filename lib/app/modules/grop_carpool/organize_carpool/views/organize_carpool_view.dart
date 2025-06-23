@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/components/richtext_heading.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
+import 'package:green_pool/app/modules/chat_page/views/chat_page_view.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 
 import '../../../../../generated/locales.g.dart';
@@ -212,9 +213,14 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                                   BlendMode.srcIn),
                             ),
                           ),
-                          trailing:InkWell(onTap: () {
-
-                          },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
+                          // trailing:InkWell(onTap: () {
+                          //
+                          //   debugPrint("/*-/*/*-/-*/*-/*-/*-/*/-*/-");
+                          //   // Get.to(()=>ChatPageView());
+                          //   Get.toNamed(Routes.GROUP_CHAT, arguments: false);
+                          //   debugPrint("*-*-**-*-*-*-*-*-*-*-*");
+                          //
+                          // },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
 
                           // trailing:   SvgPicture.asset(
                           //   ImageConstant.svgNavMessagesFilled,

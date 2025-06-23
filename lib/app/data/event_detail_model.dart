@@ -8,23 +8,33 @@ class EventDetailsModel {
   bool? status;
   String? message;
   EventDetailsData? data;
+  dynamic chatRoomId;
+  DateTime? deleteUpdateTime;
 
   EventDetailsModel({
     this.status,
     this.message,
     this.data,
+    this.chatRoomId,
+   this.deleteUpdateTime,
+
   });
 
   factory EventDetailsModel.fromJson(Map<String, dynamic> json) => EventDetailsModel(
     status: json["status"],
     message: json["message"],
     data: json["data"] == null ? null : EventDetailsData.fromJson(json["data"]),
+    chatRoomId: json["chatRoomId"],
+    deleteUpdateTime: json["deleteUpdateTime"] == null ? null : DateTime.parse(json["deleteUpdateTime"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
     "data": data?.toJson(),
+    "chatRoomId": chatRoomId,
+    "deleteUpdateTime": deleteUpdateTime?.toIso8601String(),
+
   };
 }
 

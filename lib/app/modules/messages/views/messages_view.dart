@@ -110,8 +110,7 @@ class MessagesView extends GetView<MessagesController> {
                                 ]),
                             child: MessageTile(
                               onTap: () {
-                                controller.getToChatPage(
-                                    message, controller.refreshIndicatorKey);
+                                controller.getToChatPage(message, controller.refreshIndicatorKey);
                               },
                               tileColor: messageRead
                                   ? ColorUtil.kWhiteColor
@@ -132,21 +131,16 @@ class MessagesView extends GetView<MessagesController> {
                               paymentStatus:
                                   message?.paymentStatus ?? "Inquiry",
                               titleColor: message?.paymentStatus == "Inquiry"
-                                  ? Colors.orange
-                                  : message?.paymentStatus == "Confirmed"
-                                      ? Colors.green
-                                      : Colors.red,
+                                  ? Colors.orange : message?.paymentStatus == "Confirmed"
+                                      ? Colors.green : Colors.red,
                               path: message?.reciver?.profilePic?.url ?? "",
-                              subtitle:
-                                  "${message?.ridesDetails?.origin?.name?.split(",").first ?? "City"} to ${message?.ridesDetails?.destination?.name?.split(",").first ?? "City"}, ${DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr))}",
+                              subtitle: "${message?.ridesDetails?.origin?.name?.split(",").first ?? "City"} to ${message?.ridesDetails?.destination?.name?.split(",").first ?? "City"}, ${DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr))}",
                               lastMsg: message?.lastMessage ?? "...",
                               lastMsgStyle: messageRead
                                   ? TextStyleUtil.k12Regular(
                                       color: ColorUtil.kBlack03)
                                   : TextStyleUtil.k12Bold(
-                                      color: isPinkModeOn
-                                          ? ColorUtil.kPrimary3PinkMode
-                                          : ColorUtil.kSecondary03),
+                                      color: isPinkModeOn ? ColorUtil.kPrimary3PinkMode : ColorUtil.kSecondary03),
                               trailing: PopupMenuButton(
                                 itemBuilder: (context) {
                                   return [

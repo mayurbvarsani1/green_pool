@@ -67,8 +67,7 @@ class MessagesController extends GetxController {
         name: message?.reciver?.fullName,
         origin: message?.ridesDetails?.origin?.name?.split(",").first,
         destination: message?.ridesDetails?.destination?.name?.split(",").first,
-        date: DateTimeUtils.formatDate(DateTime.parse(
-            message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr)),
+        date: DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr)),
       ),
       "ridePostId": message?.ridePostId ?? "",
     })!

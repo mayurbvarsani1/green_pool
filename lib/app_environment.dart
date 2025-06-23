@@ -20,7 +20,7 @@ abstract class AppEnvironment {
         {
           // baseApiUrl ="https://e5ce-2409-40e3-1035-cb89-4199-8ce2-5332-5576.ngrok-free.app/v1/";
           // baseApiUrl = "https://green-pool-backend.vercel.app/v1/";
-          baseApiUrl = "https://369d-2401-4900-1f3f-6dc8-b8b4-7ac5-3020-6de7.ngrok-free.app/v1/";
+          baseApiUrl = "https://204c-2401-4900-8899-6221-15f1-554f-3616-888b.ngrok-free.app/v1/";
           // baseApiUrl = "http://16.171.116.188:4000/v1/";
           title = 'Flutter flavors dev';
           publishableKey = "";
@@ -33,7 +33,7 @@ abstract class AppEnvironment {
       case Environment.prod:
         {
           // baseApiUrl = "https://api.carpooll.com/v1/";
-          baseApiUrl = "https://369d-2401-4900-1f3f-6dc8-b8b4-7ac5-3020-6de7.ngrok-free.app/v1/";
+          baseApiUrl = "https://204c-2401-4900-8899-6221-15f1-554f-3616-888b.ngrok-free.app/v1/";
           title = 'Flutter flavors prod';
           publishableKey = "";
           cardEncryptionKey = "";

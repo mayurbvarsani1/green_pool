@@ -9,6 +9,7 @@ class ChatArg {
   String? origin;
   String? destination;
   String? date;
+  String? eventId;
 
   ChatArg(
       {this.name,
@@ -20,5 +21,5 @@ class ChatArg {
       this.riderRideId,
       this.origin,
       this.destination,
-      this.date});
+      this.date,this.eventId});
 }

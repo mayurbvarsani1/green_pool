@@ -3,12 +3,16 @@ class MessageModel {
   final String message;
   final String senderId;
   final DateTime timestamp;
+  String? senderName;
+  String? senderProfilePic;
 
   MessageModel({
     required this.id,
     required this.message,
     required this.senderId,
     required this.timestamp,
+    this.senderName,
+    this.senderProfilePic,
   });
 
   factory MessageModel.fromMap(String id, Map<String, dynamic> data) {
@@ -17,6 +21,8 @@ class MessageModel {
       message: data['message'],
       senderId: data['senderId'],
       timestamp: DateTime.parse(data['timestamp']),
+      senderName: data['senderName'],
+      senderProfilePic: data['senderProfilePic'],
     );
   }
 }
