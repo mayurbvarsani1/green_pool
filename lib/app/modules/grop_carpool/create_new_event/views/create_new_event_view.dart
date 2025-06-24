@@ -292,7 +292,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                const Expanded(child: SizedBox()),
                 GreenPoolButton(
                   padding: const EdgeInsets.all(0),
-                  onPressed: () => controller.moveToMatchingRides(),
+                  onPressed: () => controller.publishEventApi(),
                   isActive: controller.isActive.value,
                   label: LocaleKeys.app_publishEvent.tr,
                 ).paddingOnly(bottom: 30.kh),

@@ -323,9 +323,9 @@ class PushNotificationService {
                       .split(',')
                       .first,
                   date: actionData?.data['date'],
-                ))
-            ?.then(
-                (value) => Get.find<MessagesController>().getMessageListAPI());
+                ));
+            // ?.then(
+            //     (value) => Get.find<MessagesController>().getMessageListAPI());
       } catch (e) {
         try {
           Get.toNamed(Routes.CHAT_PAGE,
@@ -342,9 +342,9 @@ class PushNotificationService {
                         .split(',')
                         .first,
                     date: actionData?.data['date'],
-                  ))
-              ?.then((value) =>
-                  Get.find<MessagesController>().getMessageListAPI());
+                  ));
+              // ?.then((value) =>
+              //     Get.find<MessagesController>().getMessageListAPI());
         } catch (e) {
           debugPrint(e.toString());
         }

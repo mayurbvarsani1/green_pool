@@ -16,6 +16,7 @@ import '../../../../services/dio/api_service.dart';
 import '../../../../services/storage.dart';
 import '../../../../utils/date_utils.dart';
 import '../../../origin/controllers/origin_controller.dart';
+import '../../event_details/controllers/event_details_controller.dart';
 import '../../organize_carpool/controllers/organize_carpool_controller.dart';
 
 
@@ -98,7 +99,7 @@ class CreateNewEventController extends GetxController {
   }
 
 
-  void moveToMatchingRides() {
+  void publishEventApi() {
     apiPublishEvent();
     // Get.toNamed(Routes.MATCHING_RIDES, arguments: rideDetails.toJson());
     debugPrint("***********************");
@@ -316,12 +317,19 @@ class CreateNewEventController extends GetxController {
       isLoad.value = true;
 
       final res = await APIManager.postEventSend(body: eventBody);
-      debugPrint("res=>${res.data}");
+      debugPrint("postEventSendRes=>${res.data}");
+      debugPrint("res=>${res.statusCode}");
+      debugPrint("res.data=>${res.data['data']['_id']}");
       if(res.data['status'] = true){
-          Get.back();
-          if(Get.find<OrganizeCarpoolController>().selectedButton.value != 'request'){
+        if(Get.find<OrganizeCarpoolController>().selectedButton.value != 'request'){
           Get.find<OrganizeCarpoolController>().getEventAPI(isOfferRide:true);
-          }
+        }
+         Get.back();
+        EventDetailsController  eventIdController  = Get.put(EventDetailsController());
+        eventIdController.eventDetailAPI(res.data['data']['_id'] ?? "");
+        Get.toNamed(Routes.EVENT_DETAILS, arguments:  {"eventId" : res.data['data']['_id']} );
+
+
           // await APIManager.eventList();
           }
 

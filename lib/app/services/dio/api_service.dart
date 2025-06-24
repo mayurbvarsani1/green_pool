@@ -493,4 +493,9 @@ class APIManager {
   }) async =>
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
           .post(Endpoints.deleteGroupChatApi, data: {"eventId"  : eventId});
+
+  static Future<Response> getGroupChatRoomApi() async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+        Endpoints.getGroupChatRoomApi ,
+      );
 }

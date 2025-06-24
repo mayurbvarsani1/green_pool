@@ -4,12 +4,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:green_pool/app/data/message_model.dart';
+import 'package:green_pool/app/modules/grop_carpool/organize_carpool/controllers/organize_carpool_controller.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import 'package:green_pool/app/services/storage.dart';
 import 'package:green_pool/app/services/text_style_util.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../data/chat_arg.dart';
+import '../../../../data/group_chat_room_model.dart';
 import '../../../../data/group_get_chat_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../services/colors.dart';
@@ -17,6 +19,8 @@ import '../../../../services/custom_button.dart';
 import '../../../../services/dio/api_service.dart';
 import '../../../../services/snackbar.dart';
 import '../../../home/controllers/home_controller.dart';
+import '../../../messages/controllers/messages_controller.dart';
+import '../../event_details/controllers/event_details_controller.dart';
 
 class GroupChatController extends GetxController {
   final Rx<ChatArg> chatArg = ChatArg().obs;
@@ -89,37 +93,6 @@ class GroupChatController extends GetxController {
   String? chatRoomId;
   String? groupName;
 
-  sendChatAPI() async {
-    debugPrint("eventId=>$eventId");
-    debugPrint("chatRoomId=>$chatRoomId");
-
-    if (eMsg.text.trim().isEmpty) {
-      showMySnackbar(msg: "Please enter a message");
-      return;
-    }
-    String msg = eMsg.text.trim();
-    eMsg.clear();
-    Map<String, dynamic> sendMessageBody = {
-      "message": msg,
-      if (chatRoomId != null) "chatRoomId": chatRoomId,
-      "eventId": eventId,
-    };
-
-    debugPrint("sendMessageBody12=>$sendMessageBody");
-
-    try {
-      final res = await APIManager.sendChatApi(body: sendMessageBody);
-      debugPrint("sendMessageBody=>$sendMessageBody");
-      showMySnackbar(msg: res.data["message"]);
-      debugPrint("res=>${res.data}");
-      debugPrint("res=>${res.statusCode}");
-      if (res.data['status'] = true) {
-        debugPrint("-----------");
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
 
   RxList<Message> messageList = <Message>[].obs;
   chatListGetAPI(String chatRoomId) async {
@@ -205,11 +178,12 @@ class GroupChatController extends GetxController {
               messages.value.removeWhere((item) => item.timestamp.isBefore(
                   DateTime.parse(chatArg.value.deleteUpdateTime ?? "")));
             }
+
+
           } catch (e) {
             debugPrint(e.toString());
           }
-          WidgetsBinding.instance
-              .addPostFrameCallback((_) => _scrollToBottom());
+          WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
         }
         // readMsg();
       }, onError: (Object error) {
@@ -254,6 +228,8 @@ class GroupChatController extends GetxController {
         "eventId": chatArg.value.eventId,
       });
       chatArg.value.chatRoomId = res.data["chatRoomId"];
+      MessagesController  messagesController = Get.find();
+      messagesController.getChatRoomAPI();
       getChat();
     } catch (e) {
       debugPrint(e.toString());
@@ -340,6 +316,8 @@ class GroupChatController extends GetxController {
      debugPrint("res456=>${res.data}");
      debugPrint("res123=>${res.statusCode}");
       Get.back(result: true);
+     EventDetailsController  eventDetailsController  = Get.put(EventDetailsController());
+     eventDetailsController.eventDetailAPI(chatArg.value.eventId  ?? "");
     } catch (e) {
       debugPrint(e.toString());
     }

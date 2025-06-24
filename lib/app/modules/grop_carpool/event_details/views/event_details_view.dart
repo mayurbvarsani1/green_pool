@@ -154,13 +154,12 @@ class EventDetailsView extends GetView<EventDetailsController> {
                           ),
                         ),
 
-
                         trailing:Visibility(
                           visible: !(controller.eventDetailsData.value?.data?.isAvailable ?? false),
-                          child: InkWell(onTap: () {
+                          child: InkWell(
+                              onTap: () {
                             // groupChatController.sendChatAPI(controller.eventDetailsData.value?.data?.event?.id ?? "", controller.eventDetailsData.value?.chatRoomId ?? "");
                             Get.toNamed(Routes.GROUP_CHAT, arguments: {
-
                                 "chatArg": ChatArg(
                                   chatRoomId: controller.eventDetailsData.value?.chatRoomId  ?? "",
                                   id: Get.find<GetStorageService>().getUserAppId,
@@ -171,7 +170,6 @@ class EventDetailsView extends GetView<EventDetailsController> {
                                   // date: DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr)),
                                 ),
                                 // "ridePostId": message?.ridePostId ?? "",
-
                             });
                           },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
                         ),
