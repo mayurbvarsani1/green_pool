@@ -146,6 +146,7 @@ class ImageConstant {
   static String svgProfileDetails = 'assets/images/profile/user_details.svg';
   static String svgProfileWallet = 'assets/images/profile/wallet_svg.svg';
   static String gifRateUs = 'assets/images/profile/rate_us.gif';
+  static String referFriendsImg = 'assets/images/profile/refer_a_friends_img.png';
 
 //PNGs
   static String pngUserSquare = 'assets/images/messages/user_square.png';

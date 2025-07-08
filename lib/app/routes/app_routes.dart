@@ -28,6 +28,8 @@ abstract class Routes {
   static const EMERGENCY_CONTACTS = _Paths.EMERGENCY_CONTACTS;
   static const PUSH_NOTIFICATIONS = _Paths.PUSH_NOTIFICATIONS;
   static const STUDENT_DISCOUNTS = _Paths.STUDENT_DISCOUNTS;
+  static const REFER_FRIENDS = _Paths.REFER_FRIENDS;
+  static const REFER_FRIENDS_ADD_CONTACT = _Paths.REFER_FRIENDS_ADD_CONTACT;
   static const FILE_DISPUTE = _Paths.FILE_DISPUTE;
   static const RIDE_HISTORY = _Paths.RIDE_HISTORY;
   static const RIDE_DETAILS = _Paths.RIDE_DETAILS;
@@ -137,6 +139,8 @@ abstract class _Paths {
   static const EMERGENCY_CONTACTS = '/emergency-contacts';
   static const PUSH_NOTIFICATIONS = '/push-notifications';
   static const STUDENT_DISCOUNTS = '/student-discounts';
+  static const REFER_FRIENDS = '/refer-frinds';
+  static const REFER_FRIENDS_ADD_CONTACT = '/refer-frinds-add-contact';
   static const FILE_DISPUTE = '/file-dispute';
   static const RIDE_HISTORY = '/ride-history';
   static const RIDE_DETAILS = '/ride-details';

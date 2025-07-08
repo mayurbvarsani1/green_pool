@@ -425,6 +425,13 @@ class LocaleKeys {
   static const app_profileSettings = 'app_profileSettings';
   static const app_ridehistory = 'app_ridehistory';
   static const app_referAFriend = 'app_referAFriend';
+  static const app_referAFriends = 'app_referAFriends';
+  static const app_add_contact_and_easily_invite = 'app_add_contact_and_easily_invite';
+  static const invite_your_carpool_buddies_via_text = 'invite_your_carpool_buddies_via_text';
+  static const no_thanks = 'no_thanks';
+  static const search_by_name = 'search_by_name';
+  static const invite = 'invite';
+  static const invited = 'invited';
   static const app_rateUs = 'app_rateUs';
   static const app_aboutUs = 'app_aboutUs';
   static const app_termsAmbersentConditions = 'app_termsAmbersentConditions';
@@ -1013,6 +1020,13 @@ class Locales {
     'app_profileSettings': 'Profile Settings',
     'app_ridehistory': 'Ride history',
     'app_referAFriend': 'Refer a friend',
+    'app_referAFriends': 'Refer Friends',
+    'app_add_contact_and_easily_invite': 'Add Contact and easily invite friends to join Carpooll.com',
+    'invite_your_carpool_buddies_via_text': 'Invite your carpool Buddies via text!',
+    'no_thanks': 'No thanks',
+    'search_by_name': 'Search by Name',
+    'invite': 'Invite',
+    'invited': 'invited',
     'app_rateUs': 'Rate us',
     'app_aboutUs': 'About us',
     'app_termsAmbersentConditions': 'Terms & Conditions',

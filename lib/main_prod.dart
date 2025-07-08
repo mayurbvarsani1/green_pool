@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:green_pool/app/modules/home/controllers/home_controller.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'app/modules/home/bindings/home_binding.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ import 'generated/locales.g.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Upgrader.clearSavedSettings();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
@@ -40,10 +42,8 @@ Future<void> main() async {
 
   PushNotificationService().setupInteractedMessage();
 
-  FirebaseAnalytics analytics =
-      FirebaseAnalytics.instance; // Initialize Firebase Analytics
-  FirebaseAnalyticsObserver analyticsObserver =
-      FirebaseAnalyticsObserver(analytics: analytics); // Create Observer
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance; // Initialize Firebase Analytics
+  FirebaseAnalyticsObserver analyticsObserver = FirebaseAnalyticsObserver(analytics: analytics); // Create Observer
 
   return runApp(GestureDetector(
     onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -53,6 +53,7 @@ Future<void> main() async {
           data: MediaQuery.of(context)
               .copyWith(textScaler: const TextScaler.linear(1.0)),
           child: child!,
+
         );
       },
       theme: ThemeData(

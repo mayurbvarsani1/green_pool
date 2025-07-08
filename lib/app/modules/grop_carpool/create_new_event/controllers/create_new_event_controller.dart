@@ -101,9 +101,6 @@ class CreateNewEventController extends GetxController {
 
   void publishEventApi() {
     apiPublishEvent();
-    // Get.toNamed(Routes.MATCHING_RIDES, arguments: rideDetails.toJson());
-    debugPrint("***********************");
-    // Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
   }
 
 
@@ -149,7 +146,7 @@ class CreateNewEventController extends GetxController {
       Get.find<GetStorageService>().locationsName =
           jsonEncode(locationModelNames);
     } else {
-      debugPrint("This location model already exists in the list.");
+
     }
   }
 
@@ -309,17 +306,12 @@ class CreateNewEventController extends GetxController {
       "time": time // "2025-06-17T07:10:00.000Z"
 
     };
-    print("eventBody=>$eventBody");
-    print("selectedTime=>${selectedTime.text}");
 
 
     try {
       isLoad.value = true;
 
       final res = await APIManager.postEventSend(body: eventBody);
-      debugPrint("postEventSendRes=>${res.data}");
-      debugPrint("res=>${res.statusCode}");
-      debugPrint("res.data=>${res.data['data']['_id']}");
       if(res.data['status'] = true){
         if(Get.find<OrganizeCarpoolController>().selectedButton.value != 'request'){
           Get.find<OrganizeCarpoolController>().getEventAPI(isOfferRide:true);

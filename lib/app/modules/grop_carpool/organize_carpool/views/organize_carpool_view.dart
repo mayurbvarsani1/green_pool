@@ -32,12 +32,6 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
   @override
   Widget build(BuildContext context) {
     final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
-    final storageService = Get.find<GetStorageService>();
-
-    // final pickedDate = DateTime.now();
-    // controller.date.text = pickedDate.toIso8601String();
-    // controller.departureDate.text =
-    //     "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
     return Scaffold(
       appBar: GreenPoolAppBar(
         title: Text(LocaleKeys.app_organizeCarpool.tr),
@@ -87,24 +81,7 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                           label: LocaleKeys.app_requestARide.tr,
                           fontSize: 14.kh,
                           height: 38.kh,
-                          // borderColor: Get.find<HomeController>()
-                          //     .isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01,
-                          // labelColor: Get.find<HomeController>()
-                          //     .isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01,
                           color:controller.selectedButton.value == 'request' ? null  : ColorUtil.kBlack08,
-                          // borderColor: controller.selectedButton.value == 'request'
-                          //     ? (Get.find<HomeController>().isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01)
-                          //     : Colors.grey,
-                          // labelColor: Get.find<HomeController>()
-                          //     .isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01,
                           padding: EdgeInsets.all(0.kh),
                         ),
                       ),
@@ -124,15 +101,6 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
 
                           },
                           color:controller.selectedButton.value == 'offer' ? null  : ColorUtil.kBlack08,
-                          // borderColor: controller.selectedButton.value == 'offer'
-                          //     ? ( Get.find<HomeController>().isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01)
-                          //     : Colors.grey,
-                          // labelColor: Get.find<HomeController>()
-                          //     .isPinkModeOn.value
-                          //     ? ColorUtil.kPrimary3PinkMode
-                          //     : ColorUtil.kSecondary01,
                         ),
                       ),
                     ],
@@ -166,15 +134,12 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                   height: 435.kh,
                   child: ListView.builder(
                     shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.eventData.length,
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, itemsIndex) {
                       Doc?  eventData  = controller.eventData[itemsIndex];
                       return InkWell(
                         onTap: () {
-                          debugPrint("eventData.id=>${eventData.id}");
-                          // Get.lazyPut(()=>EventDetailsController().eventDetailAPI(eventData.id ?? ""));
                           EventDetailsController  eventIdController  = Get.put(EventDetailsController());
                           eventIdController.eventDetailAPI(eventData.id ?? "");
                           Get.toNamed(Routes.EVENT_DETAILS, arguments:false);
@@ -204,8 +169,6 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                             alignment: Alignment.center,
                             child: SvgPicture.asset(
                               ImageConstant.svgProfileCar,
-                              // width: 30,
-                              // height: 30,
                               colorFilter: ColorFilter.mode(
                                   isPinkModeOn
                                       ? ColorUtil.kPrimary3PinkMode
@@ -213,24 +176,6 @@ class OrganizeCarpoolView extends GetView<OrganizeCarpoolController> {
                                   BlendMode.srcIn),
                             ),
                           ),
-                          // trailing:InkWell(onTap: () {
-                          //
-                          //   debugPrint("/*-/*/*-/-*/*-/*-/*-/*/-*/-");
-                          //   // Get.to(()=>ChatPageView());
-                          //   Get.toNamed(Routes.GROUP_CHAT, arguments: false);
-                          //   debugPrint("*-*-**-*-*-*-*-*-*-*-*");
-                          //
-                          // },child: SvgPicture.asset(ImageConstant.svgNavMessages)),
-
-                          // trailing:   SvgPicture.asset(
-                          //   ImageConstant.svgNavMessagesFilled,
-                          //   colorFilter: ColorFilter.mode(
-                          //     Get.find<GetStorageService>().isPinkMode
-                          //         ? ColorUtil.kPrimary3PinkMode
-                          //         : ColorUtil.kSecondary01,
-                          //     BlendMode.srcIn,
-                          //   ),
-                          // ),
                         ).paddingOnly(bottom: 4.kh),
                       );
                     },

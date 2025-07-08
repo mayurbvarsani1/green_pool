@@ -152,16 +152,6 @@ class MessagesController extends GetxController {
     isLoading.value = false;
   }
 
-  // getMessageListAPI() async {
-  //   try {
-  //     final resp = await APIManager.getChatList();
-  //     var data = jsonDecode(resp.toString());
-  //     messagesModel.value = MessageListModel.fromJson(data);
-  //     messagesModel.refresh();
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   }
-  // }
 
 
   String formatDate(DateTime dateTime) {
@@ -177,17 +167,6 @@ class MessagesController extends GetxController {
         chatRoomList.value = GroupChatRoomListModel.fromJson(data);
         chatRoomList.refresh();
         update();
-        // final groupChatData = GroupChatRoomListModel.fromJson(response.data);
-        // chatRoomList.value = groupChatData.chatRooms ?? [];
-        debugPrint("data=>$data");
-        debugPrint("response321=>${response.data}");
-        debugPrint("responseStatusCode123=>${response.statusCode}");
-        debugPrint("chatRoomList=>$chatRoomList");
-        // if (response.data["status"] == true) {
-        //
-        // } else {
-        //   showMySnackbar(msg: response.data["message"].toString());
-        // }
       } catch (e) {
         debugPrint(e.toString());
       }
@@ -202,18 +181,6 @@ class MessagesController extends GetxController {
 
 
 
-  // refreshMessageListAPI() async {
-  //   try {
-  //     final resp = await APIManager.getChatList();
-  //     var data = jsonDecode(resp.toString());
-  //     messagesModel.value = MessageListModel.fromJson(data);
-  //     messagesModel.refresh();
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   } finally {
-  //     Get.find<HomeController>().getUnreadCount();
-  //   }
-  // }
 
   Future<void> getToChatPage(
       message, GlobalKey<RefreshIndicatorState> refreshIndicatorKey) async {
@@ -247,7 +214,6 @@ class MessagesController extends GetxController {
   Future<void> archiveMsgAPI(String chatRoomId) async {
     try {
       final res = await APIManager.patchArchiveMsg(chatRoomId: chatRoomId);
-      // refreshMessageListAPI();
     } catch (e) {
       debugPrint(e.toString());
     }

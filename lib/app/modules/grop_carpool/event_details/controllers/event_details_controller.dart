@@ -55,26 +55,13 @@ class EventDetailsController extends GetxController {
         isLoad.value = true;
         final response = await APIManager.getEventDetailId(eventId: eventId ?? "");
           eventDetailsData.value = EventDetailsModel.fromJson(response.data);
-          debugPrint("eventDetailsData=>${eventDetailsData.value?.chatRoomId == null}");
           if(eventDetailsData.value?.chatRoomId == null){
             final res = await APIManager.sendChatApi(body: {
               "message": "A",
               "eventId": eventId,
             });
-            debugPrint("res=>${res.data}");
-            debugPrint("statusCode=>${res.statusCode}");
-
             eventDetailsData.value?.chatRoomId = res.data["chatRoomId"];
           }
-         // eventDetailsData  =  eventDetailsModel.data;
-        debugPrint("response=>${response.data}");
-        debugPrint("responseStatusCode=>${response.statusCode}");
-        debugPrint("eventDetailsData=>$eventDetailsData");
-        // if (response.data["status"] == true) {
-        //
-        // } else {
-        //   showMySnackbar(msg: response.data["message"].toString());
-        // }
         isLoad.value = false;
       } catch (e) {
         isLoad.value = false;
@@ -88,11 +75,8 @@ class EventDetailsController extends GetxController {
     try {
       final res = await APIManager.jointEventApi(body: {"eventId" : eventId});
       showMySnackbar(msg: res.data["message"]);
-      debugPrint("res=>${res.data}");
-      debugPrint("res=>${res.statusCode}");
       if(res.data['status'] = true){
         eventDetailAPI(eventId);
-        debugPrint("-----------");
 
       }
     }

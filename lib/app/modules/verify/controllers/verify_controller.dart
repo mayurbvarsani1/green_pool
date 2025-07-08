@@ -129,15 +129,16 @@ class VerifyController extends GetxController {
     final storageService = Get.find<GetStorageService>();
     final homeController = Get.find<HomeController>();
     final authService = Get.find<AuthService>();
+    debugPrint("fullName=>${fullName}");
     if (fullName != '') {
       //USER CREATING NEW ACC
       try {
         final response =
             await APIManager.postRegisterAcc(body: {"fullName": fullName});
-        print("response=>${response}");
-        print("response.data=>${response.data}");
-        // print("response=>${response.data['status']}");
-        print("response.StatusCode=>${response.statusCode}");
+        debugPrint("postRegisterResponse=>${response}");
+        debugPrint("response.data=>${response.data}");
+        debugPrint("response=>${response.data['status']}");
+        debugPrint("response.StatusCode=>${response.statusCode}");
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);
           _handleNewUser(userInfo, authService, homeController, storageService);
@@ -160,9 +161,9 @@ class VerifyController extends GetxController {
       //USER LOGIN
       try {
         final response = await APIManager.postLogin();
-        // print("response=>${response}");
-        // print("response=>${response.data['status']}");
-        // print("response=>${response.statusCode}");
+        debugPrint("response=>${response}");
+        debugPrint("response=>${response.data['status']}");
+        debugPrint("response=>${response.statusCode}");
 
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);

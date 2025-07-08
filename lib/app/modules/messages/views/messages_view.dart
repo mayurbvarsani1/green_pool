@@ -348,25 +348,7 @@ class MessagesView extends GetView<MessagesController> {
         appBar: GreenPoolAppBar(
           title: Text(LocaleKeys.app_messages.tr),
           leading: const SizedBox(),
-          // actions: [
-          //   GreenPoolButton(
-          //     onPressed: () {
-          //       controller.moveToUnarchive();
-          //     },
-          //     isBorder: true,
-          //     label: LocaleKeys.app_archived.tr,
-          //     height: 24.kh,
-          //     width: 76.kw,
-          //     fontSize: 12.kh,
-          //     padding: const EdgeInsets.all(0),
-          //     borderColor: Get.find<HomeController>().isPinkModeOn.value
-          //         ? ColorUtil.kPrimary3PinkMode
-          //         : ColorUtil.kSecondary01,
-          //     labelColor: Get.find<HomeController>().isPinkModeOn.value
-          //         ? ColorUtil.kPrimary3PinkMode
-          //         : ColorUtil.kSecondary01,
-          //   ).paddingOnly(right: 16.kw)
-          // ],
+
         ),
         body: Obx(
               () => RefreshIndicator(
@@ -376,7 +358,7 @@ class MessagesView extends GetView<MessagesController> {
                 : ColorUtil.kPrimary01,
             key: controller.refreshIndicatorKey,
             onRefresh: () async {
-              // await controller.refreshMessageListAPI();
+
             await controller.getChatRoomAPI();
             },
             child: controller.isLoading.value
@@ -385,7 +367,7 @@ class MessagesView extends GetView<MessagesController> {
                 : controller.chatRoomList.value.chatRooms?.isEmpty ?? true
                 ? Center(
               child: Text(
-                //implement a text button to see archived msgs
+
                 LocaleKeys.app_yourFutureMsgsWillApearHere.tr,
                 style: TextStyleUtil.k24Heading600(),
                 textAlign: TextAlign.center,
@@ -415,7 +397,7 @@ class MessagesView extends GetView<MessagesController> {
                         name: message?.eventId?.title ?? "",
                         eventId: message?.eventId?.id ?? "",
                         deleteUpdateTime: "${message?.deleteUpdateTime ?? ""}"  ,
-                        // date: DateTimeUtils.formatDate(DateTime.parse(message?.ridesDetails?.date ?? LocaleKeys.app_defaultDate.tr)),
+
                       ),
                       // "ridePostId": message?.ridePostId ?? "",
                     });
@@ -435,9 +417,7 @@ class MessagesView extends GetView<MessagesController> {
                           : ColorUtil.kSecondary07),
                   title: message?.eventId?.title ?? "User",
                   paymentStatus: message?.paymentStatus ?? "",
-                  // titleColor: message?.paymentStatus == "Inquiry"
-                  //     ? Colors.orange : message?.paymentStatus == "Confirmed"
-                  //     ? Colors.green : Colors.red,
+
                   path: "message?.reciver?.profilePic?.url ??",
                   subtitle: controller.formatDate(message?.createdAt ?? DateTime.now()),
                   lastMsg: message?.lastMessage ?? "...",
@@ -445,30 +425,7 @@ class MessagesView extends GetView<MessagesController> {
                       ? TextStyleUtil.k12Regular(color: ColorUtil.kBlack03)
                       : TextStyleUtil.k12Bold(color: isPinkModeOn ? ColorUtil.kPrimary3PinkMode : ColorUtil.kSecondary03),
                   trailing: const Text(""),
-                  // PopupMenuButton(
-                  //   itemBuilder: (context) {
-                  //     return [
-                  //       PopupMenuItem(
-                  //         onTap: () {
-                  //           controller.archiveMsgAPI(message?.chatRoomId ?? "");
-                  //         },
-                  //         value: 0,
-                  //         height: 45.kh,
-                  //         textStyle: TextStyleUtil.k12Medium(),
-                  //         child: Text(
-                  //             LocaleKeys.app_moveToArchive.tr,
-                  //             style: TextStyleUtil.k14Regular()),
-                  //       ),
-                  //     ];
-                  //   },
-                  //   color: ColorUtil.kWhiteColor,
-                  //   icon: const Icon(Icons.more_vert),
-                  //   iconSize: 28.kh,
-                  //   enableFeedback: true,
-                  //   menuPadding: EdgeInsets.all(0.h),
-                  //   shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(8.kh)),
-                  // ),
+
                 ).paddingOnly(top: 8.kh);
               },
             ).paddingOnly(left: 16.kw, right: 16.kw, top: 8.kh),
@@ -560,24 +517,14 @@ class MessageTile extends StatelessWidget {
         onTap: onTap,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.kh), side: borderSide),
-        // title: Text(
-        //   title,
-        //   style: TextStyleUtil.k14Semibold(
-        //     color: titleColor ?? ColorUtil.kBlack01,
-        //   ),
-        // ),
+
         title: RichText(
           text: TextSpan(children: [
             TextSpan(
               text: title,
               style: TextStyleUtil.k14Semibold(),
             ),
-            // TextSpan(
-            //   text: paymentStatus,
-            //   style: TextStyleUtil.k14Semibold(
-            //     color: titleColor ?? ColorUtil.kBlack01,
-            //   ),
-            // ),
+
           ]),
         ),
         subtitle: Column(

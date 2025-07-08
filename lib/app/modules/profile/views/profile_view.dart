@@ -81,11 +81,8 @@ class ProfileView extends GetView<ProfileController> {
                                       borderRadius: BorderRadius.circular(8.kh),
                                     ),
                                     child: Text(
-                                      LocaleKeys
-                                          .app_travelWithConfidenceWithOurPinkMode
-                                          .tr,
-                                      style: TextStyleUtil.k14Regular(
-                                          color: ColorUtil.kBlack03),
+                                      LocaleKeys.app_travelWithConfidenceWithOurPinkMode.tr,
+                                      style: TextStyleUtil.k14Regular(color: ColorUtil.kBlack03),
                                     )),
                               ),
                             ),
@@ -132,30 +129,35 @@ class ProfileView extends GetView<ProfileController> {
                 onTap: () => Get.toNamed(Routes.STUDENT_DISCOUNTS),
                 image: ImageConstant.svgProfileDiscount,
                 text: LocaleKeys.app_studentDiscount.tr),
-            Builder(
-              builder: (tileContext) {
-                return ProfileContainer(
-                  onTap: () async {
-                    final shareText = Platform.isIOS
-                        ? "Check this cool app! \nhttps://apps.apple.com/in/app/carpooll-com/id6480311009"
-                        : "Check this cool app! \nhttps://play.google.com/store/apps/details?id=com.greenpool.app";
-
-                    try {
-                      final box = tileContext.findRenderObject() as RenderBox;
-                      await Share.share(
-                        shareText,
-                        sharePositionOrigin:
-                            box.localToGlobal(Offset.zero) & box.size,
-                      );
-                    } catch (e) {
-                      await Share.share(shareText);
-                    }
-                  },
-                  image: ImageConstant.svgProfileRefer,
-                  text: LocaleKeys.app_referAFriend.tr,
-                );
-              },
+            ProfileContainer(
+                onTap: () => Get.toNamed(Routes.REFER_FRIENDS),
+                image: ImageConstant.svgProfileRefer,
+                text: LocaleKeys.app_referAFriend.tr,
             ),
+            // Builder(
+            //   builder: (tileContext) {
+            //     return ProfileContainer(
+            //       onTap: () async {
+            //         final shareText = Platform.isIOS
+            //             ? "Check this cool app! \nhttps://apps.apple.com/in/app/carpooll-com/id6480311009"
+            //             : "Check this cool app! \nhttps://play.google.com/store/apps/details?id=com.greenpool.app";
+            //
+            //         try {
+            //           final box = tileContext.findRenderObject() as RenderBox;
+            //           await Share.share(
+            //             shareText,
+            //             sharePositionOrigin:
+            //                 box.localToGlobal(Offset.zero) & box.size,
+            //           );
+            //         } catch (e) {
+            //           await Share.share(shareText);
+            //         }
+            //       },
+            //       image: ImageConstant.svgProfileRefer,
+            //       text: LocaleKeys.app_referAFriend.tr,
+            //     );
+            //   },
+            // ),
             ProfileContainer(
                     onTap: () {
                       Get.bottomSheet(const RatingBottomSheet(),

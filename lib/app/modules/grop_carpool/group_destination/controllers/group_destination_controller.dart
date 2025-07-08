@@ -66,7 +66,6 @@ class GroupDestinationController extends GetxController {
       } else {
         // If no data is found, clear the locationModels list
         findLocationModels.clear();
-        debugPrint("No locations found for type: $type");
       }
     } catch (e) {
       debugPrint("Error loading location names: $e");
@@ -96,7 +95,6 @@ class GroupDestinationController extends GetxController {
     if (_sessionToken != null && _sessionStartTime != null) {
       int sessionDuration =
           DateTime.now().difference(_sessionStartTime!).inSeconds;
-      debugPrint('Session lasted for $sessionDuration seconds');
     }
     _sessionToken = null;
     _sessionStartTime = null;
@@ -167,10 +165,6 @@ class GroupDestinationController extends GetxController {
       double lat = geometry?.geometry?.location?.lat ?? 0.0;
       double long = geometry?.geometry?.location?.lng ?? 0.0;
       String nameOfLocation = geometry?.formattedAddress ?? "";
-      debugPrint("lat=>$lat");
-      debugPrint("long=>$long");
-      debugPrint("nameOfLocation=>$nameOfLocation");
-      // Add the fetched data to the cache
       storageService
           .addToFindLocationCache(placeId, [lat, long, nameOfLocation]);
 
@@ -184,8 +178,6 @@ class GroupDestinationController extends GetxController {
   Future<void> setLocationData(String placeId) async {
     try {
       List<dynamic> fetchLatLong = await getLatLong(placeId);
-          debugPrint("fetchLatLong=>${fetchLatLong}");
-          debugPrint("fetchLatLong=>${fetchLatLong}");
       setLocationToFindRideController(fetchLatLong);
     } catch (e) {
       log("setLocationData error: $e");

@@ -28,10 +28,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
     final storageService = Get.find<GetStorageService>();
 
     final isPinkModeOn = Get.find<HomeController>().isPinkModeOn.value;
-    // final pickedDate = DateTime.now();
-    // controller.date.text = pickedDate.toIso8601String();
-    // controller.departureDate.text =
-    //     "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+
     return Scaffold(
       appBar: GreenPoolAppBar(
         title: Text(LocaleKeys.app_createNewEvent.tr),
@@ -43,7 +40,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
             () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // RichTextHeading(text: LocaleKeys.app_pickup.tr).paddingOnly(top: 12.kh),
+
               SizedBox(
               height: 30.kh),
                 RichTextHeading(text: LocaleKeys.app_title.tr),
@@ -62,10 +59,6 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                   // readOnly: true,
                 ).paddingOnly(top: 8.kh, bottom: 14.kh),
 
-                // Text(
-                //   LocaleKeys.app_destinations.tr,
-                //   style: TextStyleUtil.k14Semibold(),
-                // ),
 
                 RichTextHeading(text: LocaleKeys.app_destinations.tr),
                 GreenPoolTextField(
@@ -79,13 +72,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                     controller.moveToSetDestination();
                   },
                   controller: controller.riderOriginTextController,
-                  // prefix: Icon(
-                  //   Icons.location_on,
-                  //   size: 24.kh,
-                  //   color: isPinkModeOn
-                  //       ? ColorUtil.kPrimary3PinkMode
-                  //       : ColorUtil.kSecondary01,
-                  // ),
+
                   prefix: SvgPicture.asset(
                     ImageConstant.location,
                     colorFilter: ColorFilter.mode(
@@ -101,22 +88,6 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                           child: const Icon(Icons.cancel))
                       : const SizedBox(),
                 ).paddingOnly(top: 8.kh, bottom: 16.kh),
-                // Row(
-                //   children: [
-                //     SizedBox(
-                //       width: 55.w,
-                //       child: Text(
-                //         LocaleKeys.app_departureDate.tr,
-                //         style: TextStyleUtil.k14Semibold(),
-                //       ),
-                //     ),
-                //     Flexible(
-                //         child: Text(
-                //       LocaleKeys.app_time.tr,
-                //       style: TextStyleUtil.k14Semibold(),
-                //     ))
-                //   ],
-                // ),
 
 
                 RichTextHeading(text: LocaleKeys.app_dateTime.tr),
@@ -202,24 +173,6 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                     children: [
                       Text(LocaleKeys.app_publicPrivate.tr,) ,
                         InkWell(
-                        //     onTap: () => Get.dialog(
-                        //   useSafeArea: true,
-                        //   Center(
-                        //     child: Container(
-                        //         padding: EdgeInsets.all(16.kh),
-                        //         width: 80.w,
-                        //         decoration: BoxDecoration(
-                        //           color: ColorUtil.kWhiteColor,
-                        //           borderRadius: BorderRadius.circular(8.kh),
-                        //         ),
-                        //         child: Text(
-                        //           "LocaleKeys",
-                        //           style: TextStyleUtil.k14Regular(
-                        //               color: ColorUtil.kBlack03),
-                        //         )),
-                        //   ),
-                        // )
-
                             child: SvgPicture.asset(ImageConstant.svgIconInfo,color: storageService.isPinkMode
                                 ?   ColorUtil.kSecondaryPinkMode  : ColorUtil.kPrimary01,)),
                     ],
@@ -246,49 +199,7 @@ class CreateNewEventView extends GetView<CreateNewEventController> {
                 ),
 
 
-                // Obx(
-                //   () => Visibility(
-                //     visible: controller.locationModelNames.isNotEmpty,
-                //     child: Text(
-                //       LocaleKeys.app_previouslySearched.tr,
-                //       style: TextStyleUtil.k14Semibold(),
-                //     ).paddingOnly(bottom: 8.kh),
-                //   ),
-                // ),
-                // Obx(
-                //   () => Visibility(
-                //       visible: controller.locationModelNames.isNotEmpty,
-                //       child: SizedBox(
-                //         height: 158.kh,
-                //         child: ListView.builder(
-                //             itemCount: controller.locationModelNames.length,
-                //             itemBuilder: (context, index) {
-                //               return Container(
-                //                 decoration: BoxDecoration(
-                //                     color: ColorUtil.kNeutral7.withOpacity(0.5),
-                //                     border: Border(
-                //                         top: BorderSide.none,
-                //                         bottom: BorderSide(
-                //                             width: 1.kh,
-                //                             color: ColorUtil.kNeutral7)),
-                //                     borderRadius: BorderRadius.circular(8.kh)),
-                //                 child: ListTile(
-                //                   leading: const Icon(
-                //                     Icons.history,
-                //                     color: ColorUtil.kNeutral4,
-                //                   ),
-                //                   title: Text(
-                //                     "${controller.locationModelNames[index].originLocation?.nameOfLocation.toString().split(",").first} to ${controller.locationModelNames[index].destinationLocation?.nameOfLocation.toString().split(",").first}",
-                //                     style: TextStyleUtil.k12Bold(),
-                //                   ),
-                //                   onTap: () {
-                //                     controller.setLocation(index);
-                //                   },
-                //                 ),
-                //               ).paddingOnly(bottom: 2.kh);
-                //             }),
-                //       )),
-                // ),
+
                const Expanded(child: SizedBox()),
                 GreenPoolButton(
                   padding: const EdgeInsets.all(0),

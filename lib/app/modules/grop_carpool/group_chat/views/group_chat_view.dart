@@ -32,14 +32,7 @@ class GroupChatView extends GetView<GroupChatController> {
           () => Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(8.kh),
-              //   child: CommonImageView(
-              //     imagePath: ImageConstant.eventNotFound,
-              //     height: 32.kh,
-              //     width: 32.kh,
-              //   ),
-              // ),
+
               Icon(Icons.group ,color: ColorUtil.kNeutral5,size: 28.kh,),
               12.kwidthBox,
               Flexible(
@@ -48,17 +41,12 @@ class GroupChatView extends GetView<GroupChatController> {
                   children: [
                     Text(
                       controller.chatArg.value.name ?? "User",
-                      // controller.groupName ?? "User",
+
                       style: TextStyleUtil.k14Bold(),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    // Text(
-                    //   "${controller.chatArg.value.origin} ${LocaleKeys.app_to.tr} ${controller.chatArg.value.destination}, ${controller.chatArg.value.date}",
-                    //   style: TextStyleUtil.k12Regular(),
-                    //   overflow: TextOverflow.ellipsis,
-                    //   maxLines: 1,
-                    // ),
+
                   ],
                 ),
               ),
@@ -86,22 +74,15 @@ class GroupChatView extends GetView<GroupChatController> {
             ? const GpProgress()
             : Column(
                 children: [
-                  // Visibility(
-                  //   visible: controller.isPayBtnVisible.value,
-                  //   child: PayNowBtn(
-                  //       controller: controller, isPinkModeOn: isPinkModeOn),
-                  // ),
+
                   Expanded(
                     child: ListView.separated(
                       itemCount: controller.messages.length,
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       controller: controller.scrollController,
                       itemBuilder: (context, index) {
-                        debugPrint("controller.messages=>${controller.messages}");
                         final message = controller.messages[index];
-                        debugPrint("message=>${message}");
                         final isSender = message.senderId == Get.find<GetStorageService>().getUserAppId;
-                        debugPrint("isSender=>${isSender}");
 
                         return Container(
                           padding: EdgeInsets.only(left: 2.kw, right: 2.kw, top: 10.kh, bottom: 10.kh),
@@ -156,13 +137,13 @@ class GroupChatView extends GetView<GroupChatController> {
                                                 ],
                                               ),
                                               4.kheightBox,
-                                              // Add some space between message and time
+
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
                                                   Text(
                                                     DateTimeUtils.formatTime(message.timestamp),
-                                                    // Replace with actual time
+
                                                     style: TextStyleUtil.k10Regular(
                                                       color: isSender ? isPinkModeOn ? ColorUtil.kBlack03 : ColorUtil.kSecondary01
                                                           : isPinkModeOn ? ColorUtil.kBlack03 : ColorUtil.kWhiteColor,
@@ -205,7 +186,7 @@ class GroupChatView extends GetView<GroupChatController> {
                         bool showDate = true;
                         final nextMessage = controller.messages[index + 1];
                         if (index < controller.messages.length - 1) {
-                          // final nextMessage = controller.messages[index + 1];
+
                           final nextMessageDate = DateTime(
                             nextMessage.timestamp.year,
                             nextMessage.timestamp.month,

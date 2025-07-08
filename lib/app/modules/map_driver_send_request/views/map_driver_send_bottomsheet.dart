@@ -67,11 +67,7 @@ class MapDriverSendBottomsheet extends StatelessWidget {
                                 SvgPicture.asset(
                                   ImageConstant.svgIconCalendarTime,
                                   colorFilter: ColorFilter.mode(
-                                      Get.find<HomeController>()
-                                              .isPinkModeOn
-                                              .value
-                                          ? ColorUtil.kPrimary3PinkMode
-                                          : ColorUtil.kSecondary01,
+                                      Get.find<HomeController>().isPinkModeOn.value? ColorUtil.kPrimary3PinkMode : ColorUtil.kSecondary01,
                                       BlendMode.srcIn),
                                 ).paddingOnly(right: 4.kw),
                                 Text(

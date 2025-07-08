@@ -35,9 +35,9 @@ class AuthService extends GetxService {
       if (!value.hasError) {
         await handleGetContact();
 
-        print("display name: ${_firebaseAuth.currentUser?.displayName}");
-        print("user phone number: ${_firebaseAuth.currentUser?.phoneNumber}");
-        print("user email: ${_firebaseAuth.currentUser?.email}");
+        debugPrint("display name: ${_firebaseAuth.currentUser?.displayName}");
+        debugPrint("user phone number: ${_firebaseAuth.currentUser?.phoneNumber}");
+        debugPrint("user email: ${_firebaseAuth.currentUser?.email}");
 
         status = true;
       } else {

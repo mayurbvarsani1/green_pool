@@ -14,6 +14,7 @@ class DioClient {
 
   DioClient(this._dio, {this.isOverlayLoader = false, this.showSnakbar = false,this.baseUrl}) {
     debugPrint("baseUrl=>$baseUrl");
+    debugPrint("baseUrl123=>${Endpoints.baseUrl}");
     _dio
       ..options.baseUrl = baseUrl ?? Endpoints.baseUrl
       ..options.connectTimeout = const Duration(milliseconds: Endpoints.connectionTimeout)
@@ -39,6 +40,7 @@ class DioClient {
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     );
+    debugPrint("response=>$response");
 
     return response;
   }
@@ -88,6 +90,8 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
+      debugPrint("putResponse=>$response");
+
       return response;
     } catch (e) {
       rethrow;
@@ -112,6 +116,8 @@ class DioClient {
         options: options,
         cancelToken: cancelToken,
       );
+      debugPrint("response.data=>${response.data}");
+
       return response.data;
     } catch (e) {
       rethrow;

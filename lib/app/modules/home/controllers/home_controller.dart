@@ -74,7 +74,7 @@ class HomeController extends GetxController with Versionk {
         isPinkModeOn.value = storageService.isPinkMode;
         await onChangeLocation();
         await fetchCount();
-        await handleNewUpdate();
+        // await handleNewUpdate();
       }
     } catch (e) {
       debugPrint(e.toString());

@@ -6,6 +6,7 @@ import 'package:green_pool/app/services/responsive_size.dart';
 import 'package:green_pool/app/services/storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 import '../../generated/locales.g.dart';
@@ -167,5 +168,34 @@ mixin class Versionk {
   //hide loading
   static Future<void> hideDialog() async {
     if (Get.isDialogOpen!) Get.until((route) => !Get.isDialogOpen!);
+  }
+}
+
+
+class UpgradeWrapper extends StatelessWidget {
+  final Widget child;
+
+  const UpgradeWrapper({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return UpgradeAlert(
+      barrierDismissible: false,
+      upgrader: Upgrader(
+        debugDisplayAlways: true,
+        debugLogging: true,
+        // minAppVersion: '1.0.0',
+        messages: UpgraderMessages(code: "Welcome to Testing"),
+
+      ),
+      dialogStyle: Platform.isAndroid
+          ? UpgradeDialogStyle.material
+          : UpgradeDialogStyle.cupertino,
+          showLater: true,
+        showIgnore: false,
+      showReleaseNotes: false,
+
+      child: child,
+    );
   }
 }
