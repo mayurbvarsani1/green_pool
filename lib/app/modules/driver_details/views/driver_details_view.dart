@@ -45,8 +45,7 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
         actions: [
           GestureDetector(
             onTap: () {
-              controller.toPrevRides(
-                  controller.matchingRidesModelData.value.driverDetails?.first);
+              controller.toPrevRides(controller.matchingRidesModelData.value.driverDetails?.first);
             },
             child: Icon(Icons.history, color: ColorUtil.kBlack01, size: 24.kh)
                 .paddingOnly(right: 8.kw),

@@ -424,14 +424,43 @@ class LocaleKeys {
       'app_travelWithConfidenceWithOurPinkMode';
   static const app_profileSettings = 'app_profileSettings';
   static const app_ridehistory = 'app_ridehistory';
+
+
+
+  /// TODO : Pending text multipart language
   static const app_referAFriend = 'app_referAFriend';
   static const app_referAFriends = 'app_referAFriends';
-  static const app_add_contact_and_easily_invite = 'app_add_contact_and_easily_invite';
-  static const invite_your_carpool_buddies_via_text = 'invite_your_carpool_buddies_via_text';
-  static const no_thanks = 'no_thanks';
-  static const search_by_name = 'search_by_name';
-  static const invite = 'invite';
-  static const invited = 'invited';
+  static const app_add_contact_and_easily_invite = 'app_addContactAndEasilyInvite';
+  static const invite_your_carpool_buddies_via_text = 'app_inviteYourCarpoolBuddiesViaText';
+  static const no_thanks = 'app_noThanks';
+  static const search_by_name = 'app_searchByName';
+  static const app_invite = 'app_invite';
+  static const app_invited = 'app_invited';
+
+  static const why_are_you_reporting = 'app_whyAreYouReporting';
+  static const app_report = 'app_report';
+  static const app_yourReportIsAnonymousIfYouAreIn = 'app_yourReportIsAnonymousIfYouAreIn';
+  static const app_block = 'app_block';
+  static const app_willNotBeNotifiedYouWant = 'app_willNotBeNotifiedYouWant';
+  static const app_whatHappened = 'app_whatHappened';
+  static const app_abusiveOrOffensive = 'app_abusiveOrOffensive';
+  static const app_spammingOrScamming = 'app_spammingOrScamming';
+  static const app_requestingOtherPayment = 'app_requestingOtherPayment';
+  static const app_unresponsiveToBookingOrMessages = 'app_unresponsiveToBookingOrMessages';
+  static const app_somethingElse = 'app_somethingElse';
+  static const app_explainHere = 'app_explainHere';
+  static const app_explainYourIssue = 'app_explainYourIssue';
+  static const app_informationHelpImprove = 'app_informationHelpImprove';
+  static const app_userNotNotified = 'app_userNotNotified';
+  static const app_userCantMessageOrBook = 'app_userCantMessageOrBook';
+  static const app_youCanUnblockAnytime = 'app_youCanUnblockAnytime';
+
+
+
+
+
+
+
   static const app_rateUs = 'app_rateUs';
   static const app_aboutUs = 'app_aboutUs';
   static const app_termsAmbersentConditions = 'app_termsAmbersentConditions';
@@ -1019,14 +1048,38 @@ class Locales {
         'Travel with confidence in our \'Pink Mode\' ensuring safety and security with female riders and drivers.',
     'app_profileSettings': 'Profile Settings',
     'app_ridehistory': 'Ride history',
+
+
     'app_referAFriend': 'Refer a friend',
     'app_referAFriends': 'Refer Friends',
-    'app_add_contact_and_easily_invite': 'Add Contact and easily invite friends to join Carpooll.com',
-    'invite_your_carpool_buddies_via_text': 'Invite your carpool Buddies via text!',
-    'no_thanks': 'No thanks',
-    'search_by_name': 'Search by Name',
-    'invite': 'Invite',
-    'invited': 'invited',
+    'app_addContactAndEasilyInvite': 'Add Contact and easily invite friends to join Carpooll.com',
+    'app_inviteYourCarpoolBuddiesViaText': 'Invite your carpool Buddies via text!',
+    'app_noThanks': 'No thanks',
+    'app_searchByName': 'Search by Name',
+    'app_invite': 'Invite',
+    'app_invited': 'invited',
+
+
+    'app_whyAreYouReporting': 'Why are you reporting?',
+    'app_report': 'Report',
+    'app_yourReportIsAnonymousIfYouAreIn': 'Your report is anonymous. If you are in immediate danger, call the local emergency services - don’t wait.',
+    'app_block': 'Block',
+    'app_willNotBeNotifiedYouWant': 'will not be notified. You want be able to interact with them further.',
+    'app_whatHappened': 'What happened?',
+    'app_abusiveOrOffensive': 'Abusive or offensive',
+    'app_spammingOrScamming': 'Spamming or Scamming',
+    'app_unresponsiveToBookingOrMessages': 'Unresponsive to booking or messages',
+    'app_requestingOtherPayment': 'Requesting other form of payment',
+    'app_somethingElse': 'Something else?',
+    'app_explainHere': 'Explain here..',
+    'app_explainYourIssue': 'Explain your issue',
+    'app_informationHelpImprove': 'Information you provide to us will help us improve our platform',
+    'app_userNotNotified': 'User won’t be notified that you block them.',
+    'app_userCantMessageOrBook': 'User won’t be able to send message or book rides on platform',
+    'app_youCanUnblockAnytime': 'You can unblock anytime',
+
+
+
     'app_rateUs': 'Rate us',
     'app_aboutUs': 'About us',
     'app_termsAmbersentConditions': 'Terms & Conditions',

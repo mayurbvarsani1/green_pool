@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:green_pool/app/data/school_list_model.dart';
 import 'package:green_pool/app/services/dio/api_service.dart';
+import 'package:green_pool/generated/locales.g.dart';
 
 import '../../../services/snackbar.dart';
 
@@ -88,4 +89,46 @@ class ReferFriendsController extends GetxController {
               "The provided email does not match the registered university email address.");
     }
   }
+
+
+  /// Block & Report Part
+  TextEditingController somethingElseController = TextEditingController();
+  TextEditingController explainIssueController = TextEditingController();
+
+
+
+  List<Map<String, String>> reportReasons = [
+    {'label': LocaleKeys.app_abusiveOrOffensive},
+    {'label': LocaleKeys.app_spammingOrScamming},
+    {'label': LocaleKeys.app_unresponsiveToBookingOrMessages},
+    {'label': LocaleKeys.app_requestingOtherPayment},
+  ];
+
+
+  List<Map<String, String>> blockInformationList = [
+    {'text': LocaleKeys.app_userNotNotified},
+    {'text': LocaleKeys.app_userCantMessageOrBook},
+    {'text': LocaleKeys.app_youCanUnblockAnytime},
+  ];
+
+
+  jointEventAPI() async {
+    try {
+
+      final res = await APIManager.addReportApi(body: {
+          "rideId": "677b87bfb36ce54a40944819",
+          "reason": "reason",
+          "details": "details"
+      });
+      showMySnackbar(msg: res.data["message"]);
+      if(res.data['status'] = true){
+
+
+      }
+    }
+    catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
 }

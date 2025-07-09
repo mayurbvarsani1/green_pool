@@ -83,6 +83,21 @@ class TextStyleUtil {
     );
   }
 
+  static k24Semibold({
+    Color color = ColorUtil.kBlack01,
+    FontWeight fontWeight = FontWeight.w500,
+    TextDecoration textDecoration = TextDecoration.none,
+  }) {
+    return GoogleFonts.inter(
+      fontWeight: fontWeight,
+      color: color,
+      fontStyle: FontStyle.normal,
+      fontSize: 20.kh,
+      decoration: textDecoration,
+      letterSpacing: 0.20000000298023224,
+    );
+  }
+
   static k18Bold({
     Color color = ColorUtil.kBlack01,
     FontWeight fontWeight = FontWeight.w600,
@@ -174,7 +189,7 @@ class TextStyleUtil {
     );
   }
 
-  static k14Regular({
+  static  k14Regular({
     Color color = ColorUtil.kBlack01,
     FontWeight fontWeight = FontWeight.w400,
     TextDecoration textDecoration = TextDecoration.none,

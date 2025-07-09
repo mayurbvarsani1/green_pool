@@ -183,4 +183,8 @@ class ImageConstant {
   static String userRing ='assets/images/icons/user_ring.svg';
   static String eventNotFound ='assets/images/icons/event_not_found.png';
 
+  static String flagIcon ='assets/images/icons/flag_icon.png';
+  static String closeIcon ='assets/images/icons/close_icon.png';
+  static String messageQuestionIcon ='assets/images/icons/message_question.png';
+
 }

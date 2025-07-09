@@ -25,57 +25,169 @@ class AddContactReferFriendsView extends GetView<ReferFriendsController> {
       body: Stack(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 12.kh),
-              Text(
-                LocaleKeys.app_add_contact_and_easily_invite.tr,
-                style: TextStyleUtil.k14Regular(),
-              ).paddingOnly(bottom: 28.kh),
-              SizedBox(
-                height: 52,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                            width: 50,
-                            height: 50,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: ColorUtil.kBackgroundColor,
-                                borderRadius: BorderRadius.circular(100))),
-                        Positioned(
-                          left: 7,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: CommonImageView(
-                                height: 52,
-                                width: 52,
-                                fit: BoxFit.cover,
-                                alignment: Alignment.topCenter,
-                                url:
-                                    'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ??
-                                        ""),
-                          ),
-                        )
-                      ],
-                    );
-                  },
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 12.kh),
+                      Text(
+                        LocaleKeys.app_add_contact_and_easily_invite.tr,
+                        style: TextStyleUtil.k14Regular(),
+                      ).paddingOnly(bottom: 28.kh),
+                      SizedBox(
+                        height: 52,
+                        width: Get.width,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 50,
+                          itemBuilder: (context, index) {
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                 const SizedBox(width: 52),
+                                if(index == 0)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: CommonImageView(
+                                        height: 52,
+                                        width: 52,
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.topCenter,
+                                        url:
+                                        'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ??
+                                            ""),
+                                  ),
+                                if(index != 0)
+                                Positioned(
+                                  right: index * 7,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: CommonImageView(
+                                        height: 52,
+                                        width: 52,
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.topCenter,
+                                        url:
+                                        'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ??
+                                            ""),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      ).paddingOnly(bottom: 28.kh),
+                      // SizedBox(
+                      //   height: 52,
+                      //   child: SingleChildScrollView(
+                      //     scrollDirection: Axis.horizontal,
+                      //     physics: const BouncingScrollPhysics(),
+                      //     child: Row(
+                      //       children: List.generate(50, (index) {
+                      //         return Transform.translate(
+                      //           offset: Offset(index == 0 ? 0 : -15, 0), // overlapping effect
+                      //           child: Container(
+                      //             height: 52,
+                      //             width: 52,
+                      //             decoration: BoxDecoration(
+                      //               shape: BoxShape.circle,
+                      //               border: Border.all(color: Colors.white, width: 2),
+                      //               image: const DecorationImage(
+                      //                 fit: BoxFit.cover,
+                      //                 image: NetworkImage(
+                      //                   'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png',
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         );
+                      //       }),
+                      //     ),
+                      //   ),
+                      // ),
+
+
+
+                      // SizedBox(
+                      //   height: 52,
+                      //   width: Get.width,
+                      //   child: Stack(
+                      //    alignment: Alignment.center,
+                      //     children: List.generate(25, (index) {
+                      //       return Positioned(
+                      //         left: index * 42,
+                      //         child: ClipRRect(
+                      //           borderRadius: BorderRadius.circular(100),
+                      //           child: CommonImageView(
+                      //               height: 52,
+                      //               width: 52,
+                      //               fit: BoxFit.cover,
+                      //               alignment: Alignment.topCenter,
+                      //               url: 'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ?? ""),
+                      //         ),
+                      //       );
+                      //     }),
+                      //   ),
+                      // ).paddingOnly(bottom: 28.kh),
+
+                      // SizedBox(
+                      //   height: 55,
+                      //   child: ListView.builder(
+                      //     shrinkWrap: true,
+                      //     padding: EdgeInsets.zero,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: 52,
+                      //     itemBuilder: (context, index) {
+                      //       return Stack(
+                      //         clipBehavior: Clip.none,
+                      //         children: [
+                      //           const SizedBox(
+                      //             height: 52,
+                      //             width: 52,
+                      //           ),
+                      //           if(index == 0)
+                      //           ClipRRect(
+                      //             borderRadius: BorderRadius.circular(100),
+                      //             child: CommonImageView(
+                      //                 height: 52,
+                      //                 width: 52,
+                      //                 fit: BoxFit.cover,
+                      //                 alignment: Alignment.topCenter,
+                      //                 url: 'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ?? ""),
+                      //           ),
+                      //           Positioned(
+                      //             left: 10,
+                      //             child: ClipRRect(
+                      //               borderRadius: BorderRadius.circular(100),
+                      //               child: CommonImageView(
+                      //                   height: 52,
+                      //                   width: 52,
+                      //                   fit: BoxFit.cover,
+                      //                   alignment: Alignment.topCenter,
+                      //                   url: 'https://cdn.pixabay.com/photo/2024/05/22/20/47/doctor-8781659_1280.png' ?? ""),
+                      //             ),
+                      //           )
+                      //         ],
+                      //       );
+                      //     },
+                      //   ),
+                      // ).paddingOnly(bottom: 28.kh),
+                      Text(
+                        LocaleKeys.invite_your_carpool_buddies_via_text.tr,
+                        style: TextStyleUtil.k14Regular(),
+                      ).paddingOnly(bottom: 28.kh),
+                    ],
+                  ),
                 ),
-              ).paddingOnly(bottom: 28.kh),
-              Text(
-                LocaleKeys.invite_your_carpool_buddies_via_text.tr,
-                style: TextStyleUtil.k14Regular(),
-              ).paddingOnly(bottom: 28.kh),
+              ),
               const Expanded(child: SizedBox()),
-              Obx(
-                () => Column(
+               Column(
                   children: [
                     GreenPoolButton(
                       borderRadius: 6,
@@ -90,7 +202,7 @@ class AddContactReferFriendsView extends GetView<ReferFriendsController> {
                     ).paddingSymmetric(vertical: 10.kh),
                   ],
                 ),
-              ),
+
             ],
           ).paddingSymmetric(horizontal: 16.kw),
         ],

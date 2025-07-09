@@ -498,4 +498,11 @@ class APIManager {
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
         Endpoints.getGroupChatRoomApi ,
       );
+
+
+  static Future<Response> addReportApi({required dynamic body}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+          .post(Endpoints.addReport, data: jsonEncode(body));
+
+
 }
