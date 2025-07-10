@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/data/chat_arg.dart';
 import 'package:green_pool/app/data/matching_rides_model.dart';
 import 'package:green_pool/app/routes/app_pages.dart';
+import 'package:green_pool/app/services/snackbar.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../services/dio/api_service.dart';
@@ -31,6 +32,9 @@ class DriverDetailsController extends GetxController {
     //the date and time of rider with which search was initiated
     date = rideDetails!['ridesDetails']!['date'];
     time = rideDetails!['ridesDetails']!['time'];
+    // somethingElseController.addListener(() {
+    //   isTextNotEmpty.value = somethingElseController.text.trim().isNotEmpty;
+    // });
   }
 
   // @override
@@ -176,5 +180,83 @@ class DriverDetailsController extends GetxController {
       "driverName": driverDetails?.fullName,
       "driverId": driverDetails?.Id
     });
+  }
+
+
+  /// Block & Report Part
+  TextEditingController somethingElseController = TextEditingController();
+  TextEditingController explainIssueController = TextEditingController();
+
+  RxBool isTextNotEmpty = false.obs;
+initReport(){
+  somethingElseController.clear();
+  explainIssueController.clear();
+  selectedReason = "";
+}
+  String selectedReason = "";
+  List<Map<String, String>> reportReasons = [
+    {'label': LocaleKeys.app_abusiveOrOffensive.tr},
+    {'label': LocaleKeys.app_spammingOrScamming.tr},
+    {'label': LocaleKeys.app_unresponsiveToBookingOrMessages.tr},
+    {'label': LocaleKeys.app_requestingOtherPayment.tr},
+  ];
+
+  String selectedBlockInformation = "";
+
+  List<Map<String, String>> blockInformationList = [
+    {'text': LocaleKeys.app_userNotNotified.tr},
+    {'text': LocaleKeys.app_userCantMessageOrBook.tr},
+    {'text': LocaleKeys.app_youCanUnblockAnytime.tr},
+  ];
+
+
+  addReportAPI({String? controller}) async {
+    try {
+      final res = await APIManager.addReportApi(body: {
+        "rideId": matchingRidesModelData.value.Id,
+        "reason": selectedReason.tr,
+        "details": controller
+      });
+      debugPrint("selectedReason${res.data['status']}");
+      debugPrint("res.data['status']=>${res.data['status']}");
+      Get.back();
+      showMySnackbar(msg: res.data["message"]);
+
+      // if(res.data['status'].toString() == 'true'){
+      //   Get.back();
+      // }else{
+      //   Get.back();
+      // }
+    }
+    catch(e){
+      debugPrint(e.toString());
+    }
+  }
+
+
+
+  blockAPI() async {
+    try {
+      final res = await APIManager.userBlockApi(body: {
+        "blockUserId": matchingRidesModelData.value.Id,
+        "details": "details",
+        "isBlocked": true
+        // "isBlocked": true
+      });
+      Get.back();
+      showMySnackbar(msg: res.data["message"]);
+      debugPrint("res.data123=>${res.data['status']}");
+
+      // if(res.data['status'].toString() == 'true'){
+      //   Get.back();
+      //
+      // }{
+      //   Get.back();
+      //
+      // }
+    }
+    catch(e){
+      debugPrint(e.toString());
+    }
   }
 }

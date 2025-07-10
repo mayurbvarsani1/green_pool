@@ -91,44 +91,6 @@ class ReferFriendsController extends GetxController {
   }
 
 
-  /// Block & Report Part
-  TextEditingController somethingElseController = TextEditingController();
-  TextEditingController explainIssueController = TextEditingController();
 
-
-
-  List<Map<String, String>> reportReasons = [
-    {'label': LocaleKeys.app_abusiveOrOffensive},
-    {'label': LocaleKeys.app_spammingOrScamming},
-    {'label': LocaleKeys.app_unresponsiveToBookingOrMessages},
-    {'label': LocaleKeys.app_requestingOtherPayment},
-  ];
-
-
-  List<Map<String, String>> blockInformationList = [
-    {'text': LocaleKeys.app_userNotNotified},
-    {'text': LocaleKeys.app_userCantMessageOrBook},
-    {'text': LocaleKeys.app_youCanUnblockAnytime},
-  ];
-
-
-  jointEventAPI() async {
-    try {
-
-      final res = await APIManager.addReportApi(body: {
-          "rideId": "677b87bfb36ce54a40944819",
-          "reason": "reason",
-          "details": "details"
-      });
-      showMySnackbar(msg: res.data["message"]);
-      if(res.data['status'] = true){
-
-
-      }
-    }
-    catch(e){
-      debugPrint(e.toString());
-    }
-  }
 
 }

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/modules/refer_friends/bindings/refer_friends_binding.dart';
 import 'package:green_pool/app/modules/refer_friends/views/refer_friend_contacts_screen.dart';
 import 'package:green_pool/app/modules/refer_friends/views/refer_friends_view.dart';
+import 'package:green_pool/app/modules/report_block/bindings/report_block_binding.dart';
+import 'package:green_pool/app/modules/report_block/views/report_block_screen.dart';
 
 import '../modules/about/bindings/about_binding.dart';
 import '../modules/about/views/about_view.dart';
@@ -296,6 +298,11 @@ class AppPages {
       name: _Paths.REFER_FRIENDS,
       page: () => const ReferFriendsView(),
       binding: ReferFriendsBinding(),
+    ),
+    GetPage(
+      name: _Paths.REPORT_BLOCK,
+      page: () => const ReportBlockView(),
+      binding: ReportBlockBinding(),
     ),
     GetPage(
       name: _Paths.REFER_FRIENDS_ADD_CONTACT,

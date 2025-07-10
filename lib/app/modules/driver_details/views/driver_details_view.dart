@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/components/route_widget.dart';
+import 'package:green_pool/app/modules/driver_details/views/report_block_bottomsheet.dart';
 import 'package:green_pool/app/services/custom_button.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 
@@ -22,10 +23,8 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
   const DriverDetailsView({super.key});
   @override
   Widget build(BuildContext context) {
-    final driverDetails =
-        controller.matchingRidesModelData.value.driverDetails?[0];
-    final otherPrefs =
-        controller.matchingRidesModelData.value.preferences?.other;
+    final driverDetails = controller.matchingRidesModelData.value.driverDetails?[0];
+    final otherPrefs = controller.matchingRidesModelData.value.preferences?.other;
     return Scaffold(
       appBar: GreenPoolAppBar(
         title: Text(LocaleKeys.app_driverDetails.tr),
@@ -43,6 +42,24 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
           ),
         ),
         actions: [
+          GestureDetector(
+            onTap: () {controller.initReport();
+              Get.bottomSheet( ReportBlockBottomSheet(),
+                  enableDrag: true, isScrollControlled: true);
+            },
+            child:  Container(
+              // height: 30.kh,
+              // width: 30.kh,
+              // padding: EdgeInsets.all(8),
+              margin: EdgeInsets.all(5),
+              child: CommonImageView(
+                imagePath: ImageConstant.messageQuestionIcon,
+                height: 24.kh,
+                width: 24.kh,
+              ).paddingOnly(right: 8.kw),
+            ),
+          ),
+
           GestureDetector(
             onTap: () {
               controller.toPrevRides(controller.matchingRidesModelData.value.driverDetails?.first);

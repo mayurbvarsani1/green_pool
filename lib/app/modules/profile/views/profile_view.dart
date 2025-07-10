@@ -134,6 +134,14 @@ class ProfileView extends GetView<ProfileController> {
                 image: ImageConstant.svgProfileRefer,
                 text: LocaleKeys.app_referAFriend.tr,
             ),
+            ProfileContainer(
+                onTap: () => Get.toNamed(Routes.REPORT_BLOCK),
+                image: ImageConstant.reportBlockIcon,
+                text: LocaleKeys.app_reportBlock.tr,
+            ),
+
+
+
             // Builder(
             //   builder: (tileContext) {
             //     return ProfileContainer(

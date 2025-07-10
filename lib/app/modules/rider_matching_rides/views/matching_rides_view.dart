@@ -82,12 +82,7 @@ class MatchingRidesView extends GetView<MatchingRidesController> {
                               itemCount: controller
                                   .matchingRidesModel.value.data?.length,
                               itemBuilder: (context, index) {
-                                return (controller
-                                            .matchingRidesModel
-                                            .value
-                                            .data![index]
-                                            ?.driverDetails
-                                            ?.isEmpty ??
+                                return (controller.matchingRidesModel.value.data![index]?.driverDetails?.isEmpty ??
                                         true)
                                     ? const SizedBox()
                                     : GestureDetector(

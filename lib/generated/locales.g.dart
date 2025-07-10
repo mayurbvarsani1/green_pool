@@ -454,6 +454,8 @@ class LocaleKeys {
   static const app_userNotNotified = 'app_userNotNotified';
   static const app_userCantMessageOrBook = 'app_userCantMessageOrBook';
   static const app_youCanUnblockAnytime = 'app_youCanUnblockAnytime';
+  static const app_reportBlock = 'app_reportBlock';
+
 
 
 
@@ -1077,6 +1079,7 @@ class Locales {
     'app_userNotNotified': 'User won’t be notified that you block them.',
     'app_userCantMessageOrBook': 'User won’t be able to send message or book rides on platform',
     'app_youCanUnblockAnytime': 'You can unblock anytime',
+    'app_reportBlock': 'Report & Block',
 
 
 

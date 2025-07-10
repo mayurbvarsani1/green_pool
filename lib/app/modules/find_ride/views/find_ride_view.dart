@@ -243,7 +243,7 @@ class FindRideView extends GetView<FindRideController> {
                 GreenPoolButton(
                   padding: const EdgeInsets.all(0),
                   onPressed: () => controller.moveToMatchingRides(),
-                  isActive: controller.isActive.value,
+                  // isActive: controller.isActive.value,
                   label: LocaleKeys.app_findMatchingRides.tr,
                 ).paddingOnly(bottom: 30.kh),
               ],

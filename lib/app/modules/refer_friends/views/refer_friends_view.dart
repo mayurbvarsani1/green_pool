@@ -9,7 +9,7 @@ import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/components/gp_progress.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/components/greenpool_textfield.dart';
-import 'package:green_pool/app/modules/refer_friends/bottomsheet_ui.dart';
+import 'package:green_pool/app/modules/driver_details/views/report_block_bottomsheet.dart';
 import 'package:green_pool/app/res/strings.dart';
 import 'package:green_pool/app/routes/app_pages.dart';
 import 'package:green_pool/app/services/colors.dart';
@@ -89,8 +89,8 @@ class ReferFriendsView extends GetView<ReferFriendsController> {
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, itemsIndex) {
                       return GestureDetector(onTap: () {
-                        Get.bottomSheet(const ReportBlockBottomSheet(),
-                            enableDrag: true, isScrollControlled: true);
+                        // Get.bottomSheet(const ReportBlockBottomSheet(),
+                        //     enableDrag: true, isScrollControlled: true);
                       },
                         child: ListTile(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.kh)),

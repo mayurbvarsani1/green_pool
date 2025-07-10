@@ -120,3 +120,56 @@ class GreenPoolTextField extends StatelessWidget {
     );
   }
 }
+
+
+
+class longDescriptionTextField extends StatelessWidget {
+  final TextEditingController? controller;
+  final Function(String?)? onchanged;
+  int? maxLines;
+  String? hintText;
+
+
+   longDescriptionTextField(
+      {super.key,
+        this.controller,
+        this.onchanged,
+        this.maxLines = 5,
+        this.hintText,
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        controller: controller,
+        maxLines: maxLines ?? 5,
+        onChanged: onchanged,
+        decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(
+        vertical: 8.kh, horizontal: 12.kw),
+    hintText: hintText,
+    fillColor: ColorUtil.kGreyColor,
+    filled: true,
+    hintStyle: TextStyleUtil.k14Regular(
+    color: ColorUtil.kBlack03,
+    ),
+    enabledBorder: UnderlineInputBorder(
+    borderSide: const BorderSide(color: Colors.transparent),
+    borderRadius: BorderRadius.circular(8.kh)),
+    focusedBorder: UnderlineInputBorder(
+    borderSide: const BorderSide(color: Colors.transparent),
+    borderRadius: BorderRadius.circular(8.kh)),
+    disabledBorder: UnderlineInputBorder(
+    borderSide: const BorderSide(color: Colors.transparent),
+    borderRadius: BorderRadius.circular(8.kh)),
+    errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: ColorUtil.kError2),
+    borderRadius: BorderRadius.circular(8.kh),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: ColorUtil.kError2),
+    borderRadius: BorderRadius.circular(8.kh),
+    ),
+    ));
+  }
+}
