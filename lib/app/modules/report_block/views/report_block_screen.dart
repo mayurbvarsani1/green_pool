@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
-import 'package:green_pool/app/components/greenpool_textfield.dart';
 import 'package:green_pool/app/modules/home/controllers/home_controller.dart';
-import 'package:green_pool/app/modules/my_rides_one_time/views/my_rides_one_time_view.dart';
+import 'package:green_pool/app/modules/report_block/views/block_details_view.dart';
 import 'package:green_pool/app/modules/report_block/views/report_details_view.dart';
 import 'package:green_pool/app/services/colors.dart';
-import 'package:green_pool/app/services/custom_button.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
 import 'package:green_pool/app/services/text_style_util.dart';
 import '../../../../generated/locales.g.dart';
-import '../../../constants/image_constant.dart';
 import '../controllers/report_block_controller.dart';
 
 class ReportBlockView extends GetView<ReportBlockController> {
@@ -78,8 +74,8 @@ class ReportBlockView extends GetView<ReportBlockController> {
                 child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    ReportScreen(type: LocaleKeys.app_booked.tr),
-                    SizedBox(),
+                    ReportScreen(),
+                    blockUserScreen(),
                     // MyRidesOneTimeView(type: LocaleKeys.app_published.tr),
                   ],
                 ),

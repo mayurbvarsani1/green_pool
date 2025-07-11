@@ -325,6 +325,21 @@ class TextStyleUtil {
     );
   }
 
+  static k11Regular({
+    Color color = ColorUtil.kBlack01,
+    FontWeight fontWeight = FontWeight.w400,
+    TextDecoration textDecoration = TextDecoration.none,
+  }) {
+    return GoogleFonts.inter(
+      fontWeight: fontWeight,
+      color: color,
+      fontStyle: FontStyle.normal,
+      fontSize: 11.kh,
+      decoration: textDecoration,
+      letterSpacing: 0.4000000059604645,
+    );
+  }
+
   static k10Medium({
     Color color = ColorUtil.kBlack01,
     FontWeight fontWeight = FontWeight.w600,

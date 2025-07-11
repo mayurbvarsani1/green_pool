@@ -131,7 +131,6 @@ class VerifyController extends GetxController {
     final authService = Get.find<AuthService>();
     debugPrint("fullName=>${fullName}");
     if (fullName != '') {
-      //USER CREATING NEW ACC
       try {
         final response =
             await APIManager.postRegisterAcc(body: {"fullName": fullName});
@@ -162,8 +161,8 @@ class VerifyController extends GetxController {
       try {
         final response = await APIManager.postLogin();
         debugPrint("response=>${response}");
-        debugPrint("response=>${response.data['status']}");
-        debugPrint("response=>${response.statusCode}");
+        debugPrint("responseStatus=>${response.data['status']}");
+        debugPrint("responseStatusCode=>${response.statusCode}");
 
         if (response.data['status'] == true) {
           final userInfo = UserInfoModel.fromJson(response.data);

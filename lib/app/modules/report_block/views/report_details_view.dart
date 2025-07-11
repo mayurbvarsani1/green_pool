@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
+import 'package:green_pool/app/data/report_list_model.dart';
 import 'package:green_pool/app/modules/my_rides_one_time/views/driver_tile.dart';
 import 'package:green_pool/app/modules/my_rides_one_time/views/recurring_tile.dart';
 import 'package:green_pool/app/modules/my_rides_one_time/views/rider_tile.dart';
@@ -17,14 +18,12 @@ import '../../home/controllers/home_controller.dart';
 
 
 class ReportScreen extends GetView<ReportBlockController> {
-  String? type;
 
-  ReportScreen({super.key, this.type});
+  ReportScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => ReportBlockController());
-    controller.myRidesAPI();
     return Scaffold(
       body: SafeArea(
         child: Obx(
@@ -36,7 +35,7 @@ class ReportScreen extends GetView<ReportBlockController> {
                 ? ColorUtil.kPrimary3PinkMode
                 : ColorUtil.kPrimary01,
             onRefresh: () async {
-              await controller.myRidesAPI();
+              await controller.getReportListApi();
             },
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -50,53 +49,25 @@ class ReportScreen extends GetView<ReportBlockController> {
                    //      height: MediaQuery.of(context).size.height -
                    //          200,
                    //      child: const Center(
-                   //        child: NoRidePosted(),
+                   //        child: noReportFoundScreen(),
                    //      ),
                    //    ),
                    //  )
 
-                    //      ListView.builder(
-                    //   shrinkWrap: true,
-                    //   primary: false,
-                    //   itemCount: controller.myRidesModelData.length,
-                    //   itemBuilder: (context, index) {
-                    //     if (type == null) {
-                    //       if (controller.myRidesModelData[index]
-                    //           .driverId !=
-                    //           null) {
-                    //         return DriverTile(
-                    //             myRidesModelData: controller
-                    //                 .myRidesModelData[index]);
-                    //       } else {
-                    //         return RiderTile(
-                    //             myRidesModelData: controller
-                    //                 .myRidesModelData[index]);
-                    //       }
-                    //     } else {
-                    //       if (type == LocaleKeys.app_booked.tr) {
-                    //         if (controller.myRidesModelData[index]
-                    //             .driverId !=
-                    //             null) {
-                    //           return DriverTile(
-                    //               myRidesModelData: controller
-                    //                   .myRidesModelData[index]);
-                    //         } else {
-                    //           return const SizedBox();
-                    //         }
-                    //       } else {
-                    //         if (controller.myRidesModelData[index]
-                    //             .driverId !=
-                    //             null) {
-                    //           return const SizedBox();
-                    //         } else {
-                    //           return RiderTile(
-                    //               myRidesModelData: controller
-                    //                   .myRidesModelData[index]);
-                    //         }
-                    //       }
-                    //     }
-                    //   },
-                    // ).paddingOnly(top: 32.kh),
+                         ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: controller.getReportList.length,
+                      itemBuilder: (context, index) {
+                        ReportDataDocsList?  reportData =     controller.getReportList[index];
+                        debugPrint("reportData=>$reportData");
+                       return Column(
+                         children: [
+                           Text(reportData?.reason ?? "",style: TextStyleUtil.k14Medium(),),
+                         ],
+                       );
+                      },
+                    ).paddingOnly(top: 32.kh),
 
                 ],
               ).paddingSymmetric(horizontal: 16.kw),
@@ -108,8 +79,8 @@ class ReportScreen extends GetView<ReportBlockController> {
   }
 }
 
-class NoRidePosted extends StatelessWidget {
-  const NoRidePosted({
+class noReportFoundScreen extends StatelessWidget {
+  const noReportFoundScreen({
     super.key,
   });
 
@@ -124,7 +95,7 @@ class NoRidePosted extends StatelessWidget {
                 : SvgPicture.asset(ImageConstant.svgNoRides)),
         20.kheightBox,
         Text(
-          LocaleKeys.app_youHavePostedNoRides.tr,
+          LocaleKeys.app_noReportRecordFound.tr,
           style: TextStyleUtil.k24Heading600(),
           textAlign: TextAlign.center,
         )

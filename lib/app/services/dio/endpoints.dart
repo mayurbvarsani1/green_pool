@@ -149,7 +149,7 @@ class Endpoints {
   static const String addReport = "report"; // Post
   static const String getReportList = "report"; // Get
   static const String userBlock = "block"; // Post
-  static const String getBlockList = "block?page=1&limit=10"; // Get
+  static const String getBlockList = "block"; // Get
   static const String createAddress = "user/createAddress"; // Post
   static const String getCreateAddress = "user"; // Get
 

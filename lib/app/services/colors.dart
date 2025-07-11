@@ -54,7 +54,8 @@ extension ColorUtil on BuildContext {
   static const Color kNeutral10 = Color(0xFF454745);
   static const Color kNeutral11 = Color(0xFFF5F5F5);
   static const Color kNeutral12 = Color(0xFFEAEAEA);
-  static const Color appGray5= Color(0xFFBFBFBF);
+  static const Color appGray5 = Color(0xFFBFBFBF);
+  static const Color appGray = Color(0xFF6B6B6B);
 
   //secondary
   static const Color kSecondary07 = Color(0xffe4f9d5);
@@ -83,4 +84,5 @@ extension ColorUtil on BuildContext {
   static const Color kError2 = Color(0xffde2121);
   static const Color kError3 = Color(0xFFFF2E39);
   static const Color kError4 = Color(0xFFEA4335);
+  static const Color kError6 = Color(0xFFFF0000);
 }

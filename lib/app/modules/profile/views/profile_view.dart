@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
+import 'package:green_pool/app/modules/report_block/controllers/report_block_controller.dart';
+import 'package:green_pool/app/modules/report_block/views/address_list_view.dart';
 import 'package:green_pool/app/routes/app_pages.dart';
 import 'package:green_pool/app/services/colors.dart';
 import 'package:green_pool/app/services/custom_button.dart';
@@ -135,7 +137,15 @@ class ProfileView extends GetView<ProfileController> {
                 text: LocaleKeys.app_referAFriend.tr,
             ),
             ProfileContainer(
-                onTap: () => Get.toNamed(Routes.REPORT_BLOCK),
+                // onTap: () => Get.toNamed(Routes.REPORT_BLOCK),
+              // onTap: () => Get.to(()=> AddressListView()),
+              onTap: () {
+                ReportBlockController con = Get.put(ReportBlockController());
+                con.initAddress();
+                con.addressListGetAPI();
+                Get.to(()=> AddressListView());
+
+              },
                 image: ImageConstant.reportBlockIcon,
                 text: LocaleKeys.app_reportBlock.tr,
             ),

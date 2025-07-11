@@ -514,4 +514,17 @@ class APIManager {
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
         Endpoints.getReportList + pagination,
       );
+
+
+  static Future<Response> getBlockList(
+      {required String pagination}) async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+        Endpoints.getBlockList + pagination,
+      );
+
+
+  static Future<Response> getUserAddress() async =>
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
+        Endpoints.getCreateAddress,
+      );
 }

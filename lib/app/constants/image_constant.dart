@@ -187,5 +187,6 @@ class ImageConstant {
   static String flagIcon ='assets/images/icons/flag_icon.png';
   static String closeIcon ='assets/images/icons/close_icon.png';
   static String messageQuestionIcon ='assets/images/icons/message_question.png';
+  static String editIcon ='assets/images/icons/edit_icon.svg';
 
 }

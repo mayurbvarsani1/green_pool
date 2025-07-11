@@ -455,6 +455,15 @@ class LocaleKeys {
   static const app_userCantMessageOrBook = 'app_userCantMessageOrBook';
   static const app_youCanUnblockAnytime = 'app_youCanUnblockAnytime';
   static const app_reportBlock = 'app_reportBlock';
+  static const app_noReportRecordFound = 'app_noReportRecordFound';
+  static const app_noBlockRecordFound = 'app_noBlockRecordFound';
+  static const app_enterAddressDestination = 'app_enterAddressDestination';
+  static const app_savedAddresses = 'app_savedAddresses';
+  static const app_addressInfo = 'app_addressInfo';
+  static const app_address = 'app_address';
+  static const app_addressLabel = 'app_addressLabel';
+  static const app_alexsHome = 'app_alexsHome';
+  static const app_saveAndContinue = 'app_saveAndContinue';
 
 
 
@@ -1080,6 +1089,15 @@ class Locales {
     'app_userCantMessageOrBook': 'User won’t be able to send message or book rides on platform',
     'app_youCanUnblockAnytime': 'You can unblock anytime',
     'app_reportBlock': 'Report & Block',
+    'app_noReportRecordFound': 'No Report Record Found',
+    'app_noBlockRecordFound': 'No Block Record Found',
+    'app_enterAddressDestination': 'Enter destination address',
+    'app_savedAddresses': 'Saved addresses',
+    'app_addressInfo': 'Address Info',
+    'app_address': 'Address',
+    'app_addressLabel': 'Address Label',
+    'app_alexsHome': 'e.g. Alex’s Home',
+    'app_saveAndContinue': 'Save and Continue',
 
 
 
