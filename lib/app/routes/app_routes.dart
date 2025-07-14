@@ -30,6 +30,7 @@ abstract class Routes {
   static const STUDENT_DISCOUNTS = _Paths.STUDENT_DISCOUNTS;
   static const REFER_FRIENDS = _Paths.REFER_FRIENDS;
   static const REPORT_BLOCK = _Paths.REPORT_BLOCK;
+  static const ADD_ADDRESS_LIST = _Paths.ADD_ADDRESS_LIST;
   static const REFER_FRIENDS_ADD_CONTACT = _Paths.REFER_FRIENDS_ADD_CONTACT;
   static const FILE_DISPUTE = _Paths.FILE_DISPUTE;
   static const RIDE_HISTORY = _Paths.RIDE_HISTORY;
@@ -48,6 +49,7 @@ abstract class Routes {
   static const ORGANIZE_CARPOOL = _Paths.ORGANIZE_CARPOOL;
   static const GROUP_CHAT = _Paths.GROUP_CHAT;
   static const GROUP_DESTINATION = _Paths.GROUP_DESTINATION;
+  static const ADDRESS_DESTINATION = _Paths.ADDRESS_DESTINATION;
 
 
   static const MATCHING_RIDES = _Paths.MATCHING_RIDES;
@@ -142,6 +144,7 @@ abstract class _Paths {
   static const STUDENT_DISCOUNTS = '/student-discounts';
   static const REFER_FRIENDS = '/refer-frinds';
   static const REPORT_BLOCK = '/report-block';
+  static const ADD_ADDRESS_LIST = '/address-list';
   static const REFER_FRIENDS_ADD_CONTACT = '/refer-frinds-add-contact';
   static const FILE_DISPUTE = '/file-dispute';
   static const RIDE_HISTORY = '/ride-history';
@@ -156,6 +159,7 @@ abstract class _Paths {
   static const ORGANIZE_CARPOOL = '/organize-carpool';
   static const GROUP_CHAT = '/group-chat';
   static const GROUP_DESTINATION = '/group-destination';
+  static const ADDRESS_DESTINATION = '/address-destination';
 
 
 

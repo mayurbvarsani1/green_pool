@@ -441,6 +441,8 @@ class LocaleKeys {
   static const app_report = 'app_report';
   static const app_yourReportIsAnonymousIfYouAreIn = 'app_yourReportIsAnonymousIfYouAreIn';
   static const app_block = 'app_block';
+  static const app_blocked = 'app_blocked';
+  static const app_unblock = 'app_unblock';
   static const app_willNotBeNotifiedYouWant = 'app_willNotBeNotifiedYouWant';
   static const app_whatHappened = 'app_whatHappened';
   static const app_abusiveOrOffensive = 'app_abusiveOrOffensive';
@@ -1075,6 +1077,8 @@ class Locales {
     'app_report': 'Report',
     'app_yourReportIsAnonymousIfYouAreIn': 'Your report is anonymous. If you are in immediate danger, call the local emergency services - don’t wait.',
     'app_block': 'Block',
+    'app_blocked': 'Blocked',
+    'app_unblock': 'Unblock',
     'app_willNotBeNotifiedYouWant': 'will not be notified. You want be able to interact with them further.',
     'app_whatHappened': 'What happened?',
     'app_abusiveOrOffensive': 'Abusive or offensive',

@@ -136,6 +136,7 @@ class ImageConstant {
   static String svgProfileSettings =
       'assets/images/profile/profile_settings.svg';
   static String svgProfileRefer = 'assets/images/profile/refer.svg';
+  static String svgUserBlock = 'assets/images/profile/blocked.svg';
   static String reportBlockIcon ='assets/images/profile/report_block.svg';
   static String svgProfileRideHistory =
       'assets/images/profile/ride_history.svg';

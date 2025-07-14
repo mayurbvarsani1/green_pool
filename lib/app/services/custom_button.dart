@@ -16,6 +16,7 @@ class GreenPoolButton extends StatelessWidget {
   final Widget? child;
   final Color? color, borderColor, labelColor, loadingColor;
   final EdgeInsetsGeometry? padding;
+  final FontWeight? fontWeight;
   const GreenPoolButton({
     super.key,
     this.label,
@@ -34,6 +35,7 @@ class GreenPoolButton extends StatelessWidget {
     this.labelColor,
     this.padding,
     this.loadingColor,
+    this.fontWeight,
   });
 
   @override
@@ -97,6 +99,8 @@ class GreenPoolButton extends StatelessWidget {
                 Text(
                   label ?? '',
                   style: TextStyleUtil.k16Semibold(
+                       fontWeight: fontWeight ?? FontWeight.w500 ,
+
                       fontSize: fontSize ?? 16.kh,
                       color: isActive
                           ? isBorder

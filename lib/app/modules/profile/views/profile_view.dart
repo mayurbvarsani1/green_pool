@@ -7,14 +7,10 @@ import 'package:get/get.dart';
 import 'package:green_pool/app/components/common_image_view.dart';
 import 'package:green_pool/app/components/greenpool_appbar.dart';
 import 'package:green_pool/app/constants/image_constant.dart';
-import 'package:green_pool/app/modules/report_block/controllers/report_block_controller.dart';
-import 'package:green_pool/app/modules/report_block/views/address_list_view.dart';
 import 'package:green_pool/app/routes/app_pages.dart';
 import 'package:green_pool/app/services/colors.dart';
 import 'package:green_pool/app/services/custom_button.dart';
 import 'package:green_pool/app/services/responsive_size.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../../../generated/locales.g.dart';
 import '../../../services/text_style_util.dart';
 import '../controllers/profile_controller.dart';
@@ -119,6 +115,10 @@ class ProfileView extends GetView<ProfileController> {
                 image: ImageConstant.svgProfileNoti,
                 text: LocaleKeys.app_notifications.tr),
             ProfileContainer(
+                onTap: () =>  Get.toNamed(Routes.REPORT_BLOCK),
+                image: ImageConstant.svgUserBlock,
+                text: LocaleKeys.app_blocked.tr),
+            ProfileContainer(
                     onTap: () => Get.toNamed(Routes.RIDE_HISTORY),
                     image: ImageConstant.svgProfileRideHistory,
                     text: LocaleKeys.app_ridehistory.tr)
@@ -132,23 +132,24 @@ class ProfileView extends GetView<ProfileController> {
                 image: ImageConstant.svgProfileDiscount,
                 text: LocaleKeys.app_studentDiscount.tr),
             ProfileContainer(
-                onTap: () => Get.toNamed(Routes.REFER_FRIENDS),
+                // onTap: () => Get.toNamed(Routes.REFER_FRIENDS),
+                onTap: () => Get.toNamed(Routes.ADD_ADDRESS_LIST),
                 image: ImageConstant.svgProfileRefer,
                 text: LocaleKeys.app_referAFriend.tr,
             ),
-            ProfileContainer(
-                // onTap: () => Get.toNamed(Routes.REPORT_BLOCK),
-              // onTap: () => Get.to(()=> AddressListView()),
-              onTap: () {
-                ReportBlockController con = Get.put(ReportBlockController());
-                con.initAddress();
-                con.addressListGetAPI();
-                Get.to(()=> AddressListView());
-
-              },
-                image: ImageConstant.reportBlockIcon,
-                text: LocaleKeys.app_reportBlock.tr,
-            ),
+            // ProfileContainer(
+            //     // onTap: () => Get.toNamed(Routes.REPORT_BLOCK),
+            //   // onTap: () => Get.to(()=> AddressListView()),
+            //   onTap: () {
+            //     ReportBlockController con = Get.put(ReportBlockController());
+            //     con.initAddress();
+            //     con.addressListGetAPI();
+            //     Get.to(()=> AddressListView());
+            //
+            //   },
+            //     image: ImageConstant.reportBlockIcon,
+            //     text: LocaleKeys.app_reportBlock.tr,
+            // ),
 
 
 

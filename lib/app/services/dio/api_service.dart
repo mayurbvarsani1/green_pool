@@ -506,7 +506,7 @@ class APIManager {
 
 
   static Future<Response> userBlockApi({required dynamic body}) async =>
-      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: true)
+      await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false)
           .post(Endpoints.userBlock, data: jsonEncode(body));
 
   static Future<Response> getReportList(
@@ -516,10 +516,9 @@ class APIManager {
       );
 
 
-  static Future<Response> getBlockList(
-      {required String pagination}) async =>
+  static Future<Response> getBlockList() async =>
       await DioClient(Dio(), showSnakbar: true, isOverlayLoader: false).get(
-        Endpoints.getBlockList + pagination,
+        Endpoints.getBlockList ,
       );
 
 

@@ -110,20 +110,43 @@ class BlockDocList {
 
 class BlockedUser {
   String? id;
+  String? fullName;
   String? email;
+  ProfilePic? profilePic;
 
   BlockedUser({
     this.id,
+    this.fullName,
     this.email,
+    this.profilePic,
   });
 
   factory BlockedUser.fromJson(Map<String, dynamic> json) => BlockedUser(
     id: json["_id"],
+    fullName: json["fullName"],
     email: json["email"],
+    profilePic: json["profilePic"] == null ? null : ProfilePic.fromJson(json["profilePic"]),
   );
 
   Map<String, dynamic> toJson() => {
     "_id": id,
+    "fullName": fullName,
     "email": email,
+    "profilePic": profilePic?.toJson(),
+  };
+}
+class ProfilePic {
+  String? url;
+
+  ProfilePic({
+    this.url,
+  });
+
+  factory ProfilePic.fromJson(Map<String, dynamic> json) => ProfilePic(
+    url: json["url"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "url": url,
   };
 }

@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
+import 'package:green_pool/app/modules/add_address_list/address_destination/bindings/address_destination_binding.dart';
+import 'package:green_pool/app/modules/add_address_list/address_destination/views/address_destination_view.dart';
+import 'package:green_pool/app/modules/add_address_list/bindings/address_binding.dart';
+import 'package:green_pool/app/modules/add_address_list/views/address_list_view.dart';
 import 'package:green_pool/app/modules/refer_friends/bindings/refer_friends_binding.dart';
 import 'package:green_pool/app/modules/refer_friends/views/refer_friend_contacts_screen.dart';
 import 'package:green_pool/app/modules/refer_friends/views/refer_friends_view.dart';
-import 'package:green_pool/app/modules/report_block/bindings/report_block_binding.dart';
+import 'package:green_pool/app/modules/report_block/bindings/block_binding.dart';
 import 'package:green_pool/app/modules/report_block/views/report_block_screen.dart';
 
 import '../modules/about/bindings/about_binding.dart';
@@ -301,8 +305,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REPORT_BLOCK,
-      page: () => const ReportBlockView(),
-      binding: ReportBlockBinding(),
+      page: () =>  ReportListView(),
+      binding: BlockUserBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_ADDRESS_LIST,
+      page: () =>  AddressListView(),
+      binding: AddressBinding(),
     ),
     GetPage(
       name: _Paths.REFER_FRIENDS_ADD_CONTACT,
@@ -371,6 +380,13 @@ class AppPages {
       name: _Paths.GROUP_DESTINATION,
       page: () => const GroupDestinationView(),
       binding: GroupDestinationBinding(),
+    ),
+
+
+    GetPage(
+      name: _Paths.ADDRESS_DESTINATION,
+      page: () => const AddressDestinationView(),
+      binding: AddressDestinationBinding(),
     ),
 
 
